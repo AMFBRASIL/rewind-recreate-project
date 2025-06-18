@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { ChevronDown, ChevronUp, Heart, Play, Pause } from "lucide-react";
+import { ChevronDown, ChevronUp, Heart, Play, Pause, Star, Moon } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
 
 interface SlideData {
@@ -12,6 +12,7 @@ interface SlideData {
   subtitle: string;
   description: string;
   date: string;
+  icon?: 'heart' | 'star' | 'moon';
 }
 
 const CoupleRetrospective = () => {
@@ -26,43 +27,88 @@ const CoupleRetrospective = () => {
       title: 'O Início de Tudo',
       subtitle: 'Nosso Primeiro Encontro',
       description: 'Aquele momento mágico quando nossos olhares se cruzaram pela primeira vez. Nenhum de nós sabia que ali começaria a nossa história de amor.',
-      date: '14 de Fevereiro, 2023'
+      date: '14 de Fevereiro, 2023',
+      icon: 'heart'
     },
     {
       id: 2,
+      type: 'image',
+      backgroundImage: 'https://images.unsplash.com/photo-1470813740244-df37b8c1edcb',
+      title: 'Nosso Signo',
+      subtitle: 'Aquário - O Casal dos Sonhos',
+      description: 'Começamos a namorar sob o signo de Aquário, conhecido pela originalidade e conexão única. Somos um casal que pensa fora da caixa e constrói um amor autêntico.',
+      date: '20 de Janeiro - 18 de Fevereiro',
+      icon: 'star'
+    },
+    {
+      id: 3,
+      type: 'image',
+      backgroundImage: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05',
+      title: 'Nossa Lua',
+      subtitle: 'Lua Crescente - Crescendo Juntos',
+      description: 'Nossa história começou durante a lua crescente, simbolizando crescimento, esperança e novos começos. Como nossa lua, nosso amor só cresce.',
+      date: '14 de Fevereiro, 2023',
+      icon: 'moon'
+    },
+    {
+      id: 4,
       type: 'video',
       videoUrl: 'https://videos.unsplash.com/video-1533060588340-a3e30e3cac36',
       title: 'Momentos Especiais',
       subtitle: 'Nossa Primeira Viagem',
       description: 'Descobrindo novos lugares juntos, criando memórias que durarão para sempre. Cada momento ao seu lado é uma nova aventura.',
-      date: '15 de Junho, 2023'
+      date: '15 de Junho, 2023',
+      icon: 'heart'
     },
     {
-      id: 3,
+      id: 5,
+      type: 'image',
+      backgroundImage: 'https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07',
+      title: 'Nosso Primeiro Beijo',
+      subtitle: 'O Momento Que Mudou Tudo',
+      description: 'Entre flores e sorrisos, nosso primeiro beijo selou nosso destino. Naquele instante, soubemos que éramos para sempre.',
+      date: '20 de Fevereiro, 2023',
+      icon: 'heart'
+    },
+    {
+      id: 6,
       type: 'image',
       backgroundImage: 'https://images.unsplash.com/photo-1721322800607-8c38375eef04',
       title: 'Construindo Nosso Lar',
       subtitle: 'Nossa Casa dos Sonhos',
       description: 'Transformando uma casa em nosso lar, onde cada canto tem uma história nossa. Aqui começamos a construir nosso futuro juntos.',
-      date: '20 de Setembro, 2023'
+      date: '20 de Setembro, 2023',
+      icon: 'heart'
     },
     {
-      id: 4,
+      id: 7,
       type: 'image',
       backgroundImage: 'https://images.unsplash.com/photo-1582562124811-c09040d0a901',
       title: 'Nossa Família Cresceu',
       subtitle: 'Adotamos Nosso Gatinho',
       description: 'Nosso amor se expandiu para incluir mais um membro da família. Agora somos três corações batendo como um só.',
-      date: '10 de Dezembro, 2023'
+      date: '10 de Dezembro, 2023',
+      icon: 'heart'
     },
     {
-      id: 5,
+      id: 8,
+      type: 'image',
+      backgroundImage: 'https://images.unsplash.com/photo-1470375262327-ee60e5aa9a4b',
+      title: 'Nosso Primeiro Ano',
+      subtitle: 'Celebrando Cada Momento',
+      description: 'Um ano repleto de descobertas, risadas, lágrimas de alegria e muito amor. Cada dia ao seu lado é uma nova página da nossa história.',
+      date: '14 de Fevereiro, 2024',
+      icon: 'heart'
+    },
+    {
+      id: 9,
       type: 'image',
       backgroundImage: 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21',
       title: 'Para Sempre',
       subtitle: 'Nosso Futuro Juntos',
       description: 'Como ondas do mar que sempre retornam à praia, nosso amor sempre encontra o caminho de volta um para o outro.',
-      date: 'Todos os Dias'
+      date: 'Todos os Dias',
+      icon: 'heart'
     }
   ];
 
@@ -89,6 +135,17 @@ const CoupleRetrospective = () => {
   }, []);
 
   const currentSlideData = slides[currentSlide];
+
+  const getIcon = (iconType: string) => {
+    switch (iconType) {
+      case 'star':
+        return <Star className="w-8 h-8 text-yellow-400 mx-auto mb-4 animate-pulse" />;
+      case 'moon':
+        return <Moon className="w-8 h-8 text-blue-300 mx-auto mb-4 animate-pulse" />;
+      default:
+        return <Heart className="w-8 h-8 text-pink-400 mx-auto mb-4 animate-pulse" />;
+    }
+  };
 
   return (
     <div className="relative h-screen w-full overflow-hidden">
@@ -122,7 +179,7 @@ const CoupleRetrospective = () => {
       <div className="relative z-10 h-full flex items-center justify-center">
         <div className="text-center text-white px-8 max-w-4xl">
           <div className="mb-4">
-            <Heart className="w-8 h-8 text-pink-400 mx-auto mb-4 animate-pulse" />
+            {getIcon(currentSlideData.icon || 'heart')}
             <p className="text-pink-300 text-lg font-medium mb-2">{currentSlideData.date}</p>
           </div>
           
