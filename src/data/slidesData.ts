@@ -1,4 +1,3 @@
-
 import { SlideData } from '../types/slideTypes';
 
 export const slides: SlideData[] = [
@@ -25,10 +24,10 @@ export const slides: SlideData[] = [
   {
     id: 3,
     type: 'image',
-    backgroundImage: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05',
+    backgroundImage: 'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb',
     title: 'Nossa Lua',
-    subtitle: 'Lua Crescente - Crescendo Juntos',
-    description: 'Nossa história começou durante a lua crescente, simbolizando crescimento, esperança e novos começos. Como nossa lua, nosso amor só cresce.',
+    subtitle: 'Lua Minguante - Renovação e Reflexão',
+    description: 'Nossa história começou durante a lua minguante, simbolizando renovação, reflexão e a preparação para novos ciclos. Como nossa lua, nosso amor se renova a cada dia.',
     date: '14 de Fevereiro, 2023',
     icon: 'moon'
   },
