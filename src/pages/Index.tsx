@@ -90,10 +90,19 @@ const Index = () => {
             <p className="text-xl text-purple-200 max-w-2xl mx-auto mb-8">
               Reviva os momentos mais especiais da nossa jornada juntos
             </p>
-            <button className="group bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
-              <Play className="inline-block mr-2 group-hover:animate-pulse" size={20} />
-              Iniciar Retrospectiva
-            </button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button 
+                onClick={() => window.location.href = '/retrospective'}
+                className="group bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
+              >
+                <Play className="inline-block mr-2 group-hover:animate-pulse" size={20} />
+                Ver Retrospectiva Completa
+              </button>
+              <button className="group bg-white/10 backdrop-blur-md text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:bg-white/20">
+                <Heart className="inline-block mr-2 group-hover:animate-pulse" size={20} />
+                Criar Sua Retrospectiva
+              </button>
+            </div>
           </div>
 
           {/* Music Player */}
