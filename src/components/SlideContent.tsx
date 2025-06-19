@@ -1,5 +1,4 @@
 
-
 import { Star, Moon, Heart, Music, Clock, Image } from "lucide-react";
 import { SlideData } from '../types/slideTypes';
 import MusicPlayer from './MusicPlayer';
@@ -81,6 +80,20 @@ const SlideContent = ({ slide }: SlideContentProps) => {
               {slide.description}
             </p>
           </div>
+        ) : /* Foto especial para o slide do primeiro ano */
+        slide.title === 'Nosso Primeiro Ano' ? (
+          <div className="mb-8">
+            <div className="max-w-md mx-auto mb-6 rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-all duration-300 animate-fade-in">
+              <img
+                src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5"
+                alt="Nosso Primeiro Ano"
+                className="w-full h-64 object-cover"
+              />
+            </div>
+            <p className="text-lg md:text-xl leading-relaxed text-gray-200 max-w-2xl mx-auto animate-fade-in">
+              {slide.description}
+            </p>
+          </div>
         ) : (
           <p className="text-lg md:text-xl leading-relaxed text-gray-200 max-w-2xl mx-auto animate-fade-in">
             {slide.description}
@@ -92,4 +105,3 @@ const SlideContent = ({ slide }: SlideContentProps) => {
 };
 
 export default SlideContent;
-
