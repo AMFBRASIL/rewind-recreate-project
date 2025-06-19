@@ -1,4 +1,3 @@
-
 import { SlideData } from '../types/slideTypes';
 import { Heart, Star, Moon, Music, Clock, Image, Sparkles, Smile } from 'lucide-react';
 import PhotoMemory from './PhotoMemory';
@@ -23,19 +22,33 @@ const ChildrenSlideContent = ({ slide, formData }: ChildrenSlideContentProps) =>
     }
   };
 
-  const calculateChildAge = () => {
+  const calculateDetailedChildAge = () => {
     if (!formData?.birthDate) return null;
     
     const birthDate = new Date(formData.birthDate);
     const today = new Date();
     const diffTime = Math.abs(today.getTime() - birthDate.getTime());
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    const years = Math.floor(diffDays / 365);
-    const months = Math.floor((diffDays % 365) / 30);
-    const hours = diffDays * 24;
-    const minutes = hours * 60;
     
-    return { years, months, days: diffDays, hours, minutes };
+    // Cálculos mais precisos
+    const totalSeconds = Math.floor(diffTime / 1000);
+    const totalMinutes = Math.floor(totalSeconds / 60);
+    const totalHours = Math.floor(totalMinutes / 60);
+    const totalDays = Math.floor(totalHours / 24);
+    const totalWeeks = Math.floor(totalDays / 7);
+    const totalMonths = Math.floor(totalDays / 30.44); // Média de dias por mês
+    const years = Math.floor(totalDays / 365.25); // Considerando anos bissextos
+    const remainingDays = totalDays - (years * 365);
+    const months = Math.floor(remainingDays / 30.44);
+    
+    return { 
+      years, 
+      months, 
+      totalDays, 
+      totalWeeks,
+      totalHours, 
+      totalMinutes,
+      totalSeconds
+    };
   };
 
   const getMusicName = (musicKey: string) => {
@@ -240,17 +253,25 @@ const ChildrenSlideContent = ({ slide, formData }: ChildrenSlideContentProps) =>
         );
 
       case 8: // Tempo de Vida Juntos
-        const childAge = calculateChildAge();
+        const childAge = calculateDetailedChildAge();
         return childAge ? (
           <div className="mt-8 text-center">
-            <div className="bg-gradient-to-r from-blue-400/20 to-purple-400/20 backdrop-blur-md rounded-3xl p-8 max-w-2xl mx-auto border-4 border-yellow-300/30">
+            <div className="bg-gradient-to-r from-blue-400/20 to-purple-400/20 backdrop-blur-md rounded-3xl p-8 max-w-4xl mx-auto border-4 border-yellow-300/30">
               <h4 className="text-3xl font-bold text-white mb-6 flex items-center justify-center gap-2">
                 <span>⏰</span>
-                Nosso Tempo Juntos
+                Calculadora do Nosso Tempo Juntos
                 <span>✨</span>
               </h4>
               
-              <div className="grid grid-cols-2 gap-6 mb-6">
+              <div className="mb-6">
+                <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 rounded-2xl p-4 mb-4">
+                  <p className="text-white text-lg">
+                    Desde <span className="font-bold text-yellow-300">{new Date(formData.birthDate).toLocaleDateString('pt-BR')}</span> até hoje:
+                  </p>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
                 <div className="bg-white/10 rounded-2xl p-4">
                   <div className="text-4xl font-bold text-yellow-300 mb-2">{childAge.years}</div>
                   <div className="text-purple-200">{childAge.years === 1 ? 'Aninho' : 'Aninhos'}</div>
@@ -260,31 +281,46 @@ const ChildrenSlideContent = ({ slide, formData }: ChildrenSlideContentProps) =>
                   <div className="text-purple-200">{childAge.months === 1 ? 'Mês' : 'Meses'}</div>
                 </div>
                 <div className="bg-white/10 rounded-2xl p-4">
-                  <div className="text-4xl font-bold text-green-300 mb-2">{childAge.days.toLocaleString()}</div>
+                  <div className="text-3xl font-bold text-green-300 mb-2">{childAge.totalDays.toLocaleString()}</div>
                   <div className="text-purple-200">Dias</div>
                 </div>
                 <div className="bg-white/10 rounded-2xl p-4">
-                  <div className="text-4xl font-bold text-orange-300 mb-2">{childAge.hours.toLocaleString()}</div>
+                  <div className="text-3xl font-bold text-blue-300 mb-2">{childAge.totalWeeks.toLocaleString()}</div>
+                  <div className="text-purple-200">Semanas</div>
+                </div>
+                <div className="bg-white/10 rounded-2xl p-4">
+                  <div className="text-2xl font-bold text-orange-300 mb-2">{childAge.totalHours.toLocaleString()}</div>
                   <div className="text-purple-200">Horas</div>
+                </div>
+                <div className="bg-white/10 rounded-2xl p-4">
+                  <div className="text-2xl font-bold text-red-300 mb-2">{childAge.totalMinutes.toLocaleString()}</div>
+                  <div className="text-purple-200">Minutos</div>
                 </div>
               </div>
               
-              <p className="text-orange-200 text-lg mb-4">
-                {childAge.days.toLocaleString()} dias de pura alegria na nossa vida! 🌈
-              </p>
-              
-              <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 rounded-2xl p-4">
-                <p className="text-white text-base italic">
-                  "Cada segundo ao seu lado é um presente! Obrigado por tornar minha vida tão especial! 💖"
+              <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 rounded-2xl p-6 mb-4">
+                <p className="text-white text-xl mb-2">
+                  🎉 <span className="font-bold text-yellow-300">{childAge.totalDays.toLocaleString()}</span> dias de alegria pura!
+                </p>
+                <p className="text-purple-200 text-lg">
+                  Isso são <span className="font-bold text-pink-300">{childAge.totalSeconds.toLocaleString()}</span> segundos de amor! 💖
                 </p>
               </div>
               
-              <div className="mt-4 flex justify-center gap-4 text-2xl">
-                <span>🎈</span>
-                <span>🎨</span>
-                <span>🧸</span>
-                <span>🚀</span>
-                <span>⭐</span>
+              <div className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 rounded-2xl p-4">
+                <p className="text-white text-base italic">
+                  "Cada segundo ao seu lado é um presente! Obrigado por tornar minha vida tão especial! 
+                  Que venham muitos mais dias, semanas, meses e anos de aventuras juntos! 🌈✨"
+                </p>
+              </div>
+              
+              <div className="mt-6 flex justify-center gap-4 text-3xl">
+                <span className="animate-bounce">🎈</span>
+                <span className="animate-pulse">🎨</span>
+                <span className="animate-bounce delay-100">🧸</span>
+                <span className="animate-pulse delay-200">🚀</span>
+                <span className="animate-bounce delay-300">⭐</span>
+                <span className="animate-pulse delay-400">🌟</span>
               </div>
             </div>
           </div>
