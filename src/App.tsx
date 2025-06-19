@@ -13,6 +13,7 @@ import PaymentPix from "./pages/PaymentPix";
 import PaymentConfirmation from "./pages/PaymentConfirmation";
 import ParentsRetrospective from "./pages/ParentsRetrospective";
 import ChildrenRetrospective from "./pages/ChildrenRetrospective";
+import ChristmasRetrospective from "./pages/ChristmasRetrospective";
 import Dashboard from "./pages/Dashboard";
 import DashboardClientes from "./pages/DashboardClientes";
 import AdminLogin from "./pages/AdminLogin";
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="/retrospective" element={<CoupleRetrospective />} />
             <Route path="/parents" element={<ParentsRetrospective />} />
             <Route path="/children" element={<ChildrenRetrospective />} />
+            <Route path="/christmas" element={<ChristmasRetrospective />} />
             <Route path="/create" element={<CreateRetrospective />} />
             <Route path="/payment" element={<PaymentPix />} />
             <Route path="/payment-confirmation" element={<PaymentConfirmation />} />
