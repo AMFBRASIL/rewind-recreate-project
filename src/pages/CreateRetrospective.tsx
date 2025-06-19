@@ -67,8 +67,8 @@ const CreateRetrospective = () => {
 
   const handleSubmit = () => {
     console.log('Form submitted:', formData);
-    // Redirect to retrospective page with form data
-    navigate('/retrospective', { state: { formData } });
+    // Redirect to payment page with form data
+    navigate('/payment', { state: { formData } });
   };
 
   const isStepValid = () => {
@@ -359,8 +359,8 @@ const CreateRetrospective = () => {
                   disabled={!isStepValid()}
                   className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700"
                 >
-                  Clique e veja como ficou
-                  <Check className="w-4 h-4 ml-2" />
+                  Segue para pagamento
+                  <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               ) : (
                 <Button
