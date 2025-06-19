@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Heart, Play, Star, Calendar, Camera, Music, Users, User, Baby, Flower, Video } from "lucide-react";
+import { Heart, Play, Star, Calendar, Camera, Music, Users, User, Baby, Flower, Video, FileText, Plus, Palette, Share2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import LoadingScreen from "@/components/LoadingScreen";
 import RewindHeader from "@/components/RewindHeader";
@@ -63,6 +63,37 @@ const Index = () => {
     { value: 'filho', label: 'Filho', icon: Baby, gradient: 'from-sky-500 to-blue-500' },
     { value: 'falecido', label: 'Falecido', icon: Flower, gradient: 'from-gray-500 to-slate-500' },
     { value: 'outros', label: 'Outros', icon: Heart, gradient: 'from-violet-500 to-purple-500' }
+  ];
+
+  const howItWorksSteps = [
+    {
+      step: 1,
+      title: "Escolha o Template",
+      description: "Selecione o tipo de retrospectiva perfeita para sua pessoa especial",
+      icon: FileText,
+      gradient: "from-blue-500 to-cyan-500"
+    },
+    {
+      step: 2,
+      title: "Adicione Conteúdo",
+      description: "Inclua fotos, vídeos, músicas e memórias que fazem sua história única",
+      icon: Plus,
+      gradient: "from-green-500 to-emerald-500"
+    },
+    {
+      step: 3,
+      title: "Personalize",
+      description: "Customize cores, fontes e layouts para criar uma experiência única",
+      icon: Palette,
+      gradient: "from-purple-500 to-pink-500"
+    },
+    {
+      step: 4,
+      title: "Compartilhe",
+      description: "Gere um QR Code e compartilhe sua retrospectiva com quem importa",
+      icon: Share2,
+      gradient: "from-orange-500 to-red-500"
+    }
   ];
 
   if (isLoading) {
@@ -138,6 +169,34 @@ const Index = () => {
                   </div>
                 </DialogContent>
               </Dialog>
+            </div>
+          </div>
+
+          {/* Como Funciona Section */}
+          <div className="mb-16">
+            <h2 className="text-4xl font-bold text-white text-center mb-4">
+              Como Funciona
+            </h2>
+            <p className="text-xl text-purple-200 text-center mb-12 max-w-3xl mx-auto">
+              Crie sua retrospectiva em apenas 4 passos simples
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+              {howItWorksSteps.map((step) => {
+                const IconComponent = step.icon;
+                return (
+                  <div
+                    key={step.step}
+                    className={`relative bg-gradient-to-br ${step.gradient} p-6 rounded-2xl text-white text-center transition-all duration-300 transform hover:scale-105 hover:shadow-2xl border border-white/10 backdrop-blur-sm`}
+                  >
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 w-8 h-8 bg-white text-gray-800 rounded-full flex items-center justify-center font-bold text-sm">
+                      {step.step}
+                    </div>
+                    <IconComponent className="w-12 h-12 mx-auto mb-4 mt-2" />
+                    <h3 className="font-bold text-xl mb-3">{step.title}</h3>
+                    <p className="text-sm opacity-90 leading-relaxed">{step.description}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
