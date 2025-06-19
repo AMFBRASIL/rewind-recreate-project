@@ -1,15 +1,15 @@
+
 import { useState, useEffect } from "react";
 import { Heart, Play, Star, Calendar, Camera, Music } from "lucide-react";
+import { Link } from "react-router-dom";
 import LoadingScreen from "@/components/LoadingScreen";
 import RewindHeader from "@/components/RewindHeader";
 import PhotoMemory from "@/components/PhotoMemory";
 import TimelineEvent from "@/components/TimelineEvent";
 import MusicPlayer from "@/components/MusicPlayer";
-import RetrospectiveForm from "@/components/RetrospectiveForm";
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [isFormOpen, setIsFormOpen] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -92,20 +92,20 @@ const Index = () => {
               Reviva os momentos mais especiais da nossa jornada juntos
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button 
-                onClick={() => window.location.href = '/retrospective'}
-                className="group bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
+              <Link 
+                to="/retrospective"
+                className="group bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl inline-flex items-center justify-center"
               >
                 <Play className="inline-block mr-2 group-hover:animate-pulse" size={20} />
                 Ver Retrospectiva Completa
-              </button>
-              <button 
-                onClick={() => setIsFormOpen(true)}
-                className="group bg-white/10 backdrop-blur-md text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:bg-white/20"
+              </Link>
+              <Link 
+                to="/create"
+                className="group bg-white/10 backdrop-blur-md text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:bg-white/20 inline-flex items-center justify-center"
               >
                 <Heart className="inline-block mr-2 group-hover:animate-pulse" size={20} />
                 Criar Sua Retrospectiva
-              </button>
+              </Link>
             </div>
           </div>
 
@@ -155,21 +155,15 @@ const Index = () => {
             <p className="text-purple-200 text-lg mb-8 max-w-2xl mx-auto">
               Transforme seus momentos especiais em uma linda história digital
             </p>
-            <button 
-              onClick={() => setIsFormOpen(true)}
-              className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105"
+            <Link 
+              to="/create"
+              className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 inline-block"
             >
               Começar Agora
-            </button>
+            </Link>
           </div>
         </div>
       </div>
-
-      {/* Formulário */}
-      <RetrospectiveForm 
-        isOpen={isFormOpen} 
-        onClose={() => setIsFormOpen(false)} 
-      />
     </div>
   );
 };
