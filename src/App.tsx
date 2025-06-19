@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import CoupleRetrospective from "./pages/CoupleRetrospective";
 import ParentRetrospective from "./pages/ParentRetrospective";
 import FriendRetrospective from "./pages/FriendRetrospective";
+import ChildrenRetrospective from "./pages/ChildrenRetrospective";
 import CreateRetrospective from "./pages/CreateRetrospective";
 import NotFound from "./pages/NotFound";
 

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { X, Upload, Heart, User, Calendar, Mail, Music } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,9 +9,11 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 interface RetrospectiveFormProps {
   isOpen: boolean;
   onClose: () => void;
+  onSubmit?: (formData: any) => void;
+  selectedType?: string;
 }
 
-const RetrospectiveForm = ({ isOpen, onClose }: RetrospectiveFormProps) => {
+const RetrospectiveForm = ({ isOpen, onClose, onSubmit, selectedType }: RetrospectiveFormProps) => {
   const [formData, setFormData] = useState({
     email: '',
     gender: '',
@@ -43,7 +44,9 @@ const RetrospectiveForm = ({ isOpen, onClose }: RetrospectiveFormProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
-    // Aqui você implementaria o envio do formulário
+    if (onSubmit) {
+      onSubmit(formData);
+    }
     onClose();
   };
 
