@@ -1,5 +1,6 @@
+
 import { useState, useEffect } from "react";
-import { Heart, Play, Star, Calendar, Camera, Music, Users, Baby, Sparkles, User, Crown } from "lucide-react";
+import { Heart, Play, Star, Calendar, Camera, Music } from "lucide-react";
 import { Link } from "react-router-dom";
 import LoadingScreen from "@/components/LoadingScreen";
 import RewindHeader from "@/components/RewindHeader";
@@ -48,20 +49,6 @@ const Index = () => {
     { date: "Jun 2023", event: "Primeira viagem", icon: Calendar },
     { date: "Set 2023", event: "Adotamos o gatinho", icon: Camera },
     { date: "Dez 2023", event: "Um ano juntos", icon: Music }
-  ];
-
-  const retrospectiveTypes = [
-    { title: "Namorado", icon: Heart, color: "from-pink-500 to-rose-500", route: "/retrospective" },
-    { title: "Namorada", icon: Heart, color: "from-pink-500 to-purple-500", route: "/retrospective" },
-    { title: "Marido", icon: Crown, color: "from-blue-500 to-indigo-500", route: "/retrospective" },
-    { title: "Esposa", icon: Crown, color: "from-purple-500 to-pink-500", route: "/retrospective" },
-    { title: "Amigo", icon: Users, color: "from-green-500 to-teal-500", route: "/friend-retrospective" },
-    { title: "Amiga", icon: Users, color: "from-teal-500 to-cyan-500", route: "/friend-retrospective" },
-    { title: "Mãe", icon: Heart, color: "from-rose-500 to-pink-500", route: "/parent-retrospective" },
-    { title: "Pai", icon: User, color: "from-blue-500 to-slate-500", route: "/parent-retrospective" },
-    { title: "Filho", icon: Baby, color: "from-yellow-500 to-orange-500", route: "/children-retrospective" },
-    { title: "Falecido", icon: Star, color: "from-gray-500 to-slate-500", route: "/retrospective" },
-    { title: "Outros", icon: Sparkles, color: "from-violet-500 to-purple-500", route: "/create" }
   ];
 
   if (isLoading) {
@@ -119,35 +106,6 @@ const Index = () => {
                 <Heart className="inline-block mr-2 group-hover:animate-pulse" size={20} />
                 Criar Sua Retrospectiva
               </Link>
-            </div>
-          </div>
-
-          {/* Retrospective Types Section */}
-          <div className="mb-16">
-            <h2 className="text-4xl font-bold text-white text-center mb-4">
-              Tipos de Retrospectivas
-            </h2>
-            <p className="text-xl text-purple-200 text-center mb-12 max-w-3xl mx-auto">
-              Escolha o tipo de retrospectiva perfeito para celebrar seus momentos especiais
-            </p>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-              {retrospectiveTypes.map((type, index) => {
-                const IconComponent = type.icon;
-                return (
-                  <Link
-                    key={index}
-                    to={type.route}
-                    className="group bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 text-center hover:bg-white/20 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
-                  >
-                    <div className={`w-12 h-12 mx-auto rounded-full bg-gradient-to-r ${type.color} flex items-center justify-center mb-3 group-hover:animate-pulse`}>
-                      <IconComponent className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="text-white font-semibold text-sm group-hover:text-purple-200 transition-colors">
-                      {type.title}
-                    </h3>
-                  </Link>
-                );
-              })}
             </div>
           </div>
 
