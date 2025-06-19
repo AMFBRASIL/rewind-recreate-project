@@ -23,17 +23,14 @@ const CreateRetrospective = () => {
   const totalSteps = 5;
 
   const recipientOptions = [
-    { value: 'namorado', label: 'Namorado' },
-    { value: 'namorada', label: 'Namorada' },
-    { value: 'marido', label: 'Marido' },
-    { value: 'esposa', label: 'Esposa' },
-    { value: 'amigo', label: 'Amigo' },
-    { value: 'amiga', label: 'Amiga' },
-    { value: 'mae', label: 'Mãe' },
-    { value: 'pai', label: 'Pai' },
-    { value: 'filho', label: 'Filho' },
-    { value: 'falecido', label: 'Falecido' },
-    { value: 'outros', label: 'Outros' }
+    { value: 'namorados', label: 'Namorados' },
+    { value: 'casamento', label: 'Casamento' },
+    { value: 'amigos', label: 'Amigos' },
+    { value: 'pais', label: 'Pais' },
+    { value: 'filhos', label: 'Filhos' },
+    { value: 'formatura', label: 'Formatura' },
+    { value: 'natal', label: 'Papai Noel Natal' },
+    { value: 'hospitalizado', label: 'Hospitalizado' }
   ];
 
   const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -141,8 +138,8 @@ const CreateRetrospective = () => {
           <div className="space-y-6">
             <div className="text-center mb-8">
               <Heart className="w-16 h-16 text-pink-500 mx-auto mb-4" />
-              <h2 className="text-3xl font-bold text-white mb-2">Para Quem</h2>
-              <p className="text-purple-200">Para quem é esta retrospectiva especial?</p>
+              <h2 className="text-3xl font-bold text-white mb-2">Tipo de Retrospectiva</h2>
+              <p className="text-purple-200">Qual tipo de retrospectiva você quer criar?</p>
             </div>
             <div className="space-y-4">
               <Label className="text-white font-semibold">Selecione uma opção</Label>
@@ -150,7 +147,7 @@ const CreateRetrospective = () => {
                 type="single"
                 value={formData.recipient}
                 onValueChange={(value) => setFormData(prev => ({ ...prev, recipient: value || '' }))}
-                className="grid grid-cols-3 gap-3 w-full"
+                className="grid grid-cols-2 gap-3 w-full"
               >
                 {recipientOptions.map((option) => (
                   <ToggleGroupItem
