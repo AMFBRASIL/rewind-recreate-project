@@ -94,7 +94,7 @@ export const slides: SlideData[] = [
   {
     id: 10,
     type: 'image',
-    backgroundImage: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5',
+    backgroundImage: 'https://images.unsplash.com/photo-1470813740244-df37b8c1edcb',
     title: 'Nosso Primeiro Ano',
     subtitle: 'Celebrando Cada Momento',
     description: 'Um ano repleto de descobertas, risadas, lágrimas de alegria e muito amor. Cada dia ao seu lado é uma nova página da nossa história.',
