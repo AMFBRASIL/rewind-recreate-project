@@ -1,5 +1,4 @@
-
-import { Star, Moon, Heart } from "lucide-react";
+import { Star, Moon, Heart, Music, Clock, Image } from "lucide-react";
 import { SlideData } from '../types/slideTypes';
 
 interface SlideContentProps {
@@ -13,6 +12,12 @@ const SlideContent = ({ slide }: SlideContentProps) => {
         return <Star className="w-8 h-8 text-yellow-400 mx-auto mb-4 animate-pulse" />;
       case 'moon':
         return <Moon className="w-8 h-8 text-blue-300 mx-auto mb-4 animate-pulse" />;
+      case 'music':
+        return <Music className="w-8 h-8 text-purple-400 mx-auto mb-4 animate-pulse" />;
+      case 'clock':
+        return <Clock className="w-8 h-8 text-green-400 mx-auto mb-4 animate-pulse" />;
+      case 'image':
+        return <Image className="w-8 h-8 text-orange-400 mx-auto mb-4 animate-pulse" />;
       default:
         return <Heart className="w-8 h-8 text-pink-400 mx-auto mb-4 animate-pulse" />;
     }

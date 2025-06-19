@@ -8,5 +8,5 @@ export interface SlideData {
   subtitle: string;
   description: string;
   date: string;
-  icon?: 'heart' | 'star' | 'moon';
+  icon?: 'heart' | 'star' | 'moon' | 'music' | 'clock' | 'image';
 }

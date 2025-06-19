@@ -74,6 +74,26 @@ export const slides: SlideData[] = [
   {
     id: 8,
     type: 'image',
+    backgroundImage: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f',
+    title: 'Nossa Música',
+    subtitle: 'A Canção Que Escolhemos',
+    description: 'Aquela música especial que sempre nos faz lembrar um do outro. Cada nota conta a nossa história, cada verso fala do nosso amor.',
+    date: 'Nossa Trilha Sonora',
+    icon: 'music'
+  },
+  {
+    id: 9,
+    type: 'image',
+    backgroundImage: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2',
+    title: 'Mural de Memórias',
+    subtitle: 'Momentos Capturados',
+    description: 'Cada foto conta uma história, cada sorriso guarda uma memória. Nossa galeria de momentos únicos que construímos juntos.',
+    date: 'Coleção de Momentos',
+    icon: 'image'
+  },
+  {
+    id: 10,
+    type: 'image',
     backgroundImage: 'https://images.unsplash.com/photo-1470375262327-ee60e5aa9a4b',
     title: 'Nosso Primeiro Ano',
     subtitle: 'Celebrando Cada Momento',
@@ -82,7 +102,17 @@ export const slides: SlideData[] = [
     icon: 'heart'
   },
   {
-    id: 9,
+    id: 11,
+    type: 'image',
+    backgroundImage: 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21',
+    title: 'Tempo Juntos',
+    subtitle: 'Contando Nossos Dias',
+    description: 'Desde o nosso primeiro encontro até hoje, já são muitos dias, horas e momentos compartilhados. E ainda temos toda uma vida pela frente.',
+    date: 'Contador do Amor',
+    icon: 'clock'
+  },
+  {
+    id: 12,
     type: 'image',
     backgroundImage: 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21',
     title: 'Para Sempre',
