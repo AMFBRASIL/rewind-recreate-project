@@ -9,6 +9,7 @@ import CoupleRetrospective from "./pages/CoupleRetrospective";
 import CreateRetrospective from "./pages/CreateRetrospective";
 import PaymentPix from "./pages/PaymentPix";
 import ParentsRetrospective from "./pages/ParentsRetrospective";
+import ChildrenRetrospective from "./pages/ChildrenRetrospective";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/retrospective" element={<CoupleRetrospective />} />
           <Route path="/parents" element={<ParentsRetrospective />} />
+          <Route path="/children" element={<ChildrenRetrospective />} />
           <Route path="/create" element={<CreateRetrospective />} />
           <Route path="/payment" element={<PaymentPix />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
