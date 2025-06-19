@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Heart, Play, Star, Calendar, Camera, Music } from "lucide-react";
 import LoadingScreen from "@/components/LoadingScreen";
@@ -6,9 +5,11 @@ import RewindHeader from "@/components/RewindHeader";
 import PhotoMemory from "@/components/PhotoMemory";
 import TimelineEvent from "@/components/TimelineEvent";
 import MusicPlayer from "@/components/MusicPlayer";
+import RetrospectiveForm from "@/components/RetrospectiveForm";
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -98,7 +99,10 @@ const Index = () => {
                 <Play className="inline-block mr-2 group-hover:animate-pulse" size={20} />
                 Ver Retrospectiva Completa
               </button>
-              <button className="group bg-white/10 backdrop-blur-md text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:bg-white/20">
+              <button 
+                onClick={() => setIsFormOpen(true)}
+                className="group bg-white/10 backdrop-blur-md text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:bg-white/20"
+              >
                 <Heart className="inline-block mr-2 group-hover:animate-pulse" size={20} />
                 Criar Sua Retrospectiva
               </button>
@@ -151,12 +155,21 @@ const Index = () => {
             <p className="text-purple-200 text-lg mb-8 max-w-2xl mx-auto">
               Transforme seus momentos especiais em uma linda história digital
             </p>
-            <button className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105">
+            <button 
+              onClick={() => setIsFormOpen(true)}
+              className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105"
+            >
               Começar Agora
             </button>
           </div>
         </div>
       </div>
+
+      {/* Formulário */}
+      <RetrospectiveForm 
+        isOpen={isFormOpen} 
+        onClose={() => setIsFormOpen(false)} 
+      />
     </div>
   );
 };
