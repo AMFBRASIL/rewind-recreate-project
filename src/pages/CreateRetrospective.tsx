@@ -71,10 +71,14 @@ const CreateRetrospective = () => {
     
     // Redirect to appropriate retrospective based on recipient
     const parentRecipients = ['mae', 'pai', 'filho', 'filha'];
+    const friendRecipients = ['amigo', 'amiga'];
     const isParentRetrospective = parentRecipients.includes(formData.recipient);
+    const isFriendRetrospective = friendRecipients.includes(formData.recipient);
     
     if (isParentRetrospective) {
       navigate('/parent-retrospective', { state: { formData } });
+    } else if (isFriendRetrospective) {
+      navigate('/friend-retrospective', { state: { formData } });
     } else {
       navigate('/retrospective', { state: { formData } });
     }

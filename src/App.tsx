@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import CoupleRetrospective from "./pages/CoupleRetrospective";
 import ParentRetrospective from "./pages/ParentRetrospective";
+import FriendRetrospective from "./pages/FriendRetrospective";
 import CreateRetrospective from "./pages/CreateRetrospective";
 import NotFound from "./pages/NotFound";
 
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/retrospective" element={<CoupleRetrospective />} />
           <Route path="/parent-retrospective" element={<ParentRetrospective />} />
+          <Route path="/friend-retrospective" element={<FriendRetrospective />} />
           <Route path="/create" element={<CreateRetrospective />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
