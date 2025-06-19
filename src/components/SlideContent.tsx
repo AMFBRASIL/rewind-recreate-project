@@ -1,4 +1,3 @@
-
 import { Star, Moon, Heart, Music, Clock, Image } from "lucide-react";
 import { SlideData } from '../types/slideTypes';
 import MusicPlayer from './MusicPlayer';
@@ -15,6 +14,16 @@ const SlideContent = ({ slide }: SlideContentProps) => {
     minutes: 0,
     seconds: 0
   });
+
+  const [showHearts, setShowHearts] = useState(false);
+
+  const handleHeartClick = () => {
+    setShowHearts(true);
+    // Remove os corações após 3 segundos
+    setTimeout(() => {
+      setShowHearts(false);
+    }, 3000);
+  };
 
   useEffect(() => {
     if (slide.title === 'Tempo Juntos') {
@@ -67,6 +76,26 @@ const SlideContent = ({ slide }: SlideContentProps) => {
 
   return (
     <div className="relative z-10 h-full flex items-center justify-center">
+      {/* Corações flutuantes quando ativados */}
+      {showHearts && (
+        <div className="fixed inset-0 pointer-events-none z-50">
+          {[...Array(20)].map((_, i) => (
+            <Heart
+              key={i}
+              className="absolute text-pink-400 animate-bounce"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 2}s`,
+                animationDuration: `${1 + Math.random() * 2}s`,
+                fontSize: `${16 + Math.random() * 24}px`
+              }}
+              size={16 + Math.random() * 24}
+            />
+          ))}
+        </div>
+      )}
+
       <div className="text-center text-white px-8 max-w-4xl">
         <div className="mb-4">
           {getIcon(slide.icon || 'heart')}
@@ -154,6 +183,19 @@ const SlideContent = ({ slide }: SlideContentProps) => {
                 <div className="text-sm text-gray-300">Segundos</div>
               </div>
             </div>
+            <p className="text-lg md:text-xl leading-relaxed text-gray-200 max-w-2xl mx-auto animate-fade-in">
+              {slide.description}
+            </p>
+          </div>
+        ) : /* Botão especial para o slide Para Sempre */
+        slide.title === 'Para Sempre' ? (
+          <div className="mb-8">
+            <button
+              onClick={handleHeartClick}
+              className="mb-6 p-4 bg-gradient-to-r from-pink-500 to-red-500 rounded-full hover:from-pink-600 hover:to-red-600 transform hover:scale-110 transition-all duration-300 animate-pulse"
+            >
+              <Heart className="w-12 h-12 text-white fill-white" />
+            </button>
             <p className="text-lg md:text-xl leading-relaxed text-gray-200 max-w-2xl mx-auto animate-fade-in">
               {slide.description}
             </p>
