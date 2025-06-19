@@ -10,6 +10,7 @@ import ParentRetrospective from "./pages/ParentRetrospective";
 import FriendRetrospective from "./pages/FriendRetrospective";
 import ChildrenRetrospective from "./pages/ChildrenRetrospective";
 import CreateRetrospective from "./pages/CreateRetrospective";
+import PixPayment from "./pages/PixPayment";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/friend-retrospective" element={<FriendRetrospective />} />
           <Route path="/children-retrospective" element={<ChildrenRetrospective />} />
           <Route path="/create" element={<CreateRetrospective />} />
+          <Route path="/pix-payment" element={<PixPayment />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
