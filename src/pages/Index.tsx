@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Heart, Play, Star, Calendar, Camera, Music, Users, User, Baby, Flower, Video, FileText, Plus, Palette, Share2, Archive, MousePointer, Gift, X } from "lucide-react";
+import { Heart, Play, Star, Calendar, Camera, Music, Users, User, Baby, Flower, Video, FileText, Plus, Palette, Share2, Archive, MousePointer, Gift, X, GraduationCap, TreePine } from "lucide-react";
 import { Link } from "react-router-dom";
 import LoadingScreen from "@/components/LoadingScreen";
 import RewindHeader from "@/components/RewindHeader";
@@ -54,17 +54,13 @@ const Index = () => {
   ];
 
   const retrospectiveTypes = [
-    { value: 'namorado', label: 'Namorado', icon: Heart, gradient: 'from-pink-500 to-red-500' },
-    { value: 'namorada', label: 'Namorada', icon: Heart, gradient: 'from-pink-500 to-purple-500' },
-    { value: 'marido', label: 'Marido', icon: Users, gradient: 'from-blue-500 to-indigo-500' },
-    { value: 'esposa', label: 'Esposa', icon: Users, gradient: 'from-purple-500 to-pink-500' },
-    { value: 'amigo', label: 'Amigo', icon: User, gradient: 'from-green-500 to-teal-500' },
-    { value: 'amiga', label: 'Amiga', icon: User, gradient: 'from-teal-500 to-cyan-500' },
-    { value: 'mae', label: 'Mãe', icon: Heart, gradient: 'from-rose-500 to-pink-500' },
-    { value: 'pai', label: 'Pai', icon: Star, gradient: 'from-amber-500 to-orange-500' },
-    { value: 'filho', label: 'Filho', icon: Baby, gradient: 'from-sky-500 to-blue-500' },
-    { value: 'falecido', label: 'Falecido', icon: Flower, gradient: 'from-gray-500 to-slate-500' },
-    { value: 'outros', label: 'Outros', icon: Heart, gradient: 'from-violet-500 to-purple-500' }
+    { value: 'namorados', label: 'Namorados', icon: Heart, gradient: 'from-pink-500 to-red-500' },
+    { value: 'casamento', label: 'Casamento', icon: Users, gradient: 'from-purple-500 to-pink-500' },
+    { value: 'amigos', label: 'Amigos', icon: User, gradient: 'from-green-500 to-teal-500' },
+    { value: 'pais', label: 'Pais', icon: Heart, gradient: 'from-amber-500 to-orange-500' },
+    { value: 'filhos', label: 'Filhos', icon: Baby, gradient: 'from-sky-500 to-blue-500' },
+    { value: 'formatura', label: 'Formatura', icon: GraduationCap, gradient: 'from-indigo-500 to-purple-500' },
+    { value: 'natal', label: 'Papai Noel Natal', icon: TreePine, gradient: 'from-red-500 to-green-600' }
   ];
 
   const howItWorksSteps = [
