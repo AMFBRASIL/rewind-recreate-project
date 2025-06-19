@@ -173,7 +173,7 @@ const Index = () => {
           {/* Hero Section */}
           <div className="text-center mb-16 animate-fade-in">
             <h1 className="text-6xl font-bold text-white mb-6 bg-gradient-to-r from-pink-300 to-purple-300 bg-clip-text text-transparent">
-              Criando memórias especiais e personalizadas com 1 click
+              Um presente que emociona para sempre
             </h1>
             <p className="text-xl text-purple-200 max-w-2xl mx-auto mb-8">
               Crie retrospectivas únicas para celebrar momentos importantes com quem você ama
