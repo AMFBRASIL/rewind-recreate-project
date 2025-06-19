@@ -67,8 +67,8 @@ const CreateRetrospective = () => {
 
   const handleSubmit = () => {
     console.log('Form submitted:', formData);
-    // Aqui você implementaria o envio do formulário
-    navigate('/');
+    // Redirect to retrospective page with form data
+    navigate('/retrospective', { state: { formData } });
   };
 
   const isStepValid = () => {

@@ -1,5 +1,5 @@
-
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { slides } from "../data/slidesData";
 import SlideBackground from "../components/SlideBackground";
 import SlideContent from "../components/SlideContent";
@@ -9,7 +9,19 @@ import ScrollHint from "../components/ScrollHint";
 import FloatingHearts from "../components/FloatingHearts";
 
 const CoupleRetrospective = () => {
+  const location = useLocation();
   const [currentSlide, setCurrentSlide] = useState(0);
+  
+  // Get form data from navigation state
+  const formData = location.state?.formData;
+
+  useEffect(() => {
+    // If form data exists, you can use it to customize the retrospective
+    if (formData) {
+      console.log('Retrospective created with data:', formData);
+      // Here you could customize slides based on formData.recipient, formData.title, etc.
+    }
+  }, [formData]);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
