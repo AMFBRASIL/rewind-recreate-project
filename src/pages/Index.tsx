@@ -19,7 +19,8 @@ const Index = () => {
     "Reviva o que realmente importa",
     "Memórias que tocam o coração",
     "Um presente que emociona para sempre",
-    "A retrospectiva que vive no seu celular"
+    "A retrospectiva que vive no seu celular",
+    "Momentos que brilham de novo na tela"
   ];
 
   useEffect(() => {
