@@ -24,6 +24,7 @@ const App = () => (
           <Route path="/retrospective" element={<CoupleRetrospective />} />
           <Route path="/parent-retrospective" element={<ParentRetrospective />} />
           <Route path="/friend-retrospective" element={<FriendRetrospective />} />
+          <Route path="/children-retrospective" element={<ChildrenRetrospective />} />
           <Route path="/create" element={<CreateRetrospective />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
