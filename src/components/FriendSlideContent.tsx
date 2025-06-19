@@ -46,27 +46,47 @@ const FriendSlideContent = ({ slide, formData }: FriendSlideContentProps) => {
               {formData?.photos?.slice(0, 6).map((photo: File, index: number) => (
                 <PhotoMemory
                   key={index}
-                  imageUrl={URL.createObjectURL(photo)}
-                  title={`Aventura ${index + 1}`}
-                  date="Momento especial"
+                  memory={{
+                    id: index,
+                    title: `Aventura ${index + 1}`,
+                    date: "Momento especial",
+                    image: URL.createObjectURL(photo),
+                    description: "Uma aventura inesquecível"
+                  }}
+                  index={index}
                 />
               )) || (
                 // Fotos placeholder se não há fotos do usuário
                 <>
                   <PhotoMemory
-                    imageUrl="https://images.unsplash.com/photo-1511988617509-a57c8a288659"
-                    title="Nossa Amizade"
-                    date="Sempre juntos"
+                    memory={{
+                      id: 1,
+                      title: "Nossa Amizade",
+                      date: "Sempre juntos",
+                      image: "https://images.unsplash.com/photo-1511988617509-a57c8a288659",
+                      description: "Momentos especiais de nossa amizade"
+                    }}
+                    index={0}
                   />
                   <PhotoMemory
-                    imageUrl="https://images.unsplash.com/photo-1529156069898-49953e39b3ac"
-                    title="Diversão"
-                    date="Risos garantidos"
+                    memory={{
+                      id: 2,
+                      title: "Diversão",
+                      date: "Risos garantidos",
+                      image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac",
+                      description: "Sempre nos divertindo juntos"
+                    }}
+                    index={1}
                   />
                   <PhotoMemory
-                    imageUrl="https://images.unsplash.com/photo-1522771930-78848d9293e8"
-                    title="Aventuras"
-                    date="Criando memórias"
+                    memory={{
+                      id: 3,
+                      title: "Aventuras",
+                      date: "Criando memórias",
+                      image: "https://images.unsplash.com/photo-1522771930-78848d9293e8",
+                      description: "Cada aventura é única"
+                    }}
+                    index={2}
                   />
                 </>
               )}
