@@ -1,10 +1,10 @@
-
 import { useState } from "react";
 import { ArrowLeft, ArrowRight, Mail, User, Heart, Calendar, Upload, Music, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { useNavigate } from "react-router-dom";
 
 const CreateRetrospective = () => {
@@ -21,6 +21,20 @@ const CreateRetrospective = () => {
   });
 
   const totalSteps = 5;
+
+  const recipientOptions = [
+    { value: 'namorado', label: 'Namorado' },
+    { value: 'namorada', label: 'Namorada' },
+    { value: 'marido', label: 'Marido' },
+    { value: 'esposa', label: 'Esposa' },
+    { value: 'amigo', label: 'Amigo' },
+    { value: 'amiga', label: 'Amiga' },
+    { value: 'mae', label: 'Mãe' },
+    { value: 'pai', label: 'Pai' },
+    { value: 'filho', label: 'Filho' },
+    { value: 'falecido', label: 'Falecido' },
+    { value: 'outros', label: 'Outros' }
+  ];
 
   const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -130,16 +144,24 @@ const CreateRetrospective = () => {
               <h2 className="text-3xl font-bold text-white mb-2">Para Quem</h2>
               <p className="text-purple-200">Para quem é esta retrospectiva especial?</p>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="recipient" className="text-white font-semibold">Destinatário</Label>
-              <Input
-                id="recipient"
-                placeholder="Ex: Para minha namorada, Para meu marido..."
+            <div className="space-y-4">
+              <Label className="text-white font-semibold">Selecione uma opção</Label>
+              <ToggleGroup
+                type="single"
                 value={formData.recipient}
-                onChange={(e) => setFormData(prev => ({ ...prev, recipient: e.target.value }))}
-                className="w-full text-lg p-4"
-                required
-              />
+                onValueChange={(value) => setFormData(prev => ({ ...prev, recipient: value || '' }))}
+                className="grid grid-cols-3 gap-3 w-full"
+              >
+                {recipientOptions.map((option) => (
+                  <ToggleGroupItem
+                    key={option.value}
+                    value={option.value}
+                    className="bg-white/10 border-white/30 text-white hover:bg-white/20 data-[state=on]:bg-pink-500 data-[state=on]:text-white h-16 flex items-center justify-center text-sm font-medium transition-all duration-200"
+                  >
+                    {option.label}
+                  </ToggleGroupItem>
+                ))}
+              </ToggleGroup>
             </div>
           </div>
         );
