@@ -37,7 +37,10 @@ const SlideContent = ({ slide, formData }: SlideContentProps) => {
 
   useEffect(() => {
     if (slide.title === 'Tempo Juntos') {
-      const startDate = new Date('2023-02-14T00:00:00'); // Data do primeiro encontro
+      // Use the birth date from form data or fallback to a default date
+      const startDate = formData?.birthDate 
+        ? new Date(formData.birthDate) 
+        : new Date('2023-02-14T00:00:00');
       
       const updateCounter = () => {
         const now = new Date();
@@ -56,7 +59,7 @@ const SlideContent = ({ slide, formData }: SlideContentProps) => {
       
       return () => clearInterval(interval);
     }
-  }, [slide.title]);
+  }, [slide.title, formData?.birthDate]);
 
   const getIcon = (iconType: string) => {
     switch (iconType) {
