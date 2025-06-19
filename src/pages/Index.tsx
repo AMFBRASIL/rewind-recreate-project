@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from "react";
-import { Heart, Play, Star, Calendar, Camera, Music, Users, Baby, Sparkles, User, Crown, UserHeart } from "lucide-react";
+import { Heart, Play, Star, Calendar, Camera, Music, Users, Baby, Sparkles, User, Crown } from "lucide-react";
 import { Link } from "react-router-dom";
 import LoadingScreen from "@/components/LoadingScreen";
 import RewindHeader from "@/components/RewindHeader";
@@ -58,7 +57,7 @@ const Index = () => {
     { title: "Esposa", icon: Crown, color: "from-purple-500 to-pink-500", route: "/retrospective" },
     { title: "Amigo", icon: Users, color: "from-green-500 to-teal-500", route: "/friend-retrospective" },
     { title: "Amiga", icon: Users, color: "from-teal-500 to-cyan-500", route: "/friend-retrospective" },
-    { title: "Mãe", icon: UserHeart, color: "from-rose-500 to-pink-500", route: "/parent-retrospective" },
+    { title: "Mãe", icon: Heart, color: "from-rose-500 to-pink-500", route: "/parent-retrospective" },
     { title: "Pai", icon: User, color: "from-blue-500 to-slate-500", route: "/parent-retrospective" },
     { title: "Filho", icon: Baby, color: "from-yellow-500 to-orange-500", route: "/children-retrospective" },
     { title: "Falecido", icon: Star, color: "from-gray-500 to-slate-500", route: "/retrospective" },
