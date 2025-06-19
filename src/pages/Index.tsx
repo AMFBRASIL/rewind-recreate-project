@@ -1,12 +1,12 @@
-
 import { useState, useEffect } from "react";
-import { Heart, Play, Star, Calendar, Camera, Music, Users, User, Baby, Flower } from "lucide-react";
+import { Heart, Play, Star, Calendar, Camera, Music, Users, User, Baby, Flower, Video } from "lucide-react";
 import { Link } from "react-router-dom";
 import LoadingScreen from "@/components/LoadingScreen";
 import RewindHeader from "@/components/RewindHeader";
 import PhotoMemory from "@/components/PhotoMemory";
 import TimelineEvent from "@/components/TimelineEvent";
 import MusicPlayer from "@/components/MusicPlayer";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -113,6 +113,31 @@ const Index = () => {
                 <Play className="inline-block mr-2 group-hover:animate-pulse" size={20} />
                 Ver Retrospectiva Completa
               </Link>
+              
+              <Dialog>
+                <DialogTrigger asChild>
+                  <button className="group bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl inline-flex items-center justify-center">
+                    <Video className="inline-block mr-2 group-hover:animate-pulse" size={20} />
+                    Assistir Vídeo
+                  </button>
+                </DialogTrigger>
+                <DialogContent className="max-w-4xl w-full h-[80vh] p-0">
+                  <DialogHeader className="p-6 pb-0">
+                    <DialogTitle className="text-center text-2xl font-bold">
+                      Como Criar Sua Retrospectiva
+                    </DialogTitle>
+                  </DialogHeader>
+                  <div className="p-6 pt-4 h-full">
+                    <iframe
+                      src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                      title="Vídeo Tutorial"
+                      className="w-full h-full rounded-lg"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
 
