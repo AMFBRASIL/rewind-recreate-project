@@ -11,6 +11,7 @@ import PaymentPix from "./pages/PaymentPix";
 import PaymentConfirmation from "./pages/PaymentConfirmation";
 import ParentsRetrospective from "./pages/ParentsRetrospective";
 import ChildrenRetrospective from "./pages/ChildrenRetrospective";
+import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/create" element={<CreateRetrospective />} />
           <Route path="/payment" element={<PaymentPix />} />
           <Route path="/payment-confirmation" element={<PaymentConfirmation />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
