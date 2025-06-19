@@ -35,15 +35,35 @@ export const parentSlides: SlideData[] = [
   {
     id: 4,
     type: 'image',
+    backgroundImage: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f',
+    title: 'Nossa Música',
+    subtitle: 'A trilha sonora da nossa família',
+    description: 'Cada música tem uma história, cada nota desperta uma lembrança especial dos nossos momentos juntos.',
+    date: 'Melodias do coração',
+    icon: 'music'
+  },
+  {
+    id: 5,
+    type: 'image',
     backgroundImage: 'https://images.unsplash.com/photo-1609220136736-443140cffec6',
     title: 'Momentos Especiais',
-    subtitle: 'Memórias que aquecen o coração',
+    subtitle: 'Memórias que aquecem o coração',
     description: 'Aniversários, formaturas, conquistas... Cada momento especial compartilhado é um presente.',
     date: 'Celebrações da vida',
     icon: 'image'
   },
   {
-    id: 5,
+    id: 6,
+    type: 'image',
+    backgroundImage: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96',
+    title: 'Mural de Fotos',
+    subtitle: 'Nossas memórias em imagens',
+    description: 'Cada foto conta uma história, cada imagem guarda um pedaço do nosso coração. Estas são as memórias que construímos juntos.',
+    date: 'Álbum da família',
+    icon: 'image'
+  },
+  {
+    id: 7,
     type: 'image',
     backgroundImage: 'https://images.unsplash.com/photo-1522771930-78848d9293e8',
     title: 'Nosso Orgulho',
@@ -53,7 +73,7 @@ export const parentSlides: SlideData[] = [
     icon: 'star'
   },
   {
-    id: 6,
+    id: 8,
     type: 'image',
     backgroundImage: 'https://images.unsplash.com/photo-1541216970279-affbfdd55aa8',
     title: 'Amor Eterno',

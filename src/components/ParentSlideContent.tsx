@@ -1,7 +1,8 @@
 
-import { Heart, Star, Clock, Image, Baby, Users } from "lucide-react";
+import { Heart, Star, Clock, Image, Baby, Users, Music } from "lucide-react";
 import { SlideData } from '../types/slideTypes';
 import { useState, useEffect } from 'react';
+import MusicPlayer from './MusicPlayer';
 
 interface ParentSlideContentProps {
   slide: SlideData;
@@ -20,7 +21,11 @@ const ParentSlideContent = ({ slide, formData }: ParentSlideContentProps) => {
   const [timeElapsed, setTimeElapsed] = useState({
     years: 0,
     months: 0,
-    days: 0
+    days: 0,
+    weeks: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
   });
 
   const [showHearts, setShowHearts] = useState(false);
@@ -40,24 +45,22 @@ const ParentSlideContent = ({ slide, formData }: ParentSlideContentProps) => {
       
       const updateCounter = () => {
         const now = new Date();
-        const years = now.getFullYear() - birthDate.getFullYear();
-        let months = now.getMonth() - birthDate.getMonth();
-        let days = now.getDate() - birthDate.getDate();
+        const differenceMs = now.getTime() - birthDate.getTime();
         
-        if (days < 0) {
-          months--;
-          days += new Date(now.getFullYear(), now.getMonth(), 0).getDate();
-        }
+        // Calculate detailed time breakdown
+        const years = Math.floor(differenceMs / (1000 * 60 * 60 * 24 * 365.25));
+        const months = Math.floor((differenceMs % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24 * 30.44));
+        const days = Math.floor((differenceMs % (1000 * 60 * 60 * 24 * 30.44)) / (1000 * 60 * 60 * 24));
+        const weeks = Math.floor(differenceMs / (1000 * 60 * 60 * 24 * 7));
+        const hours = Math.floor((differenceMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((differenceMs % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((differenceMs % (1000 * 60)) / 1000);
         
-        if (months < 0) {
-          months += 12;
-        }
-        
-        setTimeElapsed({ years, months, days });
+        setTimeElapsed({ years, months, days, weeks, hours, minutes, seconds });
       };
       
       updateCounter();
-      const interval = setInterval(updateCounter, 1000 * 60 * 60 * 24); // Update daily
+      const interval = setInterval(updateCounter, 1000);
       
       return () => clearInterval(interval);
     }
@@ -75,6 +78,8 @@ const ParentSlideContent = ({ slide, formData }: ParentSlideContentProps) => {
         return <Baby className="w-8 h-8 text-pink-400 mx-auto mb-4 animate-pulse" />;
       case 'users':
         return <Users className="w-8 h-8 text-green-400 mx-auto mb-4 animate-pulse" />;
+      case 'music':
+        return <Music className="w-8 h-8 text-purple-400 mx-auto mb-4 animate-pulse" />;
       default:
         return <Heart className="w-8 h-8 text-pink-400 mx-auto mb-4 animate-pulse" />;
     }
@@ -86,7 +91,9 @@ const ParentSlideContent = ({ slide, formData }: ParentSlideContentProps) => {
     'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b',
     'https://images.unsplash.com/photo-1476703993599-0035a21b17a9',
     'https://images.unsplash.com/photo-1609220136736-443140cffec6',
-    'https://images.unsplash.com/photo-1522771930-78848d9293e8'
+    'https://images.unsplash.com/photo-1522771930-78848d9293e8',
+    'https://images.unsplash.com/photo-1578662996442-48f60103fc96',
+    'https://images.unsplash.com/photo-1541216970279-affbfdd55aa8'
   ];
 
   return (
@@ -128,25 +135,79 @@ const ParentSlideContent = ({ slide, formData }: ParentSlideContentProps) => {
         {/* Contador especial para Crescendo Juntos */}
         {slide.title === 'Crescendo Juntos' ? (
           <div className="mb-8">
-            <div className="grid grid-cols-3 gap-6 max-w-lg mx-auto mb-6">
-              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 text-center animate-fade-in">
-                <div className="text-4xl md:text-5xl font-bold text-blue-300 mb-2">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-6">
+              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 text-center animate-fade-in">
+                <div className="text-3xl md:text-4xl font-bold text-blue-300 mb-2">
                   {timeElapsed.years}
                 </div>
                 <div className="text-sm text-gray-300">Anos</div>
               </div>
-              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 text-center animate-fade-in" style={{ animationDelay: '200ms' }}>
-                <div className="text-4xl md:text-5xl font-bold text-purple-300 mb-2">
+              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 text-center animate-fade-in" style={{ animationDelay: '200ms' }}>
+                <div className="text-3xl md:text-4xl font-bold text-purple-300 mb-2">
                   {timeElapsed.months}
                 </div>
                 <div className="text-sm text-gray-300">Meses</div>
               </div>
-              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 text-center animate-fade-in" style={{ animationDelay: '400ms' }}>
-                <div className="text-4xl md:text-5xl font-bold text-pink-300 mb-2">
+              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 text-center animate-fade-in" style={{ animationDelay: '400ms' }}>
+                <div className="text-3xl md:text-4xl font-bold text-pink-300 mb-2">
                   {timeElapsed.days}
                 </div>
                 <div className="text-sm text-gray-300">Dias</div>
               </div>
+              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 text-center animate-fade-in" style={{ animationDelay: '600ms' }}>
+                <div className="text-3xl md:text-4xl font-bold text-green-300 mb-2">
+                  {timeElapsed.weeks}
+                </div>
+                <div className="text-sm text-gray-300">Semanas</div>
+              </div>
+              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 text-center animate-fade-in" style={{ animationDelay: '800ms' }}>
+                <div className="text-3xl md:text-4xl font-bold text-yellow-300 mb-2">
+                  {timeElapsed.hours}
+                </div>
+                <div className="text-sm text-gray-300">Horas</div>
+              </div>
+              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 text-center animate-fade-in" style={{ animationDelay: '1000ms' }}>
+                <div className="text-3xl md:text-4xl font-bold text-red-300 mb-2">
+                  {timeElapsed.minutes}
+                </div>
+                <div className="text-sm text-gray-300">Minutos</div>
+              </div>
+              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 text-center animate-fade-in" style={{ animationDelay: '1200ms' }}>
+                <div className="text-3xl md:text-4xl font-bold text-indigo-300 mb-2">
+                  {timeElapsed.seconds}
+                </div>
+                <div className="text-sm text-gray-300">Segundos</div>
+              </div>
+            </div>
+            <p className="text-lg md:text-xl leading-relaxed text-gray-200 max-w-2xl mx-auto animate-fade-in">
+              {slide.description}
+            </p>
+          </div>
+        ) : /* Player de música especial para o slide Nossa Música */
+        slide.title === 'Nossa Música' ? (
+          <div className="mb-8">
+            <MusicPlayer />
+            <p className="text-lg md:text-xl leading-relaxed text-gray-200 max-w-2xl mx-auto animate-fade-in mt-6">
+              {slide.description}
+            </p>
+          </div>
+        ) : /* Galeria especial para Mural de Fotos */
+        slide.title === 'Mural de Fotos' ? (
+          <div className="mb-8">
+            <div className="grid grid-cols-3 md:grid-cols-4 gap-2 md:gap-4 max-w-3xl mx-auto mb-6">
+              {familyPhotos.map((photo, index) => (
+                <div
+                  key={index}
+                  className="aspect-square rounded-lg overflow-hidden transform hover:scale-110 transition-all duration-300 animate-fade-in"
+                  style={{ animationDelay: `${index * 150}ms` }}
+                >
+                  <img
+                    src={photo}
+                    alt={`Momento ${index + 1}`}
+                    className="w-full h-full object-cover hover:brightness-110 transition-all duration-300"
+                  />
+                </div>
+              ))}
             </div>
             <p className="text-lg md:text-xl leading-relaxed text-gray-200 max-w-2xl mx-auto animate-fade-in">
               {slide.description}
@@ -156,7 +217,7 @@ const ParentSlideContent = ({ slide, formData }: ParentSlideContentProps) => {
         slide.title === 'Momentos Especiais' ? (
           <div className="mb-8">
             <div className="grid grid-cols-3 md:grid-cols-5 gap-2 md:gap-4 max-w-2xl mx-auto mb-6">
-              {familyPhotos.map((photo, index) => (
+              {familyPhotos.slice(0, 5).map((photo, index) => (
                 <div
                   key={index}
                   className="aspect-square rounded-lg overflow-hidden transform hover:scale-110 transition-all duration-300 animate-fade-in"
