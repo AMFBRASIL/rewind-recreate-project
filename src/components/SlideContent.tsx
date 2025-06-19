@@ -190,12 +190,17 @@ const SlideContent = ({ slide }: SlideContentProps) => {
         ) : /* Botão especial para o slide Para Sempre */
         slide.title === 'Para Sempre' ? (
           <div className="mb-8">
-            <button
-              onClick={handleHeartClick}
-              className="mb-6 p-4 bg-gradient-to-r from-pink-500 to-red-500 rounded-full hover:from-pink-600 hover:to-red-600 transform hover:scale-110 transition-all duration-300 animate-pulse"
-            >
-              <Heart className="w-12 h-12 text-white fill-white" />
-            </button>
+            <div className="flex flex-col items-center">
+              <p className="text-yellow-300 text-lg font-semibold mb-3 animate-bounce">
+                CLIQUE AQUI
+              </p>
+              <button
+                onClick={handleHeartClick}
+                className="mb-6 p-4 bg-gradient-to-r from-pink-500 to-red-500 rounded-full hover:from-pink-600 hover:to-red-600 transform hover:scale-110 transition-all duration-300 animate-pulse"
+              >
+                <Heart className="w-12 h-12 text-white fill-white" />
+              </button>
+            </div>
             <p className="text-lg md:text-xl leading-relaxed text-gray-200 max-w-2xl mx-auto animate-fade-in">
               {slide.description}
             </p>
