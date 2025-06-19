@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Heart, Play, Star, Calendar, Camera, Music, Users, User, Baby, Flower, Video, FileText, Plus, Palette, Share2 } from "lucide-react";
+import { Heart, Play, Star, Calendar, Camera, Music, Users, User, Baby, Flower, Video, FileText, Plus, Palette, Share2, Archive, MousePointer, Gift } from "lucide-react";
 import { Link } from "react-router-dom";
 import LoadingScreen from "@/components/LoadingScreen";
 import RewindHeader from "@/components/RewindHeader";
@@ -93,6 +93,27 @@ const Index = () => {
       description: "Gere um QR Code e compartilhe sua retrospectiva com quem importa",
       icon: Share2,
       gradient: "from-orange-500 to-red-500"
+    }
+  ];
+
+  const whyTheyWillLoveIt = [
+    {
+      title: "Memórias Eternizadas",
+      description: "Todos os momentos especiais guardados para sempre em um formato único e emocionante",
+      icon: Archive,
+      gradient: "from-amber-500 to-orange-500"
+    },
+    {
+      title: "Experiência Interativa",
+      description: "Uma jornada envolvente com música, fotos e vídeos que torna cada memória viva",
+      icon: MousePointer,
+      gradient: "from-purple-500 to-pink-500"
+    },
+    {
+      title: "Presente Romântico",
+      description: "O presente mais personalizado e carinhoso que você pode dar para alguém especial",
+      icon: Gift,
+      gradient: "from-red-500 to-rose-500"
     }
   ];
 
@@ -194,6 +215,31 @@ const Index = () => {
                     <IconComponent className="w-12 h-12 mx-auto mb-4 mt-2" />
                     <h3 className="font-bold text-xl mb-3">{step.title}</h3>
                     <p className="text-sm opacity-90 leading-relaxed">{step.description}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Por que ele/ela vai adorar Section */}
+          <div className="mb-16">
+            <h2 className="text-4xl font-bold text-white text-center mb-4">
+              Por que ele/ela vai adorar?
+            </h2>
+            <p className="text-xl text-purple-200 text-center mb-12 max-w-3xl mx-auto">
+              Três razões que tornam sua retrospectiva inesquecível
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              {whyTheyWillLoveIt.map((reason, index) => {
+                const IconComponent = reason.icon;
+                return (
+                  <div
+                    key={index}
+                    className={`bg-gradient-to-br ${reason.gradient} p-8 rounded-2xl text-white text-center transition-all duration-300 transform hover:scale-105 hover:shadow-2xl border border-white/10 backdrop-blur-sm`}
+                  >
+                    <IconComponent className="w-16 h-16 mx-auto mb-6" />
+                    <h3 className="font-bold text-2xl mb-4">{reason.title}</h3>
+                    <p className="text-lg opacity-90 leading-relaxed">{reason.description}</p>
                   </div>
                 );
               })}
