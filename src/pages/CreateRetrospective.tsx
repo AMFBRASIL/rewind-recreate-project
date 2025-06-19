@@ -359,7 +359,7 @@ const CreateRetrospective = () => {
                   disabled={!isStepValid()}
                   className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700"
                 >
-                  Criar Retrospectiva
+                  Clique e veja como ficou
                   <Check className="w-4 h-4 ml-2" />
                 </Button>
               ) : (
