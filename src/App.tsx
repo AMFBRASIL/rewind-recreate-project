@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import CoupleRetrospective from "./pages/CoupleRetrospective";
 import CreateRetrospective from "./pages/CreateRetrospective";
 import PaymentPix from "./pages/PaymentPix";
+import PaymentConfirmation from "./pages/PaymentConfirmation";
 import ParentsRetrospective from "./pages/ParentsRetrospective";
 import ChildrenRetrospective from "./pages/ChildrenRetrospective";
 import NotFound from "./pages/NotFound";
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/children" element={<ChildrenRetrospective />} />
           <Route path="/create" element={<CreateRetrospective />} />
           <Route path="/payment" element={<PaymentPix />} />
+          <Route path="/payment-confirmation" element={<PaymentConfirmation />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
