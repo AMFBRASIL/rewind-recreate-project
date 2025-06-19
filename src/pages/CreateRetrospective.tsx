@@ -32,6 +32,7 @@ const CreateRetrospective = () => {
     { value: 'mae', label: 'Mãe' },
     { value: 'pai', label: 'Pai' },
     { value: 'filho', label: 'Filho' },
+    { value: 'filha', label: 'Filha' },
     { value: 'falecido', label: 'Falecido' },
     { value: 'outros', label: 'Outros' }
   ];
@@ -67,8 +68,16 @@ const CreateRetrospective = () => {
 
   const handleSubmit = () => {
     console.log('Form submitted:', formData);
-    // Redirect to retrospective page with form data
-    navigate('/retrospective', { state: { formData } });
+    
+    // Redirect to appropriate retrospective based on recipient
+    const parentRecipients = ['mae', 'pai', 'filho', 'filha'];
+    const isParentRetrospective = parentRecipients.includes(formData.recipient);
+    
+    if (isParentRetrospective) {
+      navigate('/parent-retrospective', { state: { formData } });
+    } else {
+      navigate('/retrospective', { state: { formData } });
+    }
   };
 
   const isStepValid = () => {
