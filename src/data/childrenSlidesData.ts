@@ -55,7 +55,37 @@ export const childrenSlides: SlideData[] = [
   {
     id: 6,
     type: 'image',
+    backgroundImage: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f',
+    title: 'Nossa Música Especial 🎵',
+    subtitle: 'A trilha sonora dos nossos momentos',
+    description: 'Esta música sempre me lembra de você e dos nossos momentos especiais juntos. Cada vez que toca, meu coração se enche de amor e carinho!',
+    date: 'Sons do coração',
+    icon: 'music'
+  },
+  {
+    id: 7,
+    type: 'image',
+    backgroundImage: 'https://images.unsplash.com/photo-1516627145497-ae4df4bf4697',
+    title: 'Mural de Memórias 📸',
+    subtitle: 'Cada foto conta nossa história',
+    description: 'Aqui estão nossos momentos mais preciosos capturados para sempre. Cada foto é um tesouro que guardo no meu coração!',
+    date: 'Memórias eternas',
+    icon: 'image'
+  },
+  {
+    id: 8,
+    type: 'image',
     backgroundImage: 'https://images.unsplash.com/photo-1542810634-71277d95dcbb',
+    title: 'Tempo de Vida Juntos ⏰',
+    subtitle: 'Cada segundo ao seu lado é precioso',
+    description: 'Olhe só quanto tempo incrível já vivemos juntos! Cada dia, cada hora, cada minuto ao seu lado é um presente da vida!',
+    date: 'Contando nossos momentos',
+    icon: 'clock'
+  },
+  {
+    id: 9,
+    type: 'image',
+    backgroundImage: 'https://images.unsplash.com/photo-1519340333755-56e9c1d5d766',
     title: 'Amor Infinito 💕',
     subtitle: 'Você é meu mundo inteiro',
     description: 'Não existe amor maior que o que sinto por você. Você trouxe tanto significado para minha vida. Te amo até a lua e de volta!',

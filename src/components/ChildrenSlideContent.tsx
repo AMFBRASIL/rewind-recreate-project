@@ -2,6 +2,7 @@
 import { SlideData } from '../types/slideTypes';
 import { Heart, Star, Moon, Music, Clock, Image, Sparkles, Smile } from 'lucide-react';
 import PhotoMemory from './PhotoMemory';
+import MusicPlayer from './MusicPlayer';
 
 interface ChildrenSlideContentProps {
   slide: SlideData;
@@ -31,8 +32,24 @@ const ChildrenSlideContent = ({ slide, formData }: ChildrenSlideContentProps) =>
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     const years = Math.floor(diffDays / 365);
     const months = Math.floor((diffDays % 365) / 30);
+    const hours = diffDays * 24;
+    const minutes = hours * 60;
     
-    return { years, months, days: diffDays };
+    return { years, months, days: diffDays, hours, minutes };
+  };
+
+  const getMusicName = (musicKey: string) => {
+    const musicMap: { [key: string]: string } = {
+      'perfect': 'Perfect - Ed Sheeran',
+      'all-of-me': 'All of Me - John Legend',
+      'thinking-out-loud': 'Thinking Out Loud - Ed Sheeran',
+      'a-thousand-years': 'A Thousand Years - Christina Perri',
+      'make-you-feel-my-love': 'Make You Feel My Love - Adele',
+      'can-help-myself': "Can't Help Myself - Four Tops",
+      'at-last': 'At Last - Etta James',
+      'stand-by-me': 'Stand By Me - Ben E. King'
+    };
+    return musicMap[musicKey] || 'Música Especial';
   };
 
   const renderSpecialContent = () => {
@@ -96,25 +113,172 @@ const ChildrenSlideContent = ({ slide, formData }: ChildrenSlideContentProps) =>
             </div>
           </div>
         );
-      
-      case 5: // Crescendo Forte - Contador de idade
+
+      case 6: // Nossa Música Especial
+        return (
+          <div className="mt-8">
+            <div className="max-w-lg mx-auto">
+              <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 backdrop-blur-md rounded-3xl p-8 border-4 border-yellow-300/30">
+                <div className="text-center mb-6">
+                  <div className="text-6xl mb-4">🎵</div>
+                  <h4 className="text-2xl font-bold text-white mb-2">
+                    {getMusicName(formData?.backgroundMusic || 'perfect')}
+                  </h4>
+                  <p className="text-purple-200">Nossa canção do coração</p>
+                </div>
+                
+                <div className="bg-white/10 rounded-2xl p-6">
+                  <div className="flex items-center justify-center space-x-4 mb-4">
+                    <div className="w-12 h-12 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full flex items-center justify-center">
+                      <Music className="w-6 h-6 text-white" />
+                    </div>
+                    <div className="text-center">
+                      <div className="text-white font-bold">Tocando agora</div>
+                      <div className="text-purple-300 text-sm">Para minha criança especial</div>
+                    </div>
+                  </div>
+                  
+                  <div className="relative bg-white/20 rounded-full h-2 mb-2">
+                    <div className="absolute top-0 left-0 h-full bg-gradient-to-r from-pink-400 to-purple-500 rounded-full transition-all duration-300 w-1/3"></div>
+                  </div>
+                  
+                  <div className="flex justify-between text-sm text-purple-300">
+                    <span>1:30</span>
+                    <span>3:45</span>
+                  </div>
+                </div>
+                
+                <div className="mt-4 text-center">
+                  <p className="text-purple-200 text-sm italic">
+                    "Esta música sempre me lembra de você! 💕"
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      case 7: // Mural de Memórias
+        return (
+          <div className="mt-8">
+            <h4 className="text-2xl font-bold text-white mb-6 text-center flex items-center justify-center gap-2">
+              <span>📸</span>
+              Nosso Mural de Memórias
+              <span>🌈</span>
+            </h4>
+            
+            <div className="max-w-4xl mx-auto mb-8">
+              <div className="bg-gradient-to-r from-yellow-400/20 to-orange-400/20 backdrop-blur-md rounded-3xl p-6 border-4 border-yellow-300/30 mb-8">
+                <p className="text-white text-lg text-center leading-relaxed">
+                  <span className="text-2xl">💝</span> Cada foto aqui é um pedacinho do nosso amor guardado para sempre! 
+                  São momentos únicos que vivemos juntos, cheios de risadas, aventuras e muito carinho. 
+                  Olhando essas fotos, meu coração se enche de gratidão por ter você na minha vida! <span className="text-2xl">🥰</span>
+                </p>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
+              {formData?.photos?.map((photo: File, index: number) => (
+                <PhotoMemory
+                  key={index}
+                  memory={{
+                    id: index,
+                    title: `Memória ${index + 1} 💖`,
+                    date: "Momento especial",
+                    image: URL.createObjectURL(photo),
+                    description: "Um tesouro guardado no meu coração!"
+                  }}
+                  index={index}
+                />
+              )) || (
+                // Fotos placeholder
+                <>
+                  <PhotoMemory
+                    memory={{
+                      id: 1,
+                      title: "Felicidade Pura 😄",
+                      date: "Alegria infinita",
+                      image: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9",
+                      description: "Seu sorriso é minha luz"
+                    }}
+                    index={0}
+                  />
+                  <PhotoMemory
+                    memory={{
+                      id: 2,
+                      title: "Aventura Juntos 🚀",
+                      date: "Explorando",
+                      image: "https://images.unsplash.com/photo-1544027993-37dbfe43562a",
+                      description: "Descobrindo o mundo"
+                    }}
+                    index={1}
+                  />
+                  <PhotoMemory
+                    memory={{
+                      id: 3,
+                      title: "Brincadeiras 🎈",
+                      date: "Diversão total",
+                      image: "https://images.unsplash.com/photo-1503602642458-232111445657",
+                      description: "Momentos mágicos"
+                    }}
+                    index={2}
+                  />
+                  <PhotoMemory
+                    memory={{
+                      id: 4,
+                      title: "Carinho 💕",
+                      date: "Amor puro",
+                      image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4",
+                      description: "Você é meu tesouro"
+                    }}
+                    index={3}
+                  />
+                </>
+              )}
+            </div>
+          </div>
+        );
+
+      case 8: // Tempo de Vida Juntos
         const childAge = calculateChildAge();
         return childAge ? (
           <div className="mt-8 text-center">
-            <div className="bg-gradient-to-r from-yellow-400/20 to-orange-400/20 backdrop-blur-md rounded-3xl p-8 max-w-lg mx-auto border-4 border-yellow-300/30">
-              <h4 className="text-3xl font-bold text-white mb-4 flex items-center justify-center gap-2">
-                <span>🎂</span>
-                Meu Pequeno Gigante
+            <div className="bg-gradient-to-r from-blue-400/20 to-purple-400/20 backdrop-blur-md rounded-3xl p-8 max-w-2xl mx-auto border-4 border-yellow-300/30">
+              <h4 className="text-3xl font-bold text-white mb-6 flex items-center justify-center gap-2">
+                <span>⏰</span>
+                Nosso Tempo Juntos
                 <span>✨</span>
               </h4>
-              <div className="text-5xl font-bold text-yellow-300 mb-4">
-                {childAge.years > 0 && `${childAge.years} ${childAge.years === 1 ? 'aninho' : 'aninhos'}`}
-                {childAge.years > 0 && childAge.months > 0 && ' e '}
-                {childAge.months > 0 && `${childAge.months} ${childAge.months === 1 ? 'mês' : 'meses'}`}
+              
+              <div className="grid grid-cols-2 gap-6 mb-6">
+                <div className="bg-white/10 rounded-2xl p-4">
+                  <div className="text-4xl font-bold text-yellow-300 mb-2">{childAge.years}</div>
+                  <div className="text-purple-200">{childAge.years === 1 ? 'Aninho' : 'Aninhos'}</div>
+                </div>
+                <div className="bg-white/10 rounded-2xl p-4">
+                  <div className="text-4xl font-bold text-pink-300 mb-2">{childAge.months}</div>
+                  <div className="text-purple-200">{childAge.months === 1 ? 'Mês' : 'Meses'}</div>
+                </div>
+                <div className="bg-white/10 rounded-2xl p-4">
+                  <div className="text-4xl font-bold text-green-300 mb-2">{childAge.days.toLocaleString()}</div>
+                  <div className="text-purple-200">Dias</div>
+                </div>
+                <div className="bg-white/10 rounded-2xl p-4">
+                  <div className="text-4xl font-bold text-orange-300 mb-2">{childAge.hours.toLocaleString()}</div>
+                  <div className="text-purple-200">Horas</div>
+                </div>
               </div>
-              <p className="text-orange-200 text-lg">
-                {childAge.days} dias de pura alegria na nossa vida! 🌈
+              
+              <p className="text-orange-200 text-lg mb-4">
+                {childAge.days.toLocaleString()} dias de pura alegria na nossa vida! 🌈
               </p>
+              
+              <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 rounded-2xl p-4">
+                <p className="text-white text-base italic">
+                  "Cada segundo ao seu lado é um presente! Obrigado por tornar minha vida tão especial! 💖"
+                </p>
+              </div>
+              
               <div className="mt-4 flex justify-center gap-4 text-2xl">
                 <span>🎈</span>
                 <span>🎨</span>
