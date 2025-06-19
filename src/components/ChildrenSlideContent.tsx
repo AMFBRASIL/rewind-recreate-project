@@ -2,6 +2,7 @@ import { SlideData } from '../types/slideTypes';
 import { Heart, Star, Moon, Music, Clock, Image, Sparkles, Smile } from 'lucide-react';
 import PhotoMemory from './PhotoMemory';
 import MusicPlayer from './MusicPlayer';
+import { useState, useEffect } from 'react';
 
 interface ChildrenSlideContentProps {
   slide: SlideData;
@@ -9,6 +10,42 @@ interface ChildrenSlideContentProps {
 }
 
 const ChildrenSlideContent = ({ slide, formData }: ChildrenSlideContentProps) => {
+  const [timeElapsed, setTimeElapsed] = useState({
+    years: 0,
+    months: 0,
+    days: 0,
+    weeks: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
+
+  useEffect(() => {
+    if (slide.id === 8 && formData?.birthDate) { // Tempo de Vida Juntos
+      const updateCounter = () => {
+        const birthDate = new Date(formData.birthDate);
+        const now = new Date();
+        const differenceMs = now.getTime() - birthDate.getTime();
+        
+        // Calculate detailed time breakdown
+        const years = Math.floor(differenceMs / (1000 * 60 * 60 * 24 * 365.25));
+        const months = Math.floor((differenceMs % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24 * 30.44));
+        const days = Math.floor((differenceMs % (1000 * 60 * 60 * 24 * 30.44)) / (1000 * 60 * 60 * 24));
+        const weeks = Math.floor(differenceMs / (1000 * 60 * 60 * 24 * 7));
+        const hours = Math.floor((differenceMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((differenceMs % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((differenceMs % (1000 * 60)) / 1000);
+        
+        setTimeElapsed({ years, months, days, weeks, hours, minutes, seconds });
+      };
+      
+      updateCounter();
+      const interval = setInterval(updateCounter, 1000);
+      
+      return () => clearInterval(interval);
+    }
+  }, [slide.id, formData?.birthDate]);
+
   const getIcon = (iconType?: string) => {
     switch (iconType) {
       case 'heart': return <Heart className="w-8 h-8" />;
@@ -253,57 +290,60 @@ const ChildrenSlideContent = ({ slide, formData }: ChildrenSlideContentProps) =>
         );
 
       case 8: // Tempo de Vida Juntos
-        const childAge = calculateDetailedChildAge();
-        return childAge ? (
+        return (
           <div className="mt-8 text-center">
             <div className="bg-gradient-to-r from-blue-400/20 to-purple-400/20 backdrop-blur-md rounded-3xl p-8 max-w-4xl mx-auto border-4 border-yellow-300/30">
               <h4 className="text-3xl font-bold text-white mb-6 flex items-center justify-center gap-2">
                 <span>⏰</span>
-                Calculadora do Nosso Tempo Juntos
+                Contador do Nosso Tempo Juntos
                 <span>✨</span>
               </h4>
               
               <div className="mb-6">
                 <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 rounded-2xl p-4 mb-4">
                   <p className="text-white text-lg">
-                    Desde <span className="font-bold text-yellow-300">{new Date(formData.birthDate).toLocaleDateString('pt-BR')}</span> até hoje:
+                    Desde <span className="font-bold text-yellow-300">{formData?.birthDate ? new Date(formData.birthDate).toLocaleDateString('pt-BR') : 'seu nascimento'}</span> até agora:
                   </p>
                 </div>
               </div>
               
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-                <div className="bg-white/10 rounded-2xl p-4">
-                  <div className="text-4xl font-bold text-yellow-300 mb-2">{childAge.years}</div>
-                  <div className="text-purple-200">{childAge.years === 1 ? 'Aninho' : 'Aninhos'}</div>
+                <div className="bg-white/10 rounded-2xl p-4 animate-fade-in">
+                  <div className="text-4xl font-bold text-yellow-300 mb-2">{timeElapsed.years}</div>
+                  <div className="text-purple-200">{timeElapsed.years === 1 ? 'Aninho' : 'Aninhos'}</div>
                 </div>
-                <div className="bg-white/10 rounded-2xl p-4">
-                  <div className="text-4xl font-bold text-pink-300 mb-2">{childAge.months}</div>
-                  <div className="text-purple-200">{childAge.months === 1 ? 'Mês' : 'Meses'}</div>
+                <div className="bg-white/10 rounded-2xl p-4 animate-fade-in" style={{ animationDelay: '200ms' }}>
+                  <div className="text-4xl font-bold text-pink-300 mb-2">{timeElapsed.months}</div>
+                  <div className="text-purple-200">{timeElapsed.months === 1 ? 'Mês' : 'Meses'}</div>
                 </div>
-                <div className="bg-white/10 rounded-2xl p-4">
-                  <div className="text-3xl font-bold text-green-300 mb-2">{childAge.totalDays.toLocaleString()}</div>
+                <div className="bg-white/10 rounded-2xl p-4 animate-fade-in" style={{ animationDelay: '400ms' }}>
+                  <div className="text-3xl font-bold text-green-300 mb-2">{timeElapsed.days}</div>
                   <div className="text-purple-200">Dias</div>
                 </div>
-                <div className="bg-white/10 rounded-2xl p-4">
-                  <div className="text-3xl font-bold text-blue-300 mb-2">{childAge.totalWeeks.toLocaleString()}</div>
+                <div className="bg-white/10 rounded-2xl p-4 animate-fade-in" style={{ animationDelay: '600ms' }}>
+                  <div className="text-3xl font-bold text-blue-300 mb-2">{timeElapsed.weeks}</div>
                   <div className="text-purple-200">Semanas</div>
                 </div>
-                <div className="bg-white/10 rounded-2xl p-4">
-                  <div className="text-2xl font-bold text-orange-300 mb-2">{childAge.totalHours.toLocaleString()}</div>
+                <div className="bg-white/10 rounded-2xl p-4 animate-fade-in" style={{ animationDelay: '800ms' }}>
+                  <div className="text-2xl font-bold text-orange-300 mb-2">{timeElapsed.hours}</div>
                   <div className="text-purple-200">Horas</div>
                 </div>
-                <div className="bg-white/10 rounded-2xl p-4">
-                  <div className="text-2xl font-bold text-red-300 mb-2">{childAge.totalMinutes.toLocaleString()}</div>
+                <div className="bg-white/10 rounded-2xl p-4 animate-fade-in" style={{ animationDelay: '1000ms' }}>
+                  <div className="text-2xl font-bold text-red-300 mb-2">{timeElapsed.minutes}</div>
                   <div className="text-purple-200">Minutos</div>
+                </div>
+                <div className="bg-white/10 rounded-2xl p-4 animate-fade-in col-span-2 md:col-span-1" style={{ animationDelay: '1200ms' }}>
+                  <div className="text-2xl font-bold text-indigo-300 mb-2">{timeElapsed.seconds}</div>
+                  <div className="text-purple-200">Segundos</div>
                 </div>
               </div>
               
               <div className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 rounded-2xl p-6 mb-4">
                 <p className="text-white text-xl mb-2">
-                  🎉 <span className="font-bold text-yellow-300">{childAge.totalDays.toLocaleString()}</span> dias de alegria pura!
+                  🎉 Cada segundo ao seu lado é especial!
                 </p>
                 <p className="text-purple-200 text-lg">
-                  Isso são <span className="font-bold text-pink-300">{childAge.totalSeconds.toLocaleString()}</span> segundos de amor! 💖
+                  Isso são <span className="font-bold text-pink-300">{(timeElapsed.years * 365 * 24 * 60 * 60 + timeElapsed.months * 30 * 24 * 60 * 60 + timeElapsed.days * 24 * 60 * 60 + timeElapsed.hours * 60 * 60 + timeElapsed.minutes * 60 + timeElapsed.seconds).toLocaleString()}</span> segundos de amor! 💖
                 </p>
               </div>
               
@@ -324,7 +364,7 @@ const ChildrenSlideContent = ({ slide, formData }: ChildrenSlideContentProps) =>
               </div>
             </div>
           </div>
-        ) : null;
+        );
       
       default:
         return null;
