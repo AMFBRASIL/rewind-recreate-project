@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Heart, Play, Star, Calendar, Camera, Music, Users, User, Baby, Flower, Video, FileText, Plus, Palette, Share2, Archive, MousePointer, Gift, X, GraduationCap, TreePine, Cross } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LoadingScreen from "@/components/LoadingScreen";
 import RewindHeader from "@/components/RewindHeader";
 import PhotoMemory from "@/components/PhotoMemory";
@@ -12,6 +12,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isRetrospectiveOpen, setIsRetrospectiveOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => {
