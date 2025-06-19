@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Heart, Play, Star, Calendar, Camera, Music } from "lucide-react";
+import { Heart, Play, Star, Calendar, Camera, Music, Users, User, Baby, Flower } from "lucide-react";
 import { Link } from "react-router-dom";
 import LoadingScreen from "@/components/LoadingScreen";
 import RewindHeader from "@/components/RewindHeader";
@@ -51,6 +51,20 @@ const Index = () => {
     { date: "Dez 2023", event: "Um ano juntos", icon: Music }
   ];
 
+  const retrospectiveTypes = [
+    { value: 'namorado', label: 'Namorado', icon: Heart, gradient: 'from-pink-500 to-red-500' },
+    { value: 'namorada', label: 'Namorada', icon: Heart, gradient: 'from-pink-500 to-purple-500' },
+    { value: 'marido', label: 'Marido', icon: Users, gradient: 'from-blue-500 to-indigo-500' },
+    { value: 'esposa', label: 'Esposa', icon: Users, gradient: 'from-purple-500 to-pink-500' },
+    { value: 'amigo', label: 'Amigo', icon: User, gradient: 'from-green-500 to-teal-500' },
+    { value: 'amiga', label: 'Amiga', icon: User, gradient: 'from-teal-500 to-cyan-500' },
+    { value: 'mae', label: 'Mãe', icon: Heart, gradient: 'from-rose-500 to-pink-500' },
+    { value: 'pai', label: 'Pai', icon: Star, gradient: 'from-amber-500 to-orange-500' },
+    { value: 'filho', label: 'Filho', icon: Baby, gradient: 'from-sky-500 to-blue-500' },
+    { value: 'falecido', label: 'Falecido', icon: Flower, gradient: 'from-gray-500 to-slate-500' },
+    { value: 'outros', label: 'Outros', icon: Heart, gradient: 'from-violet-500 to-purple-500' }
+  ];
+
   if (isLoading) {
     return <LoadingScreen />;
   }
@@ -99,13 +113,31 @@ const Index = () => {
                 <Play className="inline-block mr-2 group-hover:animate-pulse" size={20} />
                 Ver Retrospectiva Completa
               </Link>
-              <Link 
-                to="/create"
-                className="group bg-white/10 backdrop-blur-md text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:bg-white/20 inline-flex items-center justify-center"
-              >
-                <Heart className="inline-block mr-2 group-hover:animate-pulse" size={20} />
-                Criar Sua Retrospectiva
-              </Link>
+            </div>
+          </div>
+
+          {/* Retrospective Types Section */}
+          <div className="mb-16">
+            <h2 className="text-4xl font-bold text-white text-center mb-4">
+              Escolha o Tipo de Retrospectiva
+            </h2>
+            <p className="text-xl text-purple-200 text-center mb-12 max-w-3xl mx-auto">
+              Crie uma retrospectiva personalizada para alguém especial
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+              {retrospectiveTypes.map((type) => {
+                const IconComponent = type.icon;
+                return (
+                  <Link
+                    key={type.value}
+                    to="/create"
+                    className={`group bg-gradient-to-br ${type.gradient} p-6 rounded-2xl text-white text-center transition-all duration-300 transform hover:scale-105 hover:shadow-2xl border border-white/10 backdrop-blur-sm`}
+                  >
+                    <IconComponent className="w-8 h-8 mx-auto mb-3 group-hover:animate-pulse" />
+                    <h3 className="font-semibold text-lg">{type.label}</h3>
+                  </Link>
+                );
+              })}
             </div>
           </div>
 
