@@ -279,140 +279,34 @@ const Index = () => {
           </div>
 
           {/* Types Section */}
-          <section className="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
-            <div className="container mx-auto px-4">
-              <div className="text-center mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-                  Tipos de Retrospectiva
-                </h2>
-                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                  Escolha o tipo perfeito para sua ocasião especial
-                </p>
-              </div>
-
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-                {/* Namorados Card */}
-                <div className="group bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
-                  <div className="w-16 h-16 bg-gradient-to-br from-pink-400 to-red-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <Heart className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-4">Namorados</h3>
-                  <p className="text-gray-600 mb-6">Memórias íntimas e românticas</p>
-                  <button 
-                    onClick={() => navigate('/create')}
-                    className="w-full bg-gradient-to-r from-pink-400 to-red-500 text-white py-3 rounded-xl font-semibold hover:from-pink-500 hover:to-red-600 transition-all duration-300"
+          <div className="mb-16">
+            <h2 className="text-4xl font-bold text-white text-center mb-4">
+              Tipos de Retrospectiva
+            </h2>
+            <p className="text-xl text-purple-200 text-center mb-12 max-w-3xl mx-auto">
+              Escolha o tipo perfeito para sua ocasião especial
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+              {retrospectiveTypes.map((type) => {
+                const IconComponent = type.icon;
+                return (
+                  <div
+                    key={type.value}
+                    className={`bg-gradient-to-br ${type.gradient} p-8 rounded-2xl text-white text-center transition-all duration-300 transform hover:scale-105 hover:shadow-2xl border border-white/10 backdrop-blur-sm`}
                   >
-                    Começar
-                  </button>
-                </div>
-
-                {/* Casamento Card */}
-                <div className="group bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
-                  <div className="w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <Users className="w-8 h-8 text-white" />
+                    <IconComponent className="w-16 h-16 mx-auto mb-6" />
+                    <h3 className="font-bold text-2xl mb-4">{type.label}</h3>
+                    <button 
+                      onClick={() => navigate('/create')}
+                      className="w-full bg-white/20 hover:bg-white/30 text-white py-3 rounded-xl font-semibold transition-all duration-300 border border-white/30"
+                    >
+                      Começar
+                    </button>
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-4">Casamento</h3>
-                  <p className="text-gray-600 mb-6">Celebração especial do casal</p>
-                  <button 
-                    onClick={() => navigate('/create')}
-                    className="w-full bg-gradient-to-r from-purple-400 to-pink-500 text-white py-3 rounded-xl font-semibold hover:from-purple-500 hover:to-pink-600 transition-all duration-300"
-                  >
-                    Começar
-                  </button>
-                </div>
-
-                {/* Amigos Card */}
-                <div className="group bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
-                  <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <User className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-4">Amigos</h3>
-                  <p className="text-gray-600 mb-6">Memórias de amizade especial</p>
-                  <button 
-                    onClick={() => navigate('/create')}
-                    className="w-full bg-gradient-to-r from-green-400 to-emerald-600 text-white py-3 rounded-xl font-semibold hover:from-green-500 hover:to-emerald-700 transition-all duration-300"
-                  >
-                    Começar
-                  </button>
-                </div>
-
-                {/* Pais Card */}
-                <div className="group bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
-                  <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <Users className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-4">Pais</h3>
-                  <p className="text-gray-600 mb-6">Homenagem especial para seus pais queridos</p>
-                  <button 
-                    onClick={() => navigate('/parents')}
-                    className="w-full bg-gradient-to-r from-green-400 to-emerald-600 text-white py-3 rounded-xl font-semibold hover:from-green-500 hover:to-emerald-700 transition-all duration-300"
-                  >
-                    Começar
-                  </button>
-                </div>
-
-                {/* Filhos Card */}
-                <div className="group bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
-                  <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <Baby className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-4">Filhos</h3>
-                  <p className="text-gray-600 mb-6">Celebre o crescimento dos seus pequenos</p>
-                  <button 
-                    onClick={() => navigate('/children')}
-                    className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white py-3 rounded-xl font-semibold hover:from-yellow-500 hover:to-orange-600 transition-all duration-300"
-                  >
-                    Começar
-                  </button>
-                </div>
-
-                {/* Formatura Card */}
-                <div className="group bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <GraduationCap className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-4">Formatura</h3>
-                  <p className="text-gray-600 mb-6">Celebre essa conquista importante</p>
-                  <button 
-                    onClick={() => navigate('/create')}
-                    className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-3 rounded-xl font-semibold hover:from-blue-600 hover:to-indigo-700 transition-all duration-300"
-                  >
-                    Começar
-                  </button>
-                </div>
-
-                {/* Natal/Papai Noel Card */}
-                <div className="group bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
-                  <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-green-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <Gift className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-4">Papai Noel</h3>
-                  <p className="text-gray-600 mb-6">Mensagem mágica do Papai Noel</p>
-                  <button 
-                    onClick={() => navigate('/christmas')}
-                    className="w-full bg-gradient-to-r from-red-500 to-green-600 text-white py-3 rounded-xl font-semibold hover:from-red-600 hover:to-green-700 transition-all duration-300"
-                  >
-                    Ho Ho Ho!
-                  </button>
-                </div>
-
-                {/* Hospitalizado Card */}
-                <div className="group bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <Cross className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-4">Hospitalizado</h3>
-                  <p className="text-gray-600 mb-6">Palavras de carinho e esperança</p>
-                  <button 
-                    onClick={() => navigate('/create')}
-                    className="w-full bg-gradient-to-r from-blue-400 to-cyan-500 text-white py-3 rounded-xl font-semibold hover:from-blue-500 hover:to-cyan-600 transition-all duration-300"
-                  >
-                    Começar
-                  </button>
-                </div>
-              </div>
+                );
+              })}
             </div>
-          </section>
+          </div>
 
           {/* Music Player */}
           <div className="mb-16">
