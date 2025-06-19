@@ -255,10 +255,10 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Por que ele/ela vai adorar Section */}
+          {/* Por que vão adorar Section */}
           <div className="mb-16">
             <h2 className="text-4xl font-bold text-white text-center mb-4">
-              Por que ele/ela vai adorar?
+              Por que vão adorar?
             </h2>
             <p className="text-xl text-purple-200 text-center mb-12 max-w-3xl mx-auto">
               Três razões que tornam sua retrospectiva inesquecível
