@@ -119,6 +119,27 @@ const Index = () => {
     }
   ];
 
+  const satisfiedClients = [
+    {
+      name: "Ana & Carlos",
+      testimony: "A retrospectiva ficou perfeita! Meu namorado chorou de emoção quando viu todas as nossas memórias juntas. Foi o presente mais especial que já demos um para o outro.",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9"
+    },
+    {
+      name: "Maria Silva",
+      testimony: "Criei uma retrospectiva para minha mãe no Dia das Mães. Ela ficou tão emocionada que não parava de mostrar para todas as vizinhas. Recomendo muito!",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1721322800607-8c38375eef04"
+    },
+    {
+      name: "João & Pedro",
+      testimony: "Fizemos uma retrospectiva da nossa amizade de 10 anos. Foi incrível relembrar todos os momentos especiais. A qualidade e a facilidade de uso são excepcionais!",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1582562124811-c09040d0a901"
+    }
+  ];
+
   if (isLoading) {
     return <LoadingScreen />;
   }
@@ -318,6 +339,43 @@ const Index = () => {
                   index={index}
                   isLast={index === timelineEvents.length - 1}
                 />
+              ))}
+            </div>
+          </div>
+
+          {/* Clientes Satisfeitos Section */}
+          <div className="mb-16">
+            <h2 className="text-4xl font-bold text-white text-center mb-4">
+              Clientes Satisfeitos
+            </h2>
+            <p className="text-xl text-purple-200 text-center mb-12 max-w-3xl mx-auto">
+              Veja o que nossos clientes estão dizendo sobre suas retrospectivas
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              {satisfiedClients.map((client, index) => (
+                <div
+                  key={index}
+                  className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
+                >
+                  <div className="flex items-center mb-6">
+                    <img
+                      src={client.image}
+                      alt={client.name}
+                      className="w-16 h-16 rounded-full object-cover mr-4 border-2 border-white/20"
+                    />
+                    <div>
+                      <h3 className="text-white font-bold text-lg">{client.name}</h3>
+                      <div className="flex items-center">
+                        {[...Array(client.rating)].map((_, i) => (
+                          <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-purple-200 text-sm leading-relaxed italic">
+                    "{client.testimony}"
+                  </p>
+                </div>
               ))}
             </div>
           </div>
