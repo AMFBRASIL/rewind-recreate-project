@@ -52,10 +52,8 @@ const CreateRetrospective = () => {
   };
 
   const handleFormSubmit = (formData: any) => {
-    const selectedRetrospective = retrospectiveTypes.find(t => t.id === selectedType);
-    if (selectedRetrospective) {
-      navigate(selectedRetrospective.route, { state: { formData } });
-    }
+    // Navegar para a página de pagamento PIX após o formulário
+    navigate("/pix-payment", { state: { formData, retrospectiveType: selectedType } });
   };
 
   return (
