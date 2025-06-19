@@ -12,7 +12,13 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isRetrospectiveOpen, setIsRetrospectiveOpen] = useState(false);
+  const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
   const navigate = useNavigate();
+
+  const titles = [
+    "Um presente que emociona para sempre",
+    "Transformamos lembranças em emoção"
+  ];
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -21,6 +27,14 @@ const Index = () => {
 
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    const titleInterval = setInterval(() => {
+      setCurrentTitleIndex((prevIndex) => (prevIndex + 1) % titles.length);
+    }, 60000); // 1 minuto = 60000ms
+
+    return () => clearInterval(titleInterval);
+  }, [titles.length]);
 
   const memories = [
     {
@@ -172,8 +186,8 @@ const Index = () => {
         <div className="container mx-auto px-4 py-8">
           {/* Hero Section */}
           <div className="text-center mb-16 animate-fade-in">
-            <h1 className="text-6xl font-bold text-white mb-6 bg-gradient-to-r from-pink-300 to-purple-300 bg-clip-text text-transparent">
-              Um presente que emociona para sempre
+            <h1 className="text-6xl font-bold text-white mb-6 bg-gradient-to-r from-pink-300 to-purple-300 bg-clip-text text-transparent transition-all duration-1000">
+              {titles[currentTitleIndex]}
             </h1>
             <p className="text-xl text-purple-200 max-w-2xl mx-auto mb-8">
               Crie retrospectivas únicas para celebrar momentos importantes com quem você ama
