@@ -1,6 +1,8 @@
 
+
 import { Star, Moon, Heart, Music, Clock, Image } from "lucide-react";
 import { SlideData } from '../types/slideTypes';
+import MusicPlayer from './MusicPlayer';
 
 interface SlideContentProps {
   slide: SlideData;
@@ -49,8 +51,16 @@ const SlideContent = ({ slide }: SlideContentProps) => {
           {slide.subtitle}
         </h2>
         
-        {/* Mural de fotos especial para o slide de memórias */}
-        {slide.title === 'Mural de Memórias' ? (
+        {/* Player de música especial para o slide de música */}
+        {slide.title === 'Nossa Música' ? (
+          <div className="mb-8">
+            <MusicPlayer />
+            <p className="text-lg md:text-xl leading-relaxed text-gray-200 max-w-2xl mx-auto animate-fade-in mt-6">
+              {slide.description}
+            </p>
+          </div>
+        ) : /* Mural de fotos especial para o slide de memórias */
+        slide.title === 'Mural de Memórias' ? (
           <div className="mb-8">
             <div className="grid grid-cols-3 md:grid-cols-5 gap-2 md:gap-4 max-w-2xl mx-auto mb-6">
               {examplePhotos.map((photo, index) => (
@@ -82,3 +92,4 @@ const SlideContent = ({ slide }: SlideContentProps) => {
 };
 
 export default SlideContent;
+
