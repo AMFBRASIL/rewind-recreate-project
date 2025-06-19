@@ -6,10 +6,12 @@ import RewindHeader from "@/components/RewindHeader";
 import PhotoMemory from "@/components/PhotoMemory";
 import TimelineEvent from "@/components/TimelineEvent";
 import MusicPlayer from "@/components/MusicPlayer";
+import CoupleRetrospective from "./CoupleRetrospective";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [isRetrospectiveOpen, setIsRetrospectiveOpen] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -158,13 +160,17 @@ const Index = () => {
               Reviva os momentos mais especiais da nossa jornada juntos
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link 
-                to="/retrospective"
-                className="group bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl inline-flex items-center justify-center"
-              >
-                <Play className="inline-block mr-2 group-hover:animate-pulse" size={20} />
-                Ver Retrospectiva Completa
-              </Link>
+              <Dialog open={isRetrospectiveOpen} onOpenChange={setIsRetrospectiveOpen}>
+                <DialogTrigger asChild>
+                  <button className="group bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl inline-flex items-center justify-center">
+                    <Play className="inline-block mr-2 group-hover:animate-pulse" size={20} />
+                    Ver Retrospectiva Completa
+                  </button>
+                </DialogTrigger>
+                <DialogContent className="w-full h-full max-w-none max-h-none p-0 border-0">
+                  <CoupleRetrospective />
+                </DialogContent>
+              </Dialog>
               
               <Dialog>
                 <DialogTrigger asChild>
