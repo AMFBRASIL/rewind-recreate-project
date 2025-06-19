@@ -1,3 +1,4 @@
+
 import { Star, Moon, Heart, Music, Clock, Image } from "lucide-react";
 import { SlideData } from '../types/slideTypes';
 
@@ -23,6 +24,15 @@ const SlideContent = ({ slide }: SlideContentProps) => {
     }
   };
 
+  // Fotos de exemplo para o mural de memórias
+  const examplePhotos = [
+    'https://images.unsplash.com/photo-1649972904349-6e44c42644a7',
+    'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158',
+    'https://images.unsplash.com/photo-1500673922987-e212871fec22',
+    'https://images.unsplash.com/photo-1721322800607-8c38375eef04',
+    'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5'
+  ];
+
   return (
     <div className="relative z-10 h-full flex items-center justify-center">
       <div className="text-center text-white px-8 max-w-4xl">
@@ -39,9 +49,33 @@ const SlideContent = ({ slide }: SlideContentProps) => {
           {slide.subtitle}
         </h2>
         
-        <p className="text-lg md:text-xl leading-relaxed text-gray-200 max-w-2xl mx-auto animate-fade-in">
-          {slide.description}
-        </p>
+        {/* Mural de fotos especial para o slide de memórias */}
+        {slide.title === 'Mural de Memórias' ? (
+          <div className="mb-8">
+            <div className="grid grid-cols-3 md:grid-cols-5 gap-2 md:gap-4 max-w-2xl mx-auto mb-6">
+              {examplePhotos.map((photo, index) => (
+                <div
+                  key={index}
+                  className="aspect-square rounded-lg overflow-hidden transform hover:scale-110 transition-all duration-300 animate-fade-in"
+                  style={{ animationDelay: `${index * 200}ms` }}
+                >
+                  <img
+                    src={photo}
+                    alt={`Memória ${index + 1}`}
+                    className="w-full h-full object-cover hover:brightness-110 transition-all duration-300"
+                  />
+                </div>
+              ))}
+            </div>
+            <p className="text-lg md:text-xl leading-relaxed text-gray-200 max-w-2xl mx-auto animate-fade-in">
+              {slide.description}
+            </p>
+          </div>
+        ) : (
+          <p className="text-lg md:text-xl leading-relaxed text-gray-200 max-w-2xl mx-auto animate-fade-in">
+            {slide.description}
+          </p>
+        )}
       </div>
     </div>
   );
