@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Heart, Play, Star, Calendar, Camera, Music, Users, User, Baby, Flower, Video, FileText, Plus, Palette, Share2, Archive, MousePointer, Gift } from "lucide-react";
+import { Heart, Play, Star, Calendar, Camera, Music, Users, User, Baby, Flower, Video, FileText, Plus, Palette, Share2, Archive, MousePointer, Gift, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import LoadingScreen from "@/components/LoadingScreen";
 import RewindHeader from "@/components/RewindHeader";
@@ -168,6 +168,13 @@ const Index = () => {
                   </button>
                 </DialogTrigger>
                 <DialogContent className="w-full h-full max-w-none max-h-none p-0 border-0">
+                  <button 
+                    onClick={() => setIsRetrospectiveOpen(false)}
+                    className="absolute top-4 right-4 z-50 bg-white text-black hover:bg-gray-100 px-4 py-2 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 shadow-lg"
+                  >
+                    <X size={16} />
+                    FECHAR
+                  </button>
                   <CoupleRetrospective />
                 </DialogContent>
               </Dialog>
