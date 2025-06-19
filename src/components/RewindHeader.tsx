@@ -9,7 +9,7 @@ const RewindHeader = () => {
           <div className="bg-gradient-to-r from-pink-500 to-purple-600 p-2 rounded-full">
             <Heart className="w-6 h-6 text-white" />
           </div>
-          <h1 className="text-2xl font-bold text-white">CoupleRewind</h1>
+          <h1 className="text-2xl font-bold text-white">Momentus | Click</h1>
         </div>
         
         <div className="flex items-center space-x-4">
