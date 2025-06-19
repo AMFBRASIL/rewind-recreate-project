@@ -171,10 +171,10 @@ const Index = () => {
           {/* Hero Section */}
           <div className="text-center mb-16 animate-fade-in">
             <h1 className="text-6xl font-bold text-white mb-6 bg-gradient-to-r from-pink-300 to-purple-300 bg-clip-text text-transparent">
-              Nossa História de Amor
+              Suas Memórias Especiais
             </h1>
             <p className="text-xl text-purple-200 max-w-2xl mx-auto mb-8">
-              Reviva os momentos mais especiais da nossa jornada juntos
+              Crie retrospectivas únicas para celebrar momentos importantes com quem você ama
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Dialog open={isRetrospectiveOpen} onOpenChange={setIsRetrospectiveOpen}>
