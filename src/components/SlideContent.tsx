@@ -2,12 +2,22 @@ import { Star, Moon, Heart, Music, Clock, Image } from "lucide-react";
 import { SlideData } from '../types/slideTypes';
 import MusicPlayer from './MusicPlayer';
 import { useState, useEffect } from 'react';
+import { getMoonPhase } from '../utils/moonPhases';
 
 interface SlideContentProps {
   slide: SlideData;
+  formData?: {
+    email: string;
+    gender: string;
+    recipient: string;
+    birthDate: string;
+    title: string;
+    photos: File[];
+    backgroundMusic: string;
+  };
 }
 
-const SlideContent = ({ slide }: SlideContentProps) => {
+const SlideContent = ({ slide, formData }: SlideContentProps) => {
   const [timeElapsed, setTimeElapsed] = useState({
     days: 0,
     hours: 0,
@@ -74,6 +84,21 @@ const SlideContent = ({ slide }: SlideContentProps) => {
     'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5'
   ];
 
+  // Calcular a fase da lua baseada na data de nascimento do formulário
+  const getMoonPhaseForSlide = () => {
+    if (formData?.birthDate) {
+      const birthDate = new Date(formData.birthDate);
+      return getMoonPhase(birthDate);
+    }
+    // Fase padrão se não houver dados do formulário
+    return {
+      name: 'Lua Cheia',
+      icon: 'moon-star',
+      description: 'Brilhando inteira, iluminando nossos corações.',
+      imageUrl: 'https://images.unsplash.com/photo-1470813740244-df37b8c1edcb'
+    };
+  };
+
   return (
     <div className="relative z-10 h-full flex items-center justify-center">
       {/* Corações flutuantes quando ativados */}
@@ -117,6 +142,28 @@ const SlideContent = ({ slide }: SlideContentProps) => {
             <p className="text-lg md:text-xl leading-relaxed text-gray-200 max-w-2xl mx-auto animate-fade-in mt-6">
               {slide.description}
             </p>
+          </div>
+        ) : /* Slide especial para Nossa Lua com fase baseada na data */
+        slide.title === 'Nossa Lua' ? (
+          <div className="mb-8">
+            {(() => {
+              const moonPhase = getMoonPhaseForSlide();
+              return (
+                <>
+                  <div className="max-w-md mx-auto mb-6 rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-all duration-300 animate-fade-in">
+                    <img
+                      src={moonPhase.imageUrl}
+                      alt={moonPhase.name}
+                      className="w-full h-64 object-cover"
+                    />
+                  </div>
+                  <h3 className="text-3xl font-semibold text-blue-300 mb-4">{moonPhase.name}</h3>
+                  <p className="text-lg md:text-xl leading-relaxed text-gray-200 max-w-2xl mx-auto animate-fade-in">
+                    {moonPhase.description}
+                  </p>
+                </>
+              );
+            })()}
           </div>
         ) : /* Mural de fotos especial para o slide de memórias */
         slide.title === 'Mural de Memórias' ? (

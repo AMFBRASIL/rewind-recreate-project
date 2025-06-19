@@ -50,7 +50,7 @@ const CoupleRetrospective = () => {
   return (
     <div className="relative h-screen w-full overflow-hidden">
       <SlideBackground slide={currentSlideData} />
-      <SlideContent slide={currentSlideData} />
+      <SlideContent slide={currentSlideData} formData={formData} />
       
       <SlideNavigation
         currentSlide={currentSlide}
