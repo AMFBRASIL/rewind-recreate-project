@@ -16,8 +16,10 @@ const Index = () => {
   const navigate = useNavigate();
 
   const titles = [
+    "Reviva o que realmente importa",
+    "Memórias que tocam o coração",
     "Um presente que emociona para sempre",
-    "Transformamos lembranças em emoção"
+    "A retrospectiva que vive no seu celular"
   ];
 
   useEffect(() => {
@@ -31,7 +33,7 @@ const Index = () => {
   useEffect(() => {
     const titleInterval = setInterval(() => {
       setCurrentTitleIndex((prevIndex) => (prevIndex + 1) % titles.length);
-    }, 60000); // 1 minuto = 60000ms
+    }, 10000); // 10 segundos = 10000ms
 
     return () => clearInterval(titleInterval);
   }, [titles.length]);
