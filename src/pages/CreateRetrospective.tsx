@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { ArrowLeft, ArrowRight, Mail, User, Heart, Calendar, Upload, Music, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -31,6 +32,12 @@ const CreateRetrospective = () => {
     { value: 'formatura', label: 'Formatura' },
     { value: 'natal', label: 'Papai Noel Natal' },
     { value: 'hospitalizado', label: 'Hospitalizado' }
+  ];
+
+  const genderOptions = [
+    { value: 'masculino', label: 'Masculino' },
+    { value: 'feminino', label: 'Feminino' },
+    { value: 'outro', label: 'Outro' }
   ];
 
   const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -112,24 +119,25 @@ const CreateRetrospective = () => {
               <h2 className="text-3xl font-bold text-white mb-2">Seu Sexo</h2>
               <p className="text-purple-200">Para personalizar sua experiência</p>
             </div>
-            <RadioGroup
-              value={formData.gender}
-              onValueChange={(value) => setFormData(prev => ({ ...prev, gender: value }))}
-              className="space-y-4"
-            >
-              <div className="flex items-center space-x-3 bg-white/10 p-4 rounded-lg hover:bg-white/20 transition-colors">
-                <RadioGroupItem value="masculino" id="masculino" />
-                <Label htmlFor="masculino" className="text-white text-lg">Masculino</Label>
-              </div>
-              <div className="flex items-center space-x-3 bg-white/10 p-4 rounded-lg hover:bg-white/20 transition-colors">
-                <RadioGroupItem value="feminino" id="feminino" />
-                <Label htmlFor="feminino" className="text-white text-lg">Feminino</Label>
-              </div>
-              <div className="flex items-center space-x-3 bg-white/10 p-4 rounded-lg hover:bg-white/20 transition-colors">
-                <RadioGroupItem value="outro" id="outro" />
-                <Label htmlFor="outro" className="text-white text-lg">Outro</Label>
-              </div>
-            </RadioGroup>
+            <div className="space-y-4">
+              <Label className="text-white font-semibold">Selecione uma opção</Label>
+              <ToggleGroup
+                type="single"
+                value={formData.gender}
+                onValueChange={(value) => setFormData(prev => ({ ...prev, gender: value || '' }))}
+                className="grid grid-cols-3 gap-3 w-full"
+              >
+                {genderOptions.map((option) => (
+                  <ToggleGroupItem
+                    key={option.value}
+                    value={option.value}
+                    className="bg-white/10 border-white/30 text-white hover:bg-white/20 data-[state=on]:bg-pink-500 data-[state=on]:text-white h-16 flex items-center justify-center text-sm font-medium transition-all duration-200"
+                  >
+                    {option.label}
+                  </ToggleGroupItem>
+                ))}
+              </ToggleGroup>
+            </div>
           </div>
         );
 
