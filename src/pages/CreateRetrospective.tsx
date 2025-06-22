@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { ArrowLeft, ArrowRight, Mail, User, Heart, Calendar, Upload, Music, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -39,6 +38,29 @@ const CreateRetrospective = () => {
     { value: 'feminino', label: 'Feminino' },
     { value: 'outro', label: 'Outro' }
   ];
+
+  const getDateLabel = () => {
+    switch (formData.recipient) {
+      case 'namorados':
+        return 'Data de Início do Namoro';
+      case 'casamento':
+        return 'Data do Casamento';
+      case 'amigos':
+        return 'Data que se Conheceram';
+      case 'pais':
+        return 'Data de Nascimento dos Pais';
+      case 'filhos':
+        return 'Data de Nascimento dos Filhos';
+      case 'formatura':
+        return 'Data da Formatura';
+      case 'natal':
+        return 'Data do Natal';
+      case 'hospitalizado':
+        return 'Data de Internação';
+      default:
+        return 'Data Importante';
+    }
+  };
 
   const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -176,11 +198,11 @@ const CreateRetrospective = () => {
           <div className="space-y-6">
             <div className="text-center mb-8">
               <Calendar className="w-16 h-16 text-pink-500 mx-auto mb-4" />
-              <h2 className="text-3xl font-bold text-white mb-2">Data de Nascimento</h2>
+              <h2 className="text-3xl font-bold text-white mb-2">{getDateLabel()}</h2>
               <p className="text-purple-200">Para tornar ainda mais pessoal</p>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="birthDate" className="text-white font-semibold">Data de Nascimento</Label>
+              <Label htmlFor="birthDate" className="text-white font-semibold">{getDateLabel()}</Label>
               <Input
                 id="birthDate"
                 type="date"
