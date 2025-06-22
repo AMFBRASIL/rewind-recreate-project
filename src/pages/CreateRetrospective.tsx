@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { ArrowLeft, ArrowRight, Mail, User, Heart, Calendar, Upload, Music, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -6,10 +7,13 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { useNavigate } from "react-router-dom";
+import PreviewModal from "@/components/PreviewModal";
 
 const CreateRetrospective = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
+  const [showPreview, setShowPreview] = useState(false);
+  const [hasPreviewed, setHasPreviewed] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     gender: '',
@@ -89,6 +93,15 @@ const CreateRetrospective = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
     }
+  };
+
+  const handlePreview = () => {
+    setShowPreview(true);
+  };
+
+  const handleClosePreview = () => {
+    setShowPreview(false);
+    setHasPreviewed(true);
   };
 
   const handleSubmit = () => {
@@ -381,14 +394,25 @@ const CreateRetrospective = () => {
               </Button>
               
               {currentStep === totalSteps ? (
-                <Button
-                  onClick={handleSubmit}
-                  disabled={!isStepValid()}
-                  className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700"
-                >
-                  Segue para pagamento
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
+                !hasPreviewed ? (
+                  <Button
+                    onClick={handlePreview}
+                    disabled={!isStepValid()}
+                    className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700"
+                  >
+                    Pré visualizar Conteúdo
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={handleSubmit}
+                    disabled={!isStepValid()}
+                    className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700"
+                  >
+                    Segue para pagamento
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                )
               ) : (
                 <Button
                   onClick={handleNext}
@@ -403,6 +427,13 @@ const CreateRetrospective = () => {
           </div>
         </div>
       </div>
+
+      {/* Preview Modal */}
+      <PreviewModal
+        isOpen={showPreview}
+        onClose={handleClosePreview}
+        formData={formData}
+      />
     </div>
   );
 };
