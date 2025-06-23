@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Plus, User, Eye, Calendar, CreditCard, CheckCircle, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -51,8 +50,7 @@ const DashboardClientes = () => {
   };
 
   const handlePerfil = () => {
-    // Em produção, navegar para página de perfil
-    console.log('Abrir página de perfil');
+    navigate('/perfil-cliente');
   };
 
   const handleVisualizarRetrospectiva = (id: number) => {

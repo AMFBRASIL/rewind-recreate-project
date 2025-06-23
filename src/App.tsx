@@ -16,6 +16,7 @@ import ChildrenRetrospective from "./pages/ChildrenRetrospective";
 import ChristmasRetrospective from "./pages/ChristmasRetrospective";
 import Dashboard from "./pages/Dashboard";
 import DashboardClientes from "./pages/DashboardClientes";
+import PerfilCliente from "./pages/PerfilCliente";
 import AdminLogin from "./pages/AdminLogin";
 import NotFound from "./pages/NotFound";
 
@@ -38,6 +39,7 @@ const App = () => (
             <Route path="/payment" element={<PaymentPix />} />
             <Route path="/payment-confirmation" element={<PaymentConfirmation />} />
             <Route path="/dashboard-clientes" element={<DashboardClientes />} />
+            <Route path="/perfil-cliente" element={<PerfilCliente />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route 
               path="/dashboard" 
