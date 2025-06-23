@@ -560,15 +560,15 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
       <SidebarProvider>
-        <div className="flex w-full">
+        <div className="flex w-full min-h-screen">
           <DashboardSidebar 
             activeSection={activeSection} 
             onSectionChange={setActiveSection} 
           />
-          <SidebarInset className="flex-1">
+          <SidebarInset className="flex-1 bg-transparent">
             <div className="container mx-auto p-6">
               <div className="flex items-center gap-4 mb-8">
-                <SidebarTrigger className="text-white hover:bg-white/10" />
+                <SidebarTrigger className="text-white hover:bg-white/10 border border-white/20" />
                 <div>
                   <h1 className="text-4xl font-bold text-white mb-2">Dashboard</h1>
                   <p className="text-purple-200">Visão geral dos indicadores da plataforma</p>
