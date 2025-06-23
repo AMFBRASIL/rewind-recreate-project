@@ -61,27 +61,27 @@ const menuItems = [
 
 export function DashboardSidebar({ activeSection, onSectionChange }: DashboardSidebarProps) {
   return (
-    <Sidebar className="bg-white/10 backdrop-blur-md border-white/20">
-      <SidebarContent>
+    <Sidebar className="bg-black/30 backdrop-blur-xl border-r border-white/10">
+      <SidebarContent className="bg-transparent">
         <SidebarGroup>
-          <SidebarGroupLabel className="text-white/80 font-semibold">
+          <SidebarGroupLabel className="text-white font-bold text-lg px-4 py-6">
             Dashboard Admin
           </SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="space-y-2 px-2">
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
                     onClick={() => onSectionChange(item.url)}
                     isActive={activeSection === item.url}
-                    className={`text-white/90 hover:bg-white/20 hover:text-white ${
+                    className={`w-full justify-start px-4 py-3 rounded-lg transition-all duration-200 ${
                       activeSection === item.url
-                        ? "bg-white/20 text-white font-semibold"
-                        : ""
+                        ? "bg-white/20 text-white font-semibold shadow-lg"
+                        : "text-white/80 hover:bg-white/10 hover:text-white"
                     }`}
                   >
-                    <item.icon className="w-4 h-4" />
-                    <span>{item.title}</span>
+                    <item.icon className="w-5 h-5 mr-3" />
+                    <span className="text-sm">{item.title}</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
