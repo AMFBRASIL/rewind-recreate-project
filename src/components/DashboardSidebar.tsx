@@ -61,8 +61,8 @@ const menuItems = [
 
 export function DashboardSidebar({ activeSection, onSectionChange }: DashboardSidebarProps) {
   return (
-    <Sidebar className="bg-black/30 backdrop-blur-xl border-r border-white/10">
-      <SidebarContent className="bg-transparent">
+    <Sidebar className="bg-slate-900/95 backdrop-blur-xl border-r border-white/10">
+      <SidebarContent className="bg-slate-900/95">
         <SidebarGroup>
           <SidebarGroupLabel className="text-white font-bold text-lg px-4 py-6">
             Dashboard Admin
