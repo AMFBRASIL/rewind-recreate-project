@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -20,6 +21,7 @@ import PerfilCliente from "./pages/PerfilCliente";
 import AdminLogin from "./pages/AdminLogin";
 import NotFound from "./pages/NotFound";
 import ChildrenLanding from "./pages/ChildrenLanding";
+import ChristmasLanding from "./pages/ChristmasLanding";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +36,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/casais" element={<CouplesLanding />} />
             <Route path="/criancas" element={<ChildrenLanding />} />
+            <Route path="/natal" element={<ChristmasLanding />} />
             <Route path="/retrospective" element={<CoupleRetrospective />} />
             <Route path="/parents" element={<ParentsRetrospective />} />
             <Route path="/children" element={<ChildrenRetrospective />} />
