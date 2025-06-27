@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Baby, Play, Star, Calendar, Camera, Music, Users, Heart, Gift, X, Palette, Sparkles, Sun, Moon, Rainbow } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,6 +6,7 @@ import RewindHeader from "@/components/RewindHeader";
 import PhotoMemory from "@/components/PhotoMemory";
 import TimelineEvent from "@/components/TimelineEvent";
 import MusicPlayer from "@/components/MusicPlayer";
+import FloatingKidsElements from "@/components/FloatingKidsElements";
 import ChildrenRetrospective from "./ChildrenRetrospective";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
@@ -98,31 +98,12 @@ const ChildrenLanding = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-yellow-300 via-pink-400 to-purple-500 relative overflow-x-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-orange-200 opacity-60"></div>
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 relative">
+      {/* Background pattern similar to Index page */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
       
-      {/* Floating Fun Elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        {[...Array(25)].map((_, i) => {
-          const icons = [Star, Heart, Baby, Gift, Sun, Moon];
-          const Icon = icons[Math.floor(Math.random() * icons.length)];
-          return (
-            <Icon 
-              key={i}
-              className={`absolute text-white opacity-40 animate-bounce`}
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`,
-                animationDuration: `${2 + Math.random() * 2}s`,
-                color: ['#FFB6C1', '#87CEEB', '#98FB98', '#DDA0DD', '#F0E68C'][Math.floor(Math.random() * 5)]
-              }}
-              size={16 + Math.random() * 20}
-            />
-          );
-        })}
-      </div>
+      {/* Floating Kids Elements */}
+      <FloatingKidsElements />
 
       <div className="relative z-10">
         <RewindHeader />
