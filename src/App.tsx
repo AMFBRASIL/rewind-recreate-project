@@ -8,6 +8,7 @@ import { AdminAuthProvider } from "@/hooks/useAdminAuth";
 import AdminRoute from "@/components/AdminRoute";
 import Index from "./pages/Index";
 import CoupleRetrospective from "./pages/CoupleRetrospective";
+import CouplesLanding from "./pages/CouplesLanding";
 import CreateRetrospective from "./pages/CreateRetrospective";
 import PaymentPix from "./pages/PaymentPix";
 import PaymentConfirmation from "./pages/PaymentConfirmation";
@@ -31,6 +32,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/casais" element={<CouplesLanding />} />
             <Route path="/retrospective" element={<CoupleRetrospective />} />
             <Route path="/parents" element={<ParentsRetrospective />} />
             <Route path="/children" element={<ChildrenRetrospective />} />
