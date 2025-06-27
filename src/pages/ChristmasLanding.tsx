@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Gift, Play, Star, Calendar, Camera, Music, Users, Heart, TreePine, X, Snowflake, Bell, Sparkles, Crown, Candy } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
@@ -130,32 +129,15 @@ const ChristmasLanding = () => {
                 🎬 Veja como será sua retrospectiva natalina
               </h2>
               <div className="relative bg-white/20 backdrop-blur-lg rounded-3xl p-8 border-4 border-white/30 shadow-2xl">
-                <div className="aspect-video bg-gradient-to-br from-red-500 via-green-600 to-red-500 rounded-2xl flex items-center justify-center relative overflow-hidden">
-                  <div className="absolute inset-0 bg-black/10"></div>
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <button className="group relative z-10 bg-white/30 backdrop-blur-md hover:bg-white/40 text-white p-8 rounded-full transition-all duration-300 transform hover:scale-110 animate-pulse">
-                        <Play className="w-16 h-16 group-hover:animate-bounce" />
-                      </button>
-                    </DialogTrigger>
-                    <DialogContent className="max-w-4xl w-full h-[80vh] p-0">
-                      <DialogHeader className="p-6 pb-0">
-                        <DialogTitle className="text-center text-2xl font-bold">
-                          🎅 Retrospectiva de Natal - Preview
-                        </DialogTitle>
-                      </DialogHeader>
-                      <div className="p-6 pt-4 h-full">
-                        <iframe
-                          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                          title="Retrospectiva de Natal - Preview"
-                          className="w-full h-full rounded-lg"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                        />
-                      </div>
-                    </DialogContent>
-                  </Dialog>
-                  <div className="absolute bottom-4 left-4 right-4 text-white">
+                <div className="aspect-video bg-black rounded-2xl relative overflow-hidden">
+                  <iframe
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&loop=1&playlist=dQw4w9WgXcQ"
+                    title="Retrospectiva de Natal - Preview"
+                    className="w-full h-full rounded-lg"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                  <div className="absolute bottom-4 left-4 right-4 text-white pointer-events-none">
                     <p className="text-lg font-semibold">🎄 Preview da Retrospectiva Natalina</p>
                     <p className="text-sm opacity-90">Veja como a magia do Natal ganha vida!</p>
                   </div>
@@ -172,6 +154,9 @@ const ChristmasLanding = () => {
                   </button>
                 </DialogTrigger>
                 <DialogContent className="w-full h-full max-w-none max-h-none p-0 border-0">
+                  <DialogHeader className="sr-only">
+                    <DialogTitle>Retrospectiva Completa de Natal</DialogTitle>
+                  </DialogHeader>
                   <button 
                     onClick={() => setIsRetrospectiveOpen(false)}
                     className="absolute top-4 right-4 z-50 bg-white text-black hover:bg-gray-100 px-4 py-2 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 shadow-lg"
