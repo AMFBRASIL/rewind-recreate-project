@@ -1,4 +1,3 @@
-
 import { Star, Moon, Heart, Music, Clock, Image } from "lucide-react";
 import { SlideData } from '../types/slideTypes';
 import MusicPlayer from './MusicPlayer';
@@ -95,6 +94,32 @@ const SlideContent = ({ slide }: SlideContentProps) => {
     }
   };
 
+  // Ícone especial do signo de Aquário
+  const AquariusIcon = () => (
+    <div className="w-24 h-24 mx-auto mb-6 relative">
+      <svg
+        viewBox="0 0 100 100"
+        className="w-full h-full text-blue-300 animate-pulse"
+        fill="currentColor"
+      >
+        {/* Símbolo de Aquário - duas ondas */}
+        <path
+          d="M15 30 L85 30 M20 25 L80 25 M15 50 L85 50 M20 45 L80 45"
+          stroke="currentColor"
+          strokeWidth="3"
+          fill="none"
+          strokeLinecap="round"
+        />
+        {/* Adicionando algumas estrelas ao redor */}
+        <circle cx="20" cy="15" r="1.5" fill="currentColor" className="animate-twinkle" />
+        <circle cx="80" cy="20" r="1" fill="currentColor" className="animate-twinkle" style={{animationDelay: '0.5s'}} />
+        <circle cx="25" cy="65" r="1.5" fill="currentColor" className="animate-twinkle" style={{animationDelay: '1s'}} />
+        <circle cx="75" cy="70" r="1" fill="currentColor" className="animate-twinkle" style={{animationDelay: '1.5s'}} />
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-cyan-400/20 rounded-full blur-xl animate-pulse"></div>
+    </div>
+  );
+
   // Fotos de exemplo para o mural de memórias
   const examplePhotos = [
     'https://images.unsplash.com/photo-1649972904349-6e44c42644a7',
@@ -138,7 +163,12 @@ const SlideContent = ({ slide }: SlideContentProps) => {
 
       <div className="text-center text-white px-8 max-w-4xl">
         <div className="mb-4">
-          {getIcon(slide.icon || 'heart')}
+          {/* Ícone especial para o slide do signo */}
+          {slide.title === 'Nosso Signo' ? (
+            <AquariusIcon />
+          ) : (
+            getIcon(slide.icon || 'heart')
+          )}
           <p className="text-pink-300 text-lg font-medium mb-2">{slide.date}</p>
         </div>
         
@@ -219,7 +249,7 @@ const SlideContent = ({ slide }: SlideContentProps) => {
               {slide.description}
             </p>
           </div>
-        ) : // ... keep existing code (mural de fotos e outros slides especiais)
+        ) :
         slide.title === 'Mural de Memórias' && !slide.title.includes('criança') ? (
           <div className="mb-8">
             <div className="grid grid-cols-3 md:grid-cols-5 gap-2 md:gap-4 max-w-2xl mx-auto mb-6">
