@@ -1,3 +1,4 @@
+
 import { Star, Moon, Heart, Music, Clock, Image } from "lucide-react";
 import { SlideData } from '../types/slideTypes';
 import MusicPlayer from './MusicPlayer';
@@ -120,6 +121,73 @@ const SlideContent = ({ slide }: SlideContentProps) => {
     </div>
   );
 
+  // Ícone especial da lua em 3D
+  const MoonIcon3D = () => (
+    <div className="w-32 h-32 mx-auto mb-6 relative">
+      <svg
+        viewBox="0 0 120 120"
+        className="w-full h-full text-blue-200 animate-pulse"
+        fill="currentColor"
+      >
+        {/* Lua principal com gradiente 3D */}
+        <defs>
+          <radialGradient id="moonGradient" cx="0.3" cy="0.3" r="0.8">
+            <stop offset="0%" stopColor="#f8fafc" />
+            <stop offset="30%" stopColor="#e2e8f0" />
+            <stop offset="70%" stopColor="#cbd5e1" />
+            <stop offset="100%" stopColor="#94a3b8" />
+          </radialGradient>
+          <radialGradient id="craterGradient" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0%" stopColor="#94a3b8" />
+            <stop offset="100%" stopColor="#64748b" />
+          </radialGradient>
+          <filter id="moonShadow">
+            <feDropShadow dx="2" dy="2" stdDeviation="3" floodColor="#1e293b" floodOpacity="0.3"/>
+          </filter>
+        </defs>
+        
+        {/* Lua principal */}
+        <circle 
+          cx="60" 
+          cy="60" 
+          r="45" 
+          fill="url(#moonGradient)"
+          filter="url(#moonShadow)"
+          className="animate-pulse"
+        />
+        
+        {/* Crateras da lua */}
+        <circle cx="45" cy="40" r="4" fill="url(#craterGradient)" opacity="0.7" />
+        <circle cx="70" cy="35" r="2.5" fill="url(#craterGradient)" opacity="0.6" />
+        <circle cx="40" cy="65" r="3" fill="url(#craterGradient)" opacity="0.8" />
+        <circle cx="75" cy="70" r="2" fill="url(#craterGradient)" opacity="0.5" />
+        <circle cx="55" cy="80" r="1.5" fill="url(#craterGradient)" opacity="0.6" />
+        
+        {/* Brilho da lua */}
+        <ellipse 
+          cx="50" 
+          cy="45" 
+          rx="8" 
+          ry="12" 
+          fill="rgba(255,255,255,0.3)" 
+          transform="rotate(-20 50 45)"
+        />
+        
+        {/* Estrelas ao redor */}
+        <circle cx="20" cy="25" r="1" fill="#fbbf24" className="animate-twinkle" />
+        <circle cx="100" cy="30" r="1.5" fill="#fbbf24" className="animate-twinkle" style={{animationDelay: '0.5s'}} />
+        <circle cx="25" cy="85" r="1" fill="#fbbf24" className="animate-twinkle" style={{animationDelay: '1s'}} />
+        <circle cx="95" cy="90" r="1.5" fill="#fbbf24" className="animate-twinkle" style={{animationDelay: '1.5s'}} />
+        <circle cx="15" cy="60" r="1" fill="#fbbf24" className="animate-twinkle" style={{animationDelay: '2s'}} />
+        <circle cx="105" cy="60" r="1" fill="#fbbf24" className="animate-twinkle" style={{animationDelay: '2.5s'}} />
+      </svg>
+      
+      {/* Efeito de brilho ao redor da lua */}
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-200/20 via-white/10 to-blue-200/20 rounded-full blur-2xl animate-pulse"></div>
+      <div className="absolute inset-4 bg-gradient-to-r from-transparent via-white/5 to-transparent rounded-full blur-xl animate-pulse" style={{animationDelay: '1s'}}></div>
+    </div>
+  );
+
   // Fotos de exemplo para o mural de memórias
   const examplePhotos = [
     'https://images.unsplash.com/photo-1649972904349-6e44c42644a7',
@@ -166,6 +234,9 @@ const SlideContent = ({ slide }: SlideContentProps) => {
           {/* Ícone especial para o slide do signo */}
           {slide.title === 'Nosso Signo' ? (
             <AquariusIcon />
+          ) : /* Ícone especial para o slide da lua */
+          slide.title === 'Nossa Lua' ? (
+            <MoonIcon3D />
           ) : (
             getIcon(slide.icon || 'heart')
           )}
