@@ -1,4 +1,3 @@
-
 import { Star, Moon, Heart, Music, Clock, Image } from "lucide-react";
 import { SlideData } from '../types/slideTypes';
 import MusicPlayer from './MusicPlayer';
@@ -191,13 +190,64 @@ const SlideContent = ({ slide }: SlideContentProps) => {
     </div>
   );
 
+  // Coração especial animado para "Momentos Especiais"
+  const AnimatedHeart = () => (
+    <div className="w-32 h-32 mx-auto mb-6 relative flex items-center justify-center">
+      <div className="relative">
+        {/* Coração principal */}
+        <Heart 
+          className="w-24 h-24 text-pink-400 fill-pink-400 animate-pulse drop-shadow-2xl" 
+          style={{
+            filter: 'drop-shadow(0 0 20px rgba(244, 114, 182, 0.6))',
+            animation: 'pulse 1.5s ease-in-out infinite alternate'
+          }}
+        />
+        
+        {/* Coração secundário para efeito de batimento */}
+        <Heart 
+          className="absolute inset-0 w-24 h-24 text-pink-300 fill-pink-300 animate-bounce opacity-60" 
+          style={{
+            animationDuration: '2s',
+            animationDelay: '0.5s'
+          }}
+        />
+        
+        {/* Partículas de coração ao redor */}
+        {[...Array(8)].map((_, i) => (
+          <Heart
+            key={i}
+            className="absolute text-pink-200 fill-pink-200 animate-pulse"
+            style={{
+              width: `${8 + Math.random() * 8}px`,
+              height: `${8 + Math.random() * 8}px`,
+              left: `${-20 + Math.random() * 140}px`,
+              top: `${-20 + Math.random() * 140}px`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${1 + Math.random() * 2}s`,
+              opacity: 0.3 + Math.random() * 0.4
+            }}
+          />
+        ))}
+      </div>
+      
+      {/* Efeito de brilho pulsante */}
+      <div className="absolute inset-0 bg-gradient-to-r from-pink-400/30 via-red-400/20 to-pink-400/30 rounded-full blur-2xl animate-pulse"></div>
+      <div className="absolute inset-4 bg-gradient-to-r from-transparent via-pink-300/10 to-transparent rounded-full blur-xl animate-pulse" style={{animationDelay: '1s'}}></div>
+      
+      {/* Ondas de amor */}
+      <div className="absolute inset-0 border-2 border-pink-300/20 rounded-full animate-ping"></div>
+      <div className="absolute inset-2 border-2 border-pink-400/30 rounded-full animate-ping" style={{animationDelay: '0.5s'}}></div>
+      <div className="absolute inset-4 border-2 border-pink-500/40 rounded-full animate-ping" style={{animationDelay: '1s'}}></div>
+    </div>
+  );
+
   // Fotos de exemplo para o mural de memórias
   const examplePhotos = [
     'https://images.unsplash.com/photo-1649972904349-6e44c42644a7',
     'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158',
     'https://images.unsplash.com/photo-1500673922987-e212871fec22',
     'https://images.unsplash.com/photo-1721322800607-8c38375eef04',
-    'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5'
+    'https://images.unsplash.com/photo-1559827260-dc66d52bef19'
   ];
 
   // Fotos especiais para crianças
@@ -278,6 +328,9 @@ const SlideContent = ({ slide }: SlideContentProps) => {
           ) : /* Ícone especial para o slide da lua */
           slide.title === 'Nossa Lua' ? (
             <MoonIcon3D />
+          ) : /* Coração especial animado para Momentos Especiais */
+          slide.title === 'Momentos Especiais' ? (
+            <AnimatedHeart />
           ) : (
             getIcon(slide.icon || 'heart')
           )}
