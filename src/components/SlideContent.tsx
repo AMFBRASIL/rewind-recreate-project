@@ -1,3 +1,4 @@
+
 import { Star, Moon, Heart, Music, Clock, Image } from "lucide-react";
 import { SlideData } from '../types/slideTypes';
 import MusicPlayer from './MusicPlayer';
@@ -94,28 +95,31 @@ const SlideContent = ({ slide }: SlideContentProps) => {
     }
   };
 
-  // Ícone especial do signo de Aquário
+  // Ícone especial do signo de Aquário - corrigido
   const AquariusIcon = () => (
-    <div className="w-24 h-24 mx-auto mb-6 relative">
+    <div className="w-24 h-24 mx-auto mb-6 relative flex items-center justify-center">
       <svg
         viewBox="0 0 100 100"
         className="w-full h-full text-blue-300 animate-pulse"
-        fill="currentColor"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Símbolo de Aquário - duas ondas */}
-        <path
-          d="M15 30 L85 30 M20 25 L80 25 M15 50 L85 50 M20 45 L80 45"
-          stroke="currentColor"
-          strokeWidth="3"
-          fill="none"
-          strokeLinecap="round"
-        />
-        {/* Adicionando algumas estrelas ao redor */}
-        <circle cx="20" cy="15" r="1.5" fill="currentColor" className="animate-twinkle" />
-        <circle cx="80" cy="20" r="1" fill="currentColor" className="animate-twinkle" style={{animationDelay: '0.5s'}} />
-        <circle cx="25" cy="65" r="1.5" fill="currentColor" className="animate-twinkle" style={{animationDelay: '1s'}} />
-        <circle cx="75" cy="70" r="1" fill="currentColor" className="animate-twinkle" style={{animationDelay: '1.5s'}} />
+        {/* Símbolo de Aquário - duas ondas horizontais */}
+        <g stroke="currentColor" strokeWidth="4" strokeLinecap="round">
+          <path d="M15 35 Q25 30 35 35 T55 35 T75 35 T85 35" />
+          <path d="M15 50 Q25 45 35 50 T55 50 T75 50 T85 50" />
+        </g>
+        
+        {/* Estrelas ao redor do símbolo */}
+        <circle cx="20" cy="20" r="1.5" fill="currentColor" className="animate-twinkle" />
+        <circle cx="80" cy="25" r="1" fill="currentColor" className="animate-twinkle" style={{animationDelay: '0.5s'}} />
+        <circle cx="25" cy="70" r="1.5" fill="currentColor" className="animate-twinkle" style={{animationDelay: '1s'}} />
+        <circle cx="75" cy="75" r="1" fill="currentColor" className="animate-twinkle" style={{animationDelay: '1.5s'}} />
+        <circle cx="50" cy="15" r="1.2" fill="currentColor" className="animate-twinkle" style={{animationDelay: '2s'}} />
+        <circle cx="50" cy="85" r="1.2" fill="currentColor" className="animate-twinkle" style={{animationDelay: '2.5s'}} />
       </svg>
+      
+      {/* Efeito de brilho ao redor */}
       <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-cyan-400/20 rounded-full blur-xl animate-pulse"></div>
     </div>
   );
