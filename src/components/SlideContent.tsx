@@ -1,4 +1,3 @@
-
 import { Star, Moon, Heart, Music, Clock, Image } from "lucide-react";
 import { SlideData } from '../types/slideTypes';
 import MusicPlayer from './MusicPlayer';
@@ -207,6 +206,44 @@ const SlideContent = ({ slide }: SlideContentProps) => {
     'https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2'
   ];
 
+  // Timeline simples para "O Início de Tudo"
+  const SimpleTimeline = () => {
+    const timelineEvents = [
+      { year: '2023', label: 'Primeiro Olhar', color: 'from-pink-400 to-red-400' },
+      { year: '2023', label: 'Primeiro Encontro', color: 'from-purple-400 to-pink-400' },
+      { year: '2023', label: 'Primeiro Beijo', color: 'from-blue-400 to-purple-400' },
+      { year: '2024', label: 'Primeiro Ano', color: 'from-green-400 to-blue-400' },
+      { year: '2025', label: 'Para Sempre', color: 'from-yellow-400 to-pink-400' }
+    ];
+
+    return (
+      <div className="mt-8 mb-6">
+        <div className="flex items-center justify-center space-x-4 md:space-x-8 overflow-x-auto pb-4">
+          {timelineEvents.map((event, index) => (
+            <div key={index} className="flex flex-col items-center min-w-max">
+              <div 
+                className={`w-3 h-3 rounded-full bg-gradient-to-r ${event.color} mb-2 animate-pulse`}
+                style={{ animationDelay: `${index * 300}ms` }}
+              />
+              <div className="text-center">
+                <div className="text-sm font-bold text-white mb-1">{event.year}</div>
+                <div className="text-xs text-gray-300 whitespace-nowrap">{event.label}</div>
+              </div>
+              {index < timelineEvents.length - 1 && (
+                <div className="hidden md:block absolute w-8 h-0.5 bg-gradient-to-r from-white/30 to-transparent mt-1.5"
+                     style={{ left: '50%', transform: 'translateX(100%)' }} />
+              )}
+            </div>
+          ))}
+        </div>
+        {/* Linha conectora para mobile */}
+        <div className="md:hidden flex justify-center mt-2">
+          <div className="w-64 h-0.5 bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 opacity-30" />
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="relative z-10 h-full flex items-center justify-center">
       {/* Corações flutuantes quando ativados */}
@@ -251,8 +288,16 @@ const SlideContent = ({ slide }: SlideContentProps) => {
           {slide.subtitle}
         </h2>
         
-        {/* Player de música especial para o slide de música */}
-        {slide.title === 'Nossa Música' ? (
+        {/* Linha do tempo simples para "O Início de Tudo" */}
+        {slide.title === 'O Início de Tudo' ? (
+          <div className="mb-8">
+            <p className="text-lg md:text-xl leading-relaxed text-gray-200 max-w-2xl mx-auto animate-fade-in mb-6">
+              {slide.description}
+            </p>
+            <SimpleTimeline />
+          </div>
+        ) : /* Player de música especial para o slide de música */
+        slide.title === 'Nossa Música' ? (
           <div className="mb-8">
             <MusicPlayer />
             <p className="text-lg md:text-xl leading-relaxed text-gray-200 max-w-2xl mx-auto animate-fade-in mt-6">
