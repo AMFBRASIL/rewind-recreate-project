@@ -76,6 +76,7 @@ const Index = () => {
     { value: 'casamento', label: 'Casamento', icon: Users, gradient: 'from-purple-500 to-pink-500' },
     { value: 'amigos', label: 'Amigos', icon: User, gradient: 'from-green-500 to-teal-500' },
     { value: 'pais', label: 'Pais', icon: Heart, gradient: 'from-amber-500 to-orange-500' },
+    { value: 'pai', label: 'Pai (Filho→Pai)', icon: Heart, gradient: 'from-blue-500 to-purple-500' },
     { value: 'filhos', label: 'Filhos', icon: Baby, gradient: 'from-sky-500 to-blue-500' },
     { value: 'formatura', label: 'Formatura', icon: GraduationCap, gradient: 'from-indigo-500 to-purple-500' },
     { value: 'natal', label: 'Papai Noel Natal', icon: TreePine, gradient: 'from-red-500 to-green-600' },
@@ -314,10 +315,10 @@ const Index = () => {
                     <IconComponent className="w-16 h-16 mx-auto mb-6" />
                     <h3 className="font-bold text-2xl mb-4">{type.label}</h3>
                     <button 
-                      onClick={() => navigate('/create')}
+                      onClick={() => type.value === 'pai' ? navigate('/pai') : navigate('/create')}
                       className="w-full bg-white/20 hover:bg-white/30 text-white py-3 rounded-xl font-semibold transition-all duration-300 border border-white/30"
                     >
-                      Começar
+                      {type.value === 'pai' ? 'Ver Retrospectiva' : 'Começar'}
                     </button>
                   </div>
                 );
