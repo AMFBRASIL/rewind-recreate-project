@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Momentus | Click - Presentes Digitais Para Todas as Ocasiões</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: "🎁";
+            position: absolute;
+            top: 10px;
+            left: 30px;
+            font-size: 40px;
+            opacity: 0.3;
+            animation: float 3s ease-in-out infinite;
+        }
+        .header::after {
+            content: "✨";
+            position: absolute;
+            bottom: 10px;
+            right: 30px;
+            font-size: 40px;
+            opacity: 0.3;
+            animation: float 3s ease-in-out infinite 1.5s;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .tagline {
+            font-size: 18px;
+            color: #ffffff;
+            opacity: 0.95;
+        }
+        .hero {
+            padding: 40px 30px;
+            text-align: center;
+            background: linear-gradient(to bottom, #ffffff 0%, #f7fafc 100%);
+        }
+        .hero h1 {
+            font-size: 32px;
+            color: #2d3748;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            font-size: 18px;
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        .products-section {
+            padding: 40px 30px;
+            background: #ffffff;
+        }
+        .products-section h2 {
+            font-size: 28px;
+            color: #2d3748;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .product-card {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            padding: 25px 15px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .product-card:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.2);
+        }
+        .product-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .product-card h3 {
+            font-size: 18px;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+        .product-card p {
+            font-size: 13px;
+            color: #4a5568;
+            line-height: 1.4;
+        }
+        .differentials {
+            padding: 50px 30px;
+            background: linear-gradient(135deg, #f7fafc 0%, #ffffff 100%);
+        }
+        .differentials h2 {
+            font-size: 28px;
+            color: #2d3748;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .differential-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        .differential-icon {
+            font-size: 48px;
+            margin-right: 20px;
+            min-width: 60px;
+            text-align: center;
+        }
+        .differential-content h3 {
+            font-size: 20px;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+        .differential-content p {
+            font-size: 15px;
+            color: #4a5568;
+            line-height: 1.5;
+        }
+        .use-cases {
+            padding: 40px 30px;
+            background: linear-gradient(135deg, #fef5ff 0%, #fff 100%);
+            text-align: center;
+        }
+        .use-cases h2 {
+            font-size: 28px;
+            color: #2d3748;
+            margin-bottom: 25px;
+        }
+        .use-cases p {
+            font-size: 16px;
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .use-case-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .use-case-tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .cta-section {
+            padding: 50px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            text-align: center;
+        }
+        .cta-section h2 {
+            font-size: 28px;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+        .cta-section p {
+            font-size: 16px;
+            color: #ffffff;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 18px 50px;
+            background: #ffffff;
+            color: #764ba2;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+        .price-highlight {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+        }
+        .price-highlight p {
+            font-size: 14px;
+            margin: 0;
+        }
+        .price-highlight .price {
+            font-size: 32px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        .footer {
+            padding: 30px;
+            background: #2d3748;
+            text-align: center;
+            color: #a0aec0;
+            font-size: 12px;
+        }
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        .social-links {
+            margin-top: 15px;
+        }
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #a0aec0;
+            text-decoration: none;
+            font-size: 20px;
+        }
+        @media only screen and (max-width: 600px) {
+            .hero h1 {
+                font-size: 26px;
+            }
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            .differential-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            .differential-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">🎁 Momentus | Click</div>
+            <div class="tagline">Presentes Digitais que Emocionam</div>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>Presenteie Quem Você Ama com <span class="highlight">Memórias Inesquecíveis!</span></h1>
+            <p>Retrospectivas digitais personalizadas para todas as ocasiões. Surpreenda pais, namorados, crianças e muito mais!</p>
+        </div>
+
+        <!-- Products Section -->
+        <div class="products-section">
+            <h2>🎯 Retrospectivas Para Cada Momento Especial</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <span class="product-icon">💑</span>
+                    <h3>Para Namorados</h3>
+                    <p>Celebre o amor com fotos, mensagens e a trilha sonora de vocês</p>
+                </div>
+                
+                <div class="product-card">
+                    <span class="product-icon">👨‍👧‍👦</span>
+                    <h3>Para Pais</h3>
+                    <p>Homenageie seu pai com memórias, hobbies e momentos engraçados</p>
+                </div>
+                
+                <div class="product-card">
+                    <span class="product-icon">🎈</span>
+                    <h3>Para Crianças</h3>
+                    <p>Retrospectiva mágica do crescimento e conquistas dos pequenos</p>
+                </div>
+                
+                <div class="product-card">
+                    <span class="product-icon">🎄</span>
+                    <h3>Especial Natal</h3>
+                    <p>Tema natalino com momentos especiais da família</p>
+                </div>
+                
+                <div class="product-card">
+                    <span class="product-icon">💝</span>
+                    <h3>Reconquista</h3>
+                    <p>Mostre seus sentimentos e reconquiste quem você ama</p>
+                </div>
+                
+                <div class="product-card">
+                    <span class="product-icon">🎊</span>
+                    <h3>Outras Ocasiões</h3>
+                    <p>Aniversários, formaturas, amizade e muito mais!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Differentials -->
+        <div class="differentials">
+            <h2>✨ Por Que Escolher Momentus?</h2>
+            
+            <div class="differential-item">
+                <div class="differential-icon">📱</div>
+                <div class="differential-content">
+                    <h3>Envio Anônimo via WhatsApp</h3>
+                    <p>Quer surpreender? Enviamos seu presente de forma totalmente anônima pelo WhatsApp. A surpresa é garantida!</p>
+                </div>
+            </div>
+            
+            <div class="differential-item">
+                <div class="differential-icon">📲</div>
+                <div class="differential-content">
+                    <h3>QR Code Exclusivo</h3>
+                    <p>Seu presente chega com um QR Code personalizado. É só escanear e a mágica acontece!</p>
+                </div>
+            </div>
+            
+            <div class="differential-item">
+                <div class="differential-icon">⚡</div>
+                <div class="differential-content">
+                    <h3>Entrega Instantânea</h3>
+                    <p>Criou, já pode enviar! Não precisa esperar. Perfeito para presentes de última hora.</p>
+                </div>
+            </div>
+            
+            <div class="differential-item">
+                <div class="differential-icon">🎨</div>
+                <div class="differential-content">
+                    <h3>100% Personalizado</h3>
+                    <p>Suas fotos, suas mensagens, sua história. Cada retrospectiva é única e especial.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Use Cases -->
+        <div class="use-cases">
+            <h2>🎯 Perfeito Para Todas as Ocasiões</h2>
+            <p>Não importa o motivo, temos a retrospectiva perfeita para você:</p>
+            
+            <div class="use-case-tags">
+                <span class="use-case-tag">💍 Pedidos de Namoro</span>
+                <span class="use-case-tag">❤️ Reconquistas</span>
+                <span class="use-case-tag">🎂 Aniversários</span>
+                <span class="use-case-tag">🎓 Formaturas</span>
+                <span class="use-case-tag">👨 Dia dos Pais</span>
+                <span class="use-case-tag">👩 Dia das Mães</span>
+                <span class="use-case-tag">🎄 Natal</span>
+                <span class="use-case-tag">💑 Aniversário de Namoro</span>
+                <span class="use-case-tag">🎈 Festa Infantil</span>
+                <span class="use-case-tag">🤝 Amigo Secreto</span>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2>🚀 Pronto Para Emocionar?</h2>
+            <p>Crie sua retrospectiva agora e faça alguém chorar de emoção!</p>
+            <a href="#" class="cta-button">Criar Minha Retrospectiva</a>
+            
+            <div class="price-highlight">
+                <p style="margin-bottom: 5px;">A partir de</p>
+                <span class="price">R$ 47,00</span>
+                <p style="margin-top: 5px;">Pagamento único • Entrega instantânea</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2024 Momentus | Click. Todos os direitos reservados.</p>
+            <p style="margin-top: 10px;">
+                Dúvidas? <a href="mailto:contato@momentusclick.com">Entre em contato</a>
+            </p>
+            <div class="social-links">
+                <a href="#" title="Instagram">📷</a>
+                <a href="#" title="Facebook">📘</a>
+                <a href="#" title="WhatsApp">💬</a>
+            </div>
+            <p style="margin-top: 20px; font-size: 10px; color: #718096;">
+                Você está recebendo este email porque se inscreveu em nossa lista.<br>
+                <a href="#" style="color: #718096;">Cancelar inscrição</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
