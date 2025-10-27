@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Você Sabe Quem Precisa Deste Presente? 💔</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        .header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: "💝";
+            position: absolute;
+            top: 10px;
+            left: 30px;
+            font-size: 40px;
+            opacity: 0.3;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        .header::after {
+            content: "✨";
+            position: absolute;
+            bottom: 10px;
+            right: 30px;
+            font-size: 40px;
+            opacity: 0.3;
+            animation: pulse 2s ease-in-out infinite 1s;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.5; }
+        }
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .tagline {
+            font-size: 16px;
+            color: #ffffff;
+            opacity: 0.95;
+        }
+        .thank-you {
+            padding: 40px 30px;
+            text-align: center;
+            background: linear-gradient(to bottom, #ffffff 0%, #fef5ff 100%);
+        }
+        .thank-you h2 {
+            font-size: 28px;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        .thank-you p {
+            font-size: 16px;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+        .emotional-section {
+            padding: 50px 30px;
+            background: linear-gradient(135deg, #fef5ff 0%, #fff5f7 100%);
+            text-align: center;
+        }
+        .emotional-section h2 {
+            font-size: 32px;
+            color: #2d3748;
+            margin-bottom: 25px;
+            line-height: 1.3;
+        }
+        .emotional-section h2 .highlight {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .emotional-text {
+            font-size: 18px;
+            color: #4a5568;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+        .quote-box {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #f5576c;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        .quote-box p {
+            font-size: 16px;
+            color: #2d3748;
+            line-height: 1.7;
+            margin-bottom: 0;
+        }
+        .scenarios {
+            padding: 40px 30px;
+            background: #ffffff;
+        }
+        .scenarios h2 {
+            font-size: 28px;
+            color: #2d3748;
+            text-align: center;
+            margin-bottom: 35px;
+        }
+        .scenario-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            padding: 25px;
+            background: linear-gradient(135deg, #fef5ff 0%, #fff 100%);
+            border-radius: 15px;
+            border-left: 4px solid #f093fb;
+        }
+        .scenario-icon {
+            font-size: 36px;
+            margin-right: 20px;
+            min-width: 50px;
+        }
+        .scenario-content h3 {
+            font-size: 19px;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        .scenario-content p {
+            font-size: 15px;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+        .incentive-section {
+            padding: 50px 30px;
+            background: linear-gradient(135deg, #fff5f7 0%, #fef5ff 100%);
+            text-align: center;
+        }
+        .incentive-section h2 {
+            font-size: 28px;
+            color: #2d3748;
+            margin-bottom: 20px;
+        }
+        .incentive-section p {
+            font-size: 16px;
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        .benefit-boxes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .benefit-box {
+            background: #ffffff;
+            padding: 25px 15px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        .benefit-box-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        .benefit-box h3 {
+            font-size: 18px;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        .benefit-box p {
+            font-size: 14px;
+            color: #4a5568;
+            line-height: 1.5;
+            margin: 0;
+        }
+        .cta-section {
+            padding: 50px 30px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            text-align: center;
+        }
+        .cta-section h2 {
+            font-size: 30px;
+            color: #ffffff;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+        .cta-section p {
+            font-size: 17px;
+            color: #ffffff;
+            opacity: 0.95;
+            margin-bottom: 35px;
+            line-height: 1.6;
+        }
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .cta-button {
+            display: block;
+            padding: 18px 40px;
+            background: #ffffff;
+            color: #f5576c;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+        .cta-button.secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            border: 2px solid #ffffff;
+        }
+        .discount-badge {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 15px 35px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+        .discount-badge p {
+            font-size: 15px;
+            margin: 0;
+            font-weight: 600;
+        }
+        .discount-badge .discount {
+            font-size: 36px;
+            font-weight: bold;
+            color: #ffffff;
+            display: block;
+            margin: 5px 0;
+        }
+        .social-proof {
+            padding: 40px 30px;
+            background: #ffffff;
+            text-align: center;
+        }
+        .social-proof h3 {
+            font-size: 20px;
+            color: #2d3748;
+            margin-bottom: 20px;
+        }
+        .testimonial-mini {
+            background: linear-gradient(135deg, #fef5ff 0%, #fff5f7 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+        .testimonial-mini p {
+            font-size: 14px;
+            color: #4a5568;
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .testimonial-mini .author {
+            font-size: 13px;
+            color: #f5576c;
+            font-weight: 600;
+        }
+        .footer {
+            padding: 30px;
+            background: #2d3748;
+            text-align: center;
+            color: #a0aec0;
+            font-size: 12px;
+        }
+        .footer a {
+            color: #f093fb;
+            text-decoration: none;
+        }
+        .social-links {
+            margin-top: 15px;
+        }
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #a0aec0;
+            text-decoration: none;
+            font-size: 20px;
+        }
+        @media only screen and (max-width: 600px) {
+            .emotional-section h2 {
+                font-size: 26px;
+            }
+            .benefit-boxes {
+                grid-template-columns: 1fr;
+            }
+            .scenario-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            .scenario-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">💝 Momentus | Click</div>
+            <div class="tagline">Obrigado por Confiar em Nós!</div>
+        </div>
+
+        <!-- Thank You -->
+        <div class="thank-you">
+            <h2>Você Criou Algo Especial! 🎉</h2>
+            <p>Esperamos que sua retrospectiva tenha emocionado e marcado um momento inesquecível. Agora, queremos te fazer uma pergunta importante...</p>
+        </div>
+
+        <!-- Emotional Section -->
+        <div class="emotional-section">
+            <h2>Você Conhece Alguém que Está <span class="highlight">Sofrendo por Amor?</span></h2>
+            
+            <p class="emotional-text">
+                Talvez seja aquele amigo que não consegue esquecer um amor do passado...<br>
+                Ou aquela pessoa especial que cometeu um erro e quer uma segunda chance...<br>
+                Ou até mesmo alguém que simplesmente não sabe como expressar o que sente...
+            </p>
+
+            <div class="quote-box">
+                <p>
+                    "Às vezes, as palavras não são suficientes. Às vezes, precisamos de algo mais profundo, mais visual, mais REAL para mostrar o que sentimos. Uma retrospectiva pode ser a ponte que reconecta dois corações."
+                </p>
+            </div>
+        </div>
+
+        <!-- Scenarios -->
+        <div class="scenarios">
+            <h2>💔 Você Pode Mudar a História de Alguém</h2>
+            
+            <div class="scenario-item">
+                <div class="scenario-icon">💑</div>
+                <div class="scenario-content">
+                    <h3>Reconquistar um Amor Perdido</h3>
+                    <p>Aquela pessoa que terminou, mas você vê nos olhos dela que ainda tem sentimento. Uma retrospectiva pode mostrar todos os momentos bons e reacender a chama.</p>
+                </div>
+            </div>
+
+            <div class="scenario-item">
+                <div class="scenario-icon">🤝</div>
+                <div class="scenario-content">
+                    <h3>Salvar uma Amizade Especial</h3>
+                    <p>Amizades verdadeiras são raras. Se uma briga ou mal-entendido está destruindo anos de história, uma retrospectiva pode lembrar o valor dessa conexão.</p>
+                </div>
+            </div>
+
+            <div class="scenario-item">
+                <div class="scenario-icon">💍</div>
+                <div class="scenario-content">
+                    <h3>Pedir uma Segunda Chance</h3>
+                    <p>Todos erramos. Mas nem todos têm a coragem de pedir perdão de forma significativa. Mostre arrependimento verdadeiro através de memórias compartilhadas.</p>
+                </div>
+            </div>
+
+            <div class="scenario-item">
+                <div class="scenario-icon">❤️</div>
+                <div class="scenario-content">
+                    <h3>Declarar um Amor Não Correspondido</h3>
+                    <p>Aquele amigo(a) que você ama há anos, mas nunca teve coragem de falar? Uma retrospectiva pode ser a forma mais bonita de revelar seus sentimentos.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Incentive Section -->
+        <div class="incentive-section">
+            <h2>🎁 Indique e Ganhe!</h2>
+            <p>Por ter sido nosso cliente, queremos te recompensar. Compartilhe o Momentus com quem você sabe que precisa e ganhe benefícios especiais:</p>
+            
+            <div class="benefit-boxes">
+                <div class="benefit-box">
+                    <div class="benefit-box-icon">🎟️</div>
+                    <h3>15% de Desconto</h3>
+                    <p>Para cada pessoa que comprar através do seu link</p>
+                </div>
+                
+                <div class="benefit-box">
+                    <div class="benefit-box-icon">🎨</div>
+                    <h3>Template Exclusivo</h3>
+                    <p>Ganhe acesso a designs premium na sua próxima compra</p>
+                </div>
+                
+                <div class="benefit-box">
+                    <div class="benefit-box-icon">⚡</div>
+                    <h3>Criação Prioritária</h3>
+                    <p>Atendimento VIP e entrega ainda mais rápida</p>
+                </div>
+                
+                <div class="benefit-box">
+                    <div class="benefit-box-icon">💝</div>
+                    <h3>Retrospectiva Grátis</h3>
+                    <p>A cada 5 indicações que virarem clientes</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Social Proof -->
+        <div class="social-proof">
+            <h3>Veja o Que Nossos Clientes Estão Dizendo:</h3>
+            
+            <div class="testimonial-mini">
+                <p>"Terminamos há 3 meses. Fiz a retrospectiva e ela chorou. Voltamos e agora estamos noivos! Melhor investimento da minha vida."</p>
+                <span class="author">— Rafael M., Cliente que Reconquistou</span>
+            </div>
+            
+            <div class="testimonial-mini">
+                <p>"Indiquei para minha prima que estava sofrendo por um término. Ela me ligou chorando de felicidade quando ele pediu ela de volta depois de ver a retrospectiva!"</p>
+                <span class="author">— Juliana S., Cliente Satisfeita</span>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2>🚀 Ajude Alguém a Reconquistar o Amor</h2>
+            <p>Compartilhe agora e seja parte de uma história de amor que pode ter final feliz!</p>
+            
+            <div class="cta-buttons">
+                <a href="#" class="cta-button">📱 Compartilhar no WhatsApp</a>
+                <a href="#" class="cta-button secondary">📋 Copiar Link de Indicação</a>
+            </div>
+            
+            <div class="discount-badge">
+                <p>Seu amigo ganha</p>
+                <span class="discount">10% OFF</span>
+                <p>na primeira compra!</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2024 Momentus | Click. Todos os direitos reservados.</p>
+            <p style="margin-top: 10px;">
+                Dúvidas? <a href="mailto:contato@momentusclick.com">Entre em contato</a>
+            </p>
+            <div class="social-links">
+                <a href="#" title="Instagram">📷</a>
+                <a href="#" title="Facebook">📘</a>
+                <a href="#" title="WhatsApp">💬</a>
+            </div>
+            <p style="margin-top: 20px; font-size: 10px; color: #718096;">
+                Você está recebendo este email porque é nosso cliente.<br>
+                <a href="#" style="color: #718096;">Gerenciar preferências</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
