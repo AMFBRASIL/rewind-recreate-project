@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dia dos Namorados 2025 | Momentus Click - O Presente Digital Que Emociona</title>
+    <meta name="description" content="Celebre o amor com um presente digital único e emocionante. Crie uma retrospectiva personalizada da história de vocês dois.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 6s infinite ease-in-out;
+            opacity: 0.6;
+        }
+
+        .heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .heart:nth-child(2) { left: 25%; animation-delay: 1s; font-size: 1.5rem; }
+        .heart:nth-child(3) { left: 40%; animation-delay: 2s; }
+        .heart:nth-child(4) { left: 55%; animation-delay: 3s; font-size: 2.5rem; }
+        .heart:nth-child(5) { left: 70%; animation-delay: 1.5s; }
+        .heart:nth-child(6) { left: 85%; animation-delay: 2.5s; font-size: 1.8rem; }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 40px;
+            border-radius: 30px;
+            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 20px rgba(245, 87, 108, 0.4);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f5576c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #555;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .cta-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 20px 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(245, 87, 108, 0.5);
+        }
+
+        .cta-secondary {
+            background: white;
+            color: #764ba2;
+            border: 3px solid #764ba2;
+        }
+
+        .cta-secondary:hover {
+            background: #764ba2;
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        .features {
+            background: white;
+            padding: 100px 20px;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f5576c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 60px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: #f093fb;
+            box-shadow: 0 20px 50px rgba(240, 147, 251, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #764ba2;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .testimonials {
+            background: linear-gradient(135deg, #f8f9ff 0%, #fef5ff 100%);
+            padding: 100px 20px;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 60px auto 0;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: #764ba2;
+        }
+
+        .stars {
+            color: #f5576c;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .final-cta {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            padding: 100px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .final-cta h2 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            font-weight: 800;
+        }
+
+        .final-cta p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .price-tag {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px 40px;
+            border-radius: 15px;
+            margin: 30px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .price-tag .old-price {
+            text-decoration: line-through;
+            font-size: 1.5rem;
+            opacity: 0.7;
+        }
+
+        .price-tag .new-price {
+            font-size: 3rem;
+            font-weight: 800;
+            display: block;
+        }
+
+        .urgency {
+            background: rgba(245, 87, 108, 0.9);
+            padding: 15px 30px;
+            border-radius: 50px;
+            margin-top: 20px;
+            display: inline-block;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero-content {
+                padding: 40px 20px;
+            }
+
+            .cta-button {
+                padding: 15px 35px;
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .final-cta h2 {
+                font-size: 2rem;
+            }
+
+            .final-cta p {
+                font-size: 1.2rem;
+            }
+
+            .price-tag .new-price {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="floating-hearts">
+            <div class="heart">❤️</div>
+            <div class="heart">💕</div>
+            <div class="heart">💗</div>
+            <div class="heart">💖</div>
+            <div class="heart">💝</div>
+            <div class="heart">💘</div>
+        </div>
+
+        <div class="hero-content">
+            <div class="badge">✨ Presente Digital Exclusivo</div>
+            <h1>O Presente Que Vai Fazer Seu Amor Chorar de Emoção</h1>
+            <p class="subtitle">
+                Não dê flores que murcham em 3 dias. Dê uma experiência digital única 
+                que conta toda a história de vocês em um presente que dura para sempre.
+            </p>
+
+            <div class="cta-container">
+                <a href="#" class="cta-button cta-primary">💝 Criar Meu Presente Agora</a>
+                <a href="#" class="cta-button cta-secondary">▶️ Ver Exemplo</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="features-container">
+            <h2 class="section-title">Por Que Este é o Presente Perfeito?</h2>
+            <p class="section-subtitle">Mais de 10.000 casais já emocionaram quem amam</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎬</div>
+                    <h3>Retrospectiva Personalizada</h3>
+                    <p>Uma linha do tempo interativa com fotos, vídeos e mensagens especiais de toda a jornada do casal</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎵</div>
+                    <h3>Trilha Sonora do Amor</h3>
+                    <p>Adicione a música de vocês e crie uma experiência cinematográfica única e emocionante</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Entrega Anônima por WhatsApp</h3>
+                    <p>Enviamos um QR Code misterioso que revela uma surpresa inesquecível quando escaneado</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💌</div>
+                    <h3>Mensagens Secretas</h3>
+                    <p>Inclua cartas de amor, declarações e momentos especiais que só vocês compartilharam</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Pronto em Minutos</h3>
+                    <p>Crie seu presente em menos de 10 minutos. Simples, rápido e emocionante</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">♾️</div>
+                    <h3>Para Sempre</h3>
+                    <p>Um presente digital que nunca se perde, nunca estraga e pode ser revivido infinitas vezes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="features-container">
+            <h2 class="section-title">Eles Já Emocionaram Quem Amam 💕</h2>
+            <p class="section-subtitle">Histórias reais de quem conquistou e reconquistou com nosso presente</p>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">
+                        "Ela chorou do início ao fim! Nunca vi minha namorada tão emocionada. 
+                        Foi o melhor presente que já dei na vida."
+                    </p>
+                    <p class="testimonial-author">— Lucas M., São Paulo</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">
+                        "Estávamos afastados há meses. Enviei essa retrospectiva e consegui 
+                        reconquistar o amor da minha vida. Simplesmente mágico!"
+                    </p>
+                    <p class="testimonial-author">— Mariana S., Rio de Janeiro</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">
+                        "Melhor que qualquer jantar caro ou presente físico. Ela disse que 
+                        foi o presente mais especial que já recebeu. Valeu cada centavo!"
+                    </p>
+                    <p class="testimonial-author">— Rafael P., Belo Horizonte</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="final-cta">
+        <h2>🌹 Oferta Especial do Dia dos Namorados</h2>
+        <p>Não deixe para última hora. Garanta seu presente digital agora!</p>
+
+        <div class="price-tag">
+            <span class="old-price">De R$ 79,90</span>
+            <span class="new-price">Por apenas R$ 49,90</span>
+        </div>
+
+        <div class="urgency">
+            ⏰ Oferta válida apenas até 12/06/2025
+        </div>
+
+        <div class="cta-container" style="margin-top: 40px;">
+            <a href="#" class="cta-button cta-primary">💝 Quero Emocionar Meu Amor Agora</a>
+        </div>
+
+        <p style="margin-top: 30px; font-size: 1rem; opacity: 0.8;">
+            ✅ Acesso imediato • ✅ Entrega por WhatsApp • ✅ Suporte 24h
+        </p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Momentus | Click - Todos os direitos reservados</p>
+        <p style="margin-top: 10px; opacity: 0.7;">
+            📧 contato@momentusclick.com | 📱 WhatsApp: (11) 99999-9999
+        </p>
+    </footer>
+</body>
+</html>
