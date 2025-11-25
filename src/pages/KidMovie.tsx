@@ -1,16 +1,17 @@
 import { useState, useEffect, useRef } from "react";
-import { ChevronDown, Star, Heart, Users, Sparkles, Camera, Book, Smile, PartyPopper } from "lucide-react";
+import { ChevronDown, Star, Heart, Users, Sparkles, Camera, Book, Smile, PartyPopper, Zap, CircleDot } from "lucide-react";
 import FloatingKidsElements from "@/components/FloatingKidsElements";
 
 interface TimelineStory {
   id: number;
-  section: 'hero' | 'personal' | 'friends' | 'adventures';
+  section: 'hero' | 'personal' | 'friends' | 'adventures' | 'party';
   title: string;
   subtitle: string;
   images: string[];
   description: string;
   emotion?: string;
   year?: string;
+  timestamp?: string;
 }
 
 const KidMovie = () => {
@@ -138,6 +139,25 @@ const KidMovie = () => {
       description: 'O melhor ainda está por vir! Esta jornada incrível está apenas começando!',
       year: '2025',
       emotion: 'touching'
+    },
+    {
+      id: 9,
+      section: 'party',
+      title: 'HOJE! Minha Festa com os Amigos! 🎉',
+      subtitle: 'Momentos Ao Vivo da Festa',
+      images: [
+        'https://images.unsplash.com/photo-1530103862676-de8c9debad1d',
+        'https://images.unsplash.com/photo-1464047736614-af63643285bf',
+        'https://images.unsplash.com/photo-1558618666-fcd25c85cd64',
+        'https://images.unsplash.com/photo-1581391528803-54df1f6e4e92',
+        'https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2',
+        'https://images.unsplash.com/photo-1558618666-fcd25c85cd64',
+        'https://images.unsplash.com/photo-1587616211892-06957b6d8b8d',
+        'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1',
+        'https://images.unsplash.com/photo-1544717297-fa95b6ee9643'
+      ],
+      description: 'Fotos incríveis tiradas agora pelos amigos e familiares durante a festa!',
+      timestamp: 'Agora mesmo'
     }
   ];
 
@@ -166,6 +186,8 @@ const KidMovie = () => {
         return 'from-green-500 via-teal-500 to-blue-500';
       case 'adventures':
         return 'from-orange-500 via-red-500 to-pink-500';
+      case 'party':
+        return 'from-yellow-400 via-pink-500 to-purple-600';
       default:
         return 'from-purple-500 to-pink-500';
     }
@@ -179,6 +201,8 @@ const KidMovie = () => {
         return Users;
       case 'adventures':
         return PartyPopper;
+      case 'party':
+        return Camera;
       default:
         return Star;
     }
@@ -320,6 +344,122 @@ const KidMovie = () => {
     );
   };
 
+  const renderPartySection = (story: TimelineStory) => {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-start py-12 px-4">
+        {/* Header Ao Vivo */}
+        <div className="w-full max-w-7xl mb-8 animate-fade-in">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center space-x-4">
+              <div className="relative">
+                <div className="bg-gradient-to-r from-red-500 to-pink-500 px-6 py-3 rounded-full flex items-center space-x-2 animate-pulse">
+                  <CircleDot className="w-5 h-5 text-white animate-pulse" />
+                  <span className="text-white font-black text-lg uppercase">AO VIVO</span>
+                </div>
+                <div className="absolute -top-1 -right-1">
+                  <Sparkles className="w-6 h-6 text-yellow-400 animate-spin" style={{ animationDuration: '3s' }} />
+                </div>
+              </div>
+              
+              <div className="bg-white/10 backdrop-blur-lg px-6 py-3 rounded-full border-2 border-white/30">
+                <span className="text-white font-bold text-lg">{story.images.length} Fotos</span>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-2 bg-gradient-to-r from-yellow-400 to-orange-500 px-6 py-3 rounded-full">
+              <PartyPopper className="w-5 h-5 text-white" />
+              <span className="text-white font-bold">Festa Acontecendo!</span>
+            </div>
+          </div>
+
+          <h2 className="text-5xl md:text-7xl font-black bg-gradient-to-r from-yellow-300 via-pink-300 to-purple-300 bg-clip-text text-transparent mb-4 text-center">
+            {story.title}
+          </h2>
+          
+          <p className="text-2xl md:text-3xl text-white/80 text-center mb-2">
+            {story.subtitle}
+          </p>
+          
+          <p className="text-lg text-white/60 text-center">
+            {story.description}
+          </p>
+        </div>
+
+        {/* Grid de Fotos Tipo Polaroid/Instagram */}
+        <div className="w-full max-w-7xl">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            {story.images.map((img, idx) => (
+              <div 
+                key={idx}
+                className="group relative animate-scale-in"
+                style={{
+                  animationDelay: `${idx * 150}ms`
+                }}
+              >
+                {/* Efeito Polaroid */}
+                <div className="relative bg-white p-3 md:p-4 rounded-2xl shadow-2xl transform transition-all duration-500 hover:scale-105 hover:rotate-2 hover:shadow-pink-500/50">
+                  {/* Flash effect no hover */}
+                  <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-30 transition-opacity duration-150 rounded-2xl pointer-events-none"></div>
+                  
+                  {/* Foto */}
+                  <div className="aspect-square overflow-hidden rounded-xl bg-gray-200">
+                    <img 
+                      src={img}
+                      alt={`Momento ${idx + 1}`}
+                      className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                    />
+                  </div>
+
+                  {/* Badge de novo */}
+                  {idx < 3 && (
+                    <div className="absolute -top-2 -right-2 bg-gradient-to-r from-green-400 to-emerald-500 px-3 py-1 rounded-full shadow-lg animate-pulse">
+                      <span className="text-white font-bold text-xs uppercase">Novo!</span>
+                    </div>
+                  )}
+
+                  {/* Timestamp simulado */}
+                  <div className="mt-2 flex items-center justify-between">
+                    <span className="text-gray-600 text-xs font-medium">Há {idx + 1} min</span>
+                    <div className="flex items-center space-x-1">
+                      <Heart className="w-4 h-4 text-pink-500" />
+                      <Zap className="w-4 h-4 text-yellow-500" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Efeito de câmera flash */}
+                <div className="absolute inset-0 pointer-events-none">
+                  <div className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Camera className="w-6 h-6 text-yellow-400 animate-bounce" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Footer com mensagem especial */}
+          <div className="mt-12 text-center">
+            <div className="inline-block bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 p-1 rounded-3xl">
+              <div className="bg-black px-8 py-6 rounded-3xl">
+                <div className="flex items-center justify-center space-x-3 mb-3">
+                  <Sparkles className="w-6 h-6 text-yellow-400" />
+                  <span className="text-2xl">✨</span>
+                  <Sparkles className="w-6 h-6 text-pink-400" />
+                </div>
+                <h3 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-yellow-300 to-pink-300 bg-clip-text text-transparent mb-2">
+                  Momentos Inesquecíveis!
+                </h3>
+                <p className="text-white/70 text-lg">
+                  Cada foto conta uma história especial deste dia mágico! 🎈
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="relative min-h-screen bg-black overflow-hidden">
       {/* Background gradient */}
@@ -347,6 +487,8 @@ const KidMovie = () => {
           <div key={story.id} className="snap-start">
             {story.section === 'hero' ? (
               renderHeroSection(story)
+            ) : story.section === 'party' ? (
+              renderPartySection(story)
             ) : (
               renderStorySection(story, index)
             )}
