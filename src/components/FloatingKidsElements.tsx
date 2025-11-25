@@ -1,62 +1,73 @@
-
-import { Baby, Heart, Star, Sun, Moon, Rainbow, Gift, Palette, Music } from "lucide-react";
-
 const FloatingKidsElements = () => {
-  const kidsElements = [
-    { icon: Baby, color: '#FFB6C1', size: 20 },
-    { icon: Heart, color: '#87CEEB', size: 16 },
-    { icon: Star, color: '#98FB98', size: 18 },
-    { icon: Sun, color: '#F0E68C', size: 22 },
-    { icon: Moon, color: '#DDA0DD', size: 18 },
-    { icon: Rainbow, color: '#FFB6C1', size: 24 },
-    { icon: Gift, color: '#87CEEB', size: 20 },
-    { icon: Palette, color: '#98FB98', size: 18 },
-    { icon: Music, color: '#F0E68C', size: 16 }
-  ];
-
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {[...Array(30)].map((_, i) => {
-        const element = kidsElements[Math.floor(Math.random() * kidsElements.length)];
-        const Icon = element.icon;
-        
-        return (
-          <Icon
-            key={i}
-            className="absolute opacity-30 animate-bounce"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 4}s`,
-              animationDuration: `${2 + Math.random() * 3}s`,
-              color: element.color
-            }}
-            size={element.size}
-          />
-        );
-      })}
-      
-      {/* Emojis flutuantes também */}
-      {[...Array(15)].map((_, i) => {
-        const emojis = ['🎈', '🎨', '🌈', '⭐', '🎁', '🦄', '🌟', '🎪', '🎭', '🧸'];
-        const emoji = emojis[Math.floor(Math.random() * emojis.length)];
-        
-        return (
-          <div
-            key={`emoji-${i}`}
-            className="absolute text-2xl opacity-40 animate-float"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${3 + Math.random() * 2}s`
-            }}
-          >
-            {emoji}
-          </div>
-        );
-      })}
-    </div>
+    <>
+      {/* Balões coloridos */}
+      <div className="absolute top-20 left-10 animate-float-up" style={{ animationDuration: '8s', animationDelay: '0s' }}>
+        <div className="text-6xl">🎈</div>
+      </div>
+      <div className="absolute top-40 right-20 animate-float-up" style={{ animationDuration: '10s', animationDelay: '2s' }}>
+        <div className="text-5xl">🎈</div>
+      </div>
+      <div className="absolute bottom-40 left-1/4 animate-float-up" style={{ animationDuration: '12s', animationDelay: '4s' }}>
+        <div className="text-7xl">🎈</div>
+      </div>
+
+      {/* Estrelas e sparkles */}
+      <div className="absolute top-1/4 left-1/3 animate-twinkle" style={{ animationDelay: '1s' }}>
+        <div className="text-4xl">⭐</div>
+      </div>
+      <div className="absolute top-1/3 right-1/4 animate-twinkle" style={{ animationDelay: '2s' }}>
+        <div className="text-5xl">✨</div>
+      </div>
+      <div className="absolute bottom-1/4 left-1/4 animate-twinkle" style={{ animationDelay: '3s' }}>
+        <div className="text-4xl">🌟</div>
+      </div>
+
+      {/* Confetes */}
+      <div className="absolute top-10 right-1/3 animate-float" style={{ animationDuration: '5s' }}>
+        <div className="text-3xl">🎉</div>
+      </div>
+      <div className="absolute bottom-1/3 right-10 animate-float" style={{ animationDuration: '6s', animationDelay: '1s' }}>
+        <div className="text-3xl">🎊</div>
+      </div>
+
+      {/* Nuvens */}
+      <div className="absolute top-32 left-1/2 animate-float-slow" style={{ animationDuration: '20s' }}>
+        <div className="text-6xl opacity-30">☁️</div>
+      </div>
+      <div className="absolute top-20 right-1/3 animate-float-slow" style={{ animationDuration: '25s', animationDelay: '5s' }}>
+        <div className="text-7xl opacity-20">☁️</div>
+      </div>
+
+      {/* Corações */}
+      <div className="absolute top-1/2 left-20 animate-float" style={{ animationDuration: '7s', animationDelay: '2s' }}>
+        <div className="text-4xl">💖</div>
+      </div>
+      <div className="absolute bottom-1/4 right-1/3 animate-float" style={{ animationDuration: '8s', animationDelay: '3s' }}>
+        <div className="text-5xl">💕</div>
+      </div>
+
+      {/* Arco-íris e sol */}
+      <div className="absolute top-10 left-1/4 animate-pulse" style={{ animationDuration: '3s' }}>
+        <div className="text-5xl">🌈</div>
+      </div>
+      <div className="absolute top-5 right-10 animate-pulse" style={{ animationDuration: '4s', animationDelay: '1s' }}>
+        <div className="text-6xl">☀️</div>
+      </div>
+
+      {/* Pipas */}
+      <div className="absolute top-1/3 left-10 animate-float" style={{ animationDuration: '10s' }}>
+        <div className="text-4xl">🪁</div>
+      </div>
+
+      {/* Borboletas */}
+      <div className="absolute top-2/3 right-1/4 animate-fly-diagonal" style={{ animationDuration: '15s', animationDelay: '2s' }}>
+        <div className="text-4xl">🦋</div>
+      </div>
+      <div className="absolute bottom-1/2 left-1/3 animate-fly-diagonal" style={{ animationDuration: '18s', animationDelay: '5s' }}>
+        <div className="text-3xl">🦋</div>
+      </div>
+    </>
   );
 };
 
