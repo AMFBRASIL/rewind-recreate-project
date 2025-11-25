@@ -16,7 +16,6 @@ interface TimelineStory {
 
 const KidMovie = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [currentSection, setCurrentSection] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Dados da criança - em produção viriam do backend
@@ -184,31 +183,6 @@ const KidMovie = () => {
     container?.addEventListener('scroll', handleScroll);
     return () => container?.removeEventListener('scroll', handleScroll);
   }, []);
-
-  // Auto-play: avança automaticamente após 7 segundos
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSection((prev) => {
-        const next = prev + 1;
-        if (next >= timelineStories.length) {
-          return 0; // Volta ao início
-        }
-        
-        // Scroll para a próxima seção
-        if (containerRef.current) {
-          const sectionHeight = containerRef.current.clientHeight;
-          containerRef.current.scrollTo({
-            top: next * sectionHeight,
-            behavior: 'smooth'
-          });
-        }
-        
-        return next;
-      });
-    }, 7000); // 7 segundos
-
-    return () => clearInterval(timer);
-  }, [timelineStories.length]);
 
   const getSectionColor = (section: string) => {
     switch (section) {
