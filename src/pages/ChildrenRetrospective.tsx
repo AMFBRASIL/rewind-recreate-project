@@ -97,6 +97,30 @@ const ChildrenRetrospective = () => {
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1635805737707-575885ab0b61?w=1920')] bg-cover bg-center opacity-20"></div>
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/60"></div>
           <FloatingSuperheroElements />
+
+          {/* Hulk pendurado balançando */}
+          <div className="absolute top-0 left-1/4 z-20 animate-swing" style={{ transformOrigin: 'top center' }}>
+            {/* Corda */}
+            <div className="w-1 h-20 bg-gradient-to-b from-yellow-600 to-yellow-800 mx-auto"></div>
+            {/* Hulk */}
+            <div className="text-7xl md:text-9xl filter drop-shadow-2xl">
+              💚🦸‍♂️
+            </div>
+            {/* Efeito de brilho */}
+            <div className="absolute -inset-4 bg-green-500/20 blur-2xl rounded-full animate-pulse"></div>
+          </div>
+
+          {/* Hulk pendurado do outro lado */}
+          <div className="absolute top-0 right-1/4 z-20 animate-swing-reverse" style={{ transformOrigin: 'top center', animationDelay: '1s' }}>
+            {/* Corda */}
+            <div className="w-1 h-16 bg-gradient-to-b from-red-600 to-red-800 mx-auto"></div>
+            {/* Spider-Man */}
+            <div className="text-6xl md:text-8xl filter drop-shadow-2xl transform scale-x-[-1]">
+              🕷️🦸‍♂️
+            </div>
+            {/* Efeito de brilho */}
+            <div className="absolute -inset-4 bg-red-500/20 blur-2xl rounded-full animate-pulse"></div>
+          </div>
           
           <div className="relative z-10 min-h-screen flex flex-col items-center justify-center text-center px-4">
             {/* Logo de super-herói */}
