@@ -4,7 +4,7 @@ import FloatingKidsElements from "@/components/FloatingKidsElements";
 
 interface TimelineStory {
   id: number;
-  section: 'hero' | 'personal' | 'friends' | 'adventures' | 'party';
+  section: 'hero' | 'personal' | 'friends' | 'adventures' | 'suspense' | 'party';
   title: string;
   subtitle: string;
   images: string[];
@@ -143,6 +143,14 @@ const KidMovie = () => {
     },
     {
       id: 9,
+      section: 'suspense',
+      title: 'Estão Preparados?',
+      subtitle: 'Algo Incrível Está Chegando...',
+      images: [],
+      description: 'O momento mais especial está prestes a acontecer!'
+    },
+    {
+      id: 10,
       section: 'party',
       title: 'HOJE! Minha Festa com os Amigos! 🎉',
       subtitle: 'Momentos Ao Vivo da Festa',
@@ -370,6 +378,77 @@ const KidMovie = () => {
     );
   };
 
+  const renderSuspenseSection = (story: TimelineStory) => {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center relative px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-black to-pink-900"></div>
+        
+        {/* Efeitos de luz pulsantes */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-yellow-500/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        </div>
+
+        <div className="relative z-10 text-center animate-fade-in">
+          {/* Ícones girando */}
+          <div className="flex justify-center space-x-8 mb-12">
+            <Sparkles className="w-16 h-16 text-yellow-400 animate-spin" style={{ animationDuration: '3s' }} />
+            <Star className="w-20 h-20 text-pink-400 animate-pulse" />
+            <Sparkles className="w-16 h-16 text-purple-400 animate-spin" style={{ animationDuration: '3s', animationDirection: 'reverse' }} />
+          </div>
+
+          <h1 className="text-6xl md:text-8xl font-black text-white mb-8 drop-shadow-2xl animate-pulse">
+            {story.title}
+          </h1>
+          
+          <div className="space-y-6 mb-12">
+            <p className="text-4xl md:text-5xl bg-gradient-to-r from-yellow-300 via-pink-300 to-purple-300 bg-clip-text text-transparent font-black animate-bounce">
+              {story.subtitle}
+            </p>
+            
+            <p className="text-2xl md:text-3xl text-white/80 max-w-3xl mx-auto">
+              {story.description}
+            </p>
+          </div>
+
+          {/* Contagem regressiva visual */}
+          <div className="flex justify-center space-x-4 mb-8">
+            {[3, 2, 1].map((num, idx) => (
+              <div 
+                key={num}
+                className="w-20 h-20 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-white text-3xl font-black shadow-2xl animate-pulse"
+                style={{ animationDelay: `${idx * 0.3}s` }}
+              >
+                {num}
+              </div>
+            ))}
+          </div>
+
+          {/* Emojis animados */}
+          <div className="flex justify-center space-x-6 text-6xl animate-bounce">
+            <span style={{ animationDelay: '0s' }}>🎉</span>
+            <span style={{ animationDelay: '0.2s' }}>🎊</span>
+            <span style={{ animationDelay: '0.4s' }}>🎈</span>
+            <span style={{ animationDelay: '0.6s' }}>✨</span>
+            <span style={{ animationDelay: '0.8s' }}>🎁</span>
+          </div>
+
+          {/* Mensagem final */}
+          <div className="mt-16">
+            <div className="bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 p-1 rounded-3xl inline-block animate-pulse">
+              <div className="bg-black px-12 py-6 rounded-3xl">
+                <p className="text-2xl md:text-3xl text-white font-bold">
+                  Prepare-se para ver momentos INCRÍVEIS! 🚀
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   const renderPartySection = (story: TimelineStory) => {
     return (
       <div className="min-h-screen flex flex-col items-center justify-start py-12 px-4">
@@ -513,6 +592,8 @@ const KidMovie = () => {
           <div key={story.id} className="snap-start">
             {story.section === 'hero' ? (
               renderHeroSection(story)
+            ) : story.section === 'suspense' ? (
+              renderSuspenseSection(story)
             ) : story.section === 'party' ? (
               renderPartySection(story)
             ) : (
