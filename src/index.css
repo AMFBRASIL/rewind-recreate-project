@@ -57,3 +57,128 @@
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
+
+/* Animação de voo atravessando a tela */
+@keyframes fly-across {
+  0% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(120vw) translateY(-30px) rotate(15deg);
+    opacity: 0;
+  }
+}
+
+.animate-fly-across {
+  animation: fly-across linear infinite;
+}
+
+/* Animação de voo diagonal */
+@keyframes fly-diagonal {
+  0% {
+    transform: translateX(0) translateY(0) scale(0.8);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(50vw) translateY(120vh) scale(1.2);
+    opacity: 0;
+  }
+}
+
+.animate-fly-diagonal {
+  animation: fly-diagonal linear infinite;
+}
+
+/* Animação de flutuação lenta */
+@keyframes float-slow {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  100% {
+    transform: translateX(100vw) translateY(20px);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow linear infinite;
+}
+
+/* Animação de subida (balões) */
+@keyframes float-up {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120vh) translateX(50px) rotate(15deg);
+    opacity: 0;
+  }
+}
+
+.animate-float-up {
+  animation: float-up linear infinite;
+}
+
+/* Animação de voo de pássaro */
+@keyframes bird-fly {
+  0% {
+    transform: translateX(0) translateY(0) scaleX(1);
+  }
+  25% {
+    transform: translateX(30vw) translateY(-20px) scaleX(1);
+  }
+  50% {
+    transform: translateX(60vw) translateY(10px) scaleX(-1);
+  }
+  75% {
+    transform: translateX(90vw) translateY(-15px) scaleX(-1);
+  }
+  100% {
+    transform: translateX(120vw) translateY(0) scaleX(-1);
+  }
+}
+
+.animate-bird-fly {
+  animation: bird-fly linear infinite;
+}
+
+/* Animação de estrela cadente */
+@keyframes shooting-star {
+  0% {
+    transform: translateX(0) translateY(0) rotate(-45deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-120vw) translateY(60vh) rotate(-45deg);
+    opacity: 0;
+  }
+}
+
+.animate-shooting-star {
+  animation: shooting-star ease-in infinite;
+}
