@@ -92,9 +92,10 @@ const ChildrenRetrospective = () => {
     if (currentContent === 'intro') {
       return (
         <div className="min-h-screen relative overflow-hidden">
-          {/* Fundo com gradiente de super-herói */}
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-purple-900 to-red-900"></div>
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1620287341260-ab5759f9fc54?w=1920')] bg-cover bg-center opacity-10"></div>
+          {/* Fundo dos Vingadores */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-red-900 to-purple-900"></div>
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1635805737707-575885ab0b61?w=1920')] bg-cover bg-center opacity-20"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/60"></div>
           <FloatingSuperheroElements />
           
           <div className="relative z-10 min-h-screen flex flex-col items-center justify-center text-center px-4">
@@ -167,8 +168,9 @@ const ChildrenRetrospective = () => {
     if (currentContent === 'timeline') {
       return (
         <div className="min-h-screen relative overflow-y-auto">
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900"></div>
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1920')] bg-cover bg-center opacity-10"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-red-950 via-blue-950 to-yellow-950"></div>
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1608889335941-32ac5f2041b9?w=1920')] bg-cover bg-center opacity-15"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/50"></div>
           <FloatingSuperheroElements />
           
           <div className="relative z-10 py-16">
@@ -197,8 +199,9 @@ const ChildrenRetrospective = () => {
     if (currentContent === 'memories') {
       return (
         <div className="min-h-screen relative overflow-y-auto">
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-pink-900 to-red-900"></div>
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1502781252888-9143ba7f074e?w=1920')] bg-cover bg-center opacity-10"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-red-950 to-blue-950"></div>
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1611604548018-d56bbd85d681?w=1920')] bg-cover bg-center opacity-20"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/70"></div>
           <FloatingSuperheroElements />
           
           <div className="relative z-10 py-16 px-4 max-w-7xl mx-auto">
