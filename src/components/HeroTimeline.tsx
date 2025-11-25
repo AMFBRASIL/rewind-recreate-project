@@ -1,10 +1,11 @@
 import { Zap, Star, Heart, Sparkles, Trophy, Crown, Shield, Rocket } from "lucide-react";
+import { useState, useEffect } from "react";
 
 interface TimelineEvent {
   date: string;
   title: string;
   description: string;
-  image: string;
+  images: string[];
   icon: 'zap' | 'star' | 'heart' | 'sparkles' | 'trophy' | 'crown' | 'shield' | 'rocket';
 }
 
@@ -14,42 +15,72 @@ const HeroTimeline = () => {
       date: "Capítulo 1",
       title: "O Nascimento do Herói",
       description: "Onde tudo começou! Um pequeno super-herói chegou ao mundo trazendo alegria e superpoderes especiais.",
-      image: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9",
+      images: [
+        "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9",
+        "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4",
+        "https://images.unsplash.com/photo-1519689680058-324335c77eba",
+        "https://images.unsplash.com/photo-1492725764893-90b379c2b6e7"
+      ],
       icon: "star"
     },
     {
       date: "Capítulo 2",
       title: "Primeiros Poderes",
       description: "Descobrindo habilidades incríveis: rir, brincar e conquistar corações com apenas um sorriso!",
-      image: "https://images.unsplash.com/photo-1544717297-fa95b6ee9643",
+      images: [
+        "https://images.unsplash.com/photo-1544717297-fa95b6ee9643",
+        "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9",
+        "https://images.unsplash.com/photo-1542810634-71277d95dcbb",
+        "https://images.unsplash.com/photo-1548865573-1cc845710a8f"
+      ],
       icon: "zap"
     },
     {
       date: "Capítulo 3",
       title: "Academia de Heróis",
       description: "Treinamento intensivo! Aprendendo novas habilidades todos os dias na escola da vida.",
-      image: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9",
+      images: [
+        "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9",
+        "https://images.unsplash.com/photo-1587654780291-39c9404d746b",
+        "https://images.unsplash.com/photo-1472162072942-cd5147eb3902",
+        "https://images.unsplash.com/photo-1560421683-6856ea585c78"
+      ],
       icon: "shield"
     },
     {
       date: "Capítulo 4",
       title: "Aliados Especiais",
       description: "Todo herói precisa de amigos! Formando uma equipe imbatível de aventureiros.",
-      image: "https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2",
+      images: [
+        "https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2",
+        "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9",
+        "https://images.unsplash.com/photo-1529400971008-f566de0e6dfc",
+        "https://images.unsplash.com/photo-1543326727-cf6c39e8f84c"
+      ],
       icon: "heart"
     },
     {
       date: "Capítulo 5",
       title: "Conquistas Épicas",
       description: "Cada desafio superado, cada vitória celebrada. Colecionando troféus da vida!",
-      image: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1",
+      images: [
+        "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1",
+        "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9",
+        "https://images.unsplash.com/photo-1551379782-d0f89ccbc2b6",
+        "https://images.unsplash.com/photo-1540479859555-17af45c78602"
+      ],
       icon: "trophy"
     },
     {
       date: "Capítulo 6",
       title: "Aventuras Infinitas",
       description: "A jornada continua! Novos mundos para explorar, novos desafios para superar.",
-      image: "https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a",
+      images: [
+        "https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a",
+        "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9",
+        "https://images.unsplash.com/photo-1578662996442-48f60103fc96",
+        "https://images.unsplash.com/photo-1530319067432-f2a729c03db5"
+      ],
       icon: "rocket"
     }
   ];
@@ -67,6 +98,67 @@ const HeroTimeline = () => {
       case 'rocket': return <Rocket {...iconProps} />;
       default: return <Star {...iconProps} />;
     }
+  };
+
+  const TimelineEventCarousel = ({ images, title }: { images: string[], title: string }) => {
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setCurrentImageIndex((prev) => (prev + 1) % images.length);
+      }, 3000); // Troca de foto a cada 3 segundos
+
+      return () => clearInterval(interval);
+    }, [images.length]);
+
+    return (
+      <div className="relative overflow-hidden rounded-2xl border-4 border-yellow-400/40 hover:border-yellow-400/80 transition-all duration-500 group-hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/30">
+        {/* Carrossel de imagens */}
+        <div className="relative h-64 overflow-hidden">
+          {images.map((image, idx) => (
+            <img
+              key={idx}
+              src={image}
+              alt={`${title} - ${idx + 1}`}
+              className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ${
+                idx === currentImageIndex 
+                  ? 'opacity-100 scale-100' 
+                  : 'opacity-0 scale-110'
+              }`}
+            />
+          ))}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+        </div>
+
+        {/* Indicadores de foto */}
+        <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 z-10">
+          {images.map((_, idx) => (
+            <div
+              key={idx}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                idx === currentImageIndex 
+                  ? 'w-8 bg-yellow-400' 
+                  : 'w-2 bg-white/50'
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Badge de contagem */}
+        <div className="absolute top-4 right-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold px-3 py-1 rounded-full text-sm z-10 flex items-center space-x-1">
+          <Star className="w-4 h-4 fill-current" />
+          <span>{currentImageIndex + 1}/{images.length}</span>
+        </div>
+
+        <div className="absolute bottom-0 left-0 right-0 p-4">
+          <div className="flex items-center justify-center space-x-2">
+            <Star className="w-5 h-5 text-yellow-400 fill-yellow-400 animate-pulse" />
+            <span className="text-white font-bold">Memória Épica {currentImageIndex + 1}</span>
+            <Star className="w-5 h-5 text-yellow-400 fill-yellow-400 animate-pulse" />
+          </div>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -117,23 +209,9 @@ const HeroTimeline = () => {
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-400/10 to-orange-500/10 blur-xl"></div>
             </div>
 
-            {/* Imagem */}
+            {/* Carrossel de Imagens */}
             <div className={`w-full md:w-5/12 ${index % 2 === 0 ? 'md:pl-8' : 'md:pr-8'} mt-4 md:mt-0`}>
-              <div className="relative overflow-hidden rounded-2xl border-4 border-yellow-400/40 hover:border-yellow-400/80 transition-all duration-500 group-hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/30">
-                <img
-                  src={event.image}
-                  alt={event.title}
-                  className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <div className="flex items-center justify-center space-x-2">
-                    <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
-                    <span className="text-white font-bold">Memória Épica</span>
-                    <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
-                  </div>
-                </div>
-              </div>
+              <TimelineEventCarousel images={event.images} title={event.title} />
             </div>
           </div>
         ))}
