@@ -182,37 +182,3 @@
 .animate-shooting-star {
   animation: shooting-star ease-in infinite;
 }
-
-/* Animação de balanço (Hulk pendurado) */
-@keyframes swing {
-  0%, 100% {
-    transform: rotate(0deg);
-  }
-  25% {
-    transform: rotate(15deg);
-  }
-  75% {
-    transform: rotate(-15deg);
-  }
-}
-
-.animate-swing {
-  animation: swing 3s ease-in-out infinite;
-}
-
-/* Animação de balanço reverso */
-@keyframes swing-reverse {
-  0%, 100% {
-    transform: rotate(0deg);
-  }
-  25% {
-    transform: rotate(-12deg);
-  }
-  75% {
-    transform: rotate(12deg);
-  }
-}
-
-.animate-swing-reverse {
-  animation: swing-reverse 2.5s ease-in-out infinite;
-}
