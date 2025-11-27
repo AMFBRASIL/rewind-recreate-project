@@ -275,8 +275,10 @@ const KidLibrary = () => {
                   <div key={moment.id} className="flex items-start gap-6">
                     {/* Bolinha na linha do tempo */}
                     <div className="relative flex-shrink-0">
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg z-10 relative">
-                        <span className="text-white font-bold">{index + 1}</span>
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex flex-col items-center justify-center shadow-lg z-10 relative">
+                        <span className="text-white text-xs font-semibold">
+                          {new Date(moment.date).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' }).replace('.', '').toUpperCase()}
+                        </span>
                       </div>
                     </div>
 
