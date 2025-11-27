@@ -25,6 +25,7 @@ import DashboardClientes from "./pages/DashboardClientes";
 import DashboardMovies from "./pages/DashboardMovies";
 import PerfilCliente from "./pages/PerfilCliente";
 import AdminLogin from "./pages/AdminLogin";
+import ClientLogin from "./pages/ClientLogin";
 import NotFound from "./pages/NotFound";
 import ChildrenLanding from "./pages/ChildrenLanding";
 import ChristmasLanding from "./pages/ChristmasLanding";
@@ -58,6 +59,7 @@ const App = () => (
             <Route path="/dashboard-clientes" element={<DashboardClientes />} />
             <Route path="/dashboard-movies" element={<DashboardMovies />} />
             <Route path="/perfil-cliente" element={<PerfilCliente />} />
+            <Route path="/login" element={<ClientLogin />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route 
               path="/dashboard" 
