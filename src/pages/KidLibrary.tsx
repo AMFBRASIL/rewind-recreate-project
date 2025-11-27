@@ -24,7 +24,12 @@ const KidLibrary = () => {
       photos: [
         'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400',
         'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400',
-        'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=400'
+        'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=400',
+        'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=400&fit=crop',
+        'https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?w=400',
+        'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=400',
+        'https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=400',
+        'https://images.unsplash.com/photo-1544717301-9cdcb1f5940f?w=400'
       ],
       createdAt: '2024-02-01T10:00:00Z'
     },
@@ -39,7 +44,12 @@ const KidLibrary = () => {
       videoUrl: 'https://example.com/video1.mp4',
       photos: [
         'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400',
-        'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400'
+        'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400',
+        'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400',
+        'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400',
+        'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400',
+        'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400&h=400&fit=crop',
+        'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400&h=400&fit=crop'
       ],
       createdAt: '2024-03-15T14:00:00Z'
     },
@@ -66,7 +76,11 @@ const KidLibrary = () => {
         'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400',
         'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400',
         'https://images.unsplash.com/photo-1471922694854-ff1b63b20054?w=400',
-        'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=400'
+        'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=400',
+        'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=400',
+        'https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=400',
+        'https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=400',
+        'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400'
       ],
       createdAt: '2024-07-20T12:00:00Z'
     },
@@ -79,7 +93,12 @@ const KidLibrary = () => {
       category: 'familia',
       tags: ['família', 'arte', 'presente'],
       photos: [
-        'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=400'
+        'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=400',
+        'https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=400',
+        'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=400',
+        'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=400&h=400&fit=crop',
+        'https://images.unsplash.com/photo-1523821741446-edb2b68bb7a0?w=400',
+        'https://images.unsplash.com/photo-1456086272160-b28b0645b729?w=400'
       ],
       createdAt: '2024-05-12T09:00:00Z'
     },
@@ -93,7 +112,12 @@ const KidLibrary = () => {
       tags: ['escola', 'dança', 'apresentação', 'conquistas'],
       photos: [
         'https://images.unsplash.com/photo-1508807526345-15e9b5f4eaff?w=400',
-        'https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?w=400'
+        'https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?w=400',
+        'https://images.unsplash.com/photo-1540206395-68808572332f?w=400',
+        'https://images.unsplash.com/photo-1550399105-c4db5fb85c18?w=400',
+        'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=400',
+        'https://images.unsplash.com/photo-1535525153412-5a42439a210d?w=400',
+        'https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?w=400'
       ],
       createdAt: '2024-06-05T18:00:00Z'
     },
@@ -108,7 +132,12 @@ const KidLibrary = () => {
       photos: [
         'https://images.unsplash.com/photo-1513735718-ff2868c2ed24?w=400',
         'https://images.unsplash.com/photo-1524293581917-878a6d017c71?w=400',
-        'https://images.unsplash.com/photo-1509023464722-18d996393ca8?w=400'
+        'https://images.unsplash.com/photo-1509023464722-18d996393ca8?w=400',
+        'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=400',
+        'https://images.unsplash.com/photo-1527933053326-89d1746b76b9?w=400',
+        'https://images.unsplash.com/photo-1464219789935-c2d9d9aba644?w=400',
+        'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=400',
+        'https://images.unsplash.com/photo-1494783367193-149034c05e8f?w=400'
       ],
       createdAt: '2024-08-14T15:00:00Z'
     },
