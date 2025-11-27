@@ -11,7 +11,122 @@ import { useToast } from "@/hooks/use-toast";
 const KidLibrary = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [moments, setMoments] = useState<KidMoment[]>([]);
+  
+  // Dados de exemplo para visualização
+  const mockMoments: KidMoment[] = [
+    {
+      id: '1',
+      type: 'photo',
+      title: 'Primeiro Dia de Aula',
+      date: '2024-02-01',
+      description: 'O grande dia finalmente chegou! Muita animação e um pouquinho de nervosismo.',
+      category: 'escola',
+      tags: ['escola', 'conquistas', 'amigos'],
+      photos: [
+        'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400',
+        'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400',
+        'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=400'
+      ],
+      createdAt: '2024-02-01T10:00:00Z'
+    },
+    {
+      id: '2',
+      type: 'video',
+      title: 'Festa de Aniversário de 7 Anos',
+      date: '2024-03-15',
+      description: 'Festa incrível com tema de super-heróis! Muitos amigos, bolo delicioso e presentes especiais.',
+      category: 'aniversario',
+      tags: ['aniversário', 'festa', 'amigos', 'super-heróis'],
+      videoUrl: 'https://example.com/video1.mp4',
+      photos: [
+        'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400',
+        'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400'
+      ],
+      createdAt: '2024-03-15T14:00:00Z'
+    },
+    {
+      id: '3',
+      type: 'text',
+      title: 'Primeira Redação Nota 10',
+      date: '2024-04-10',
+      description: 'Orgulho demais! A professora elogiou muito a criatividade.',
+      category: 'escola',
+      tags: ['escola', 'conquistas', 'escrita'],
+      textContent: 'Era uma vez um dragão que não sabia cuspir fogo. Todos os outros dragões riam dele, mas um dia ele descobriu que podia fazer algo muito mais especial: ele podia fazer florescer flores por onde passava...',
+      createdAt: '2024-04-10T16:30:00Z'
+    },
+    {
+      id: '4',
+      type: 'photo',
+      title: 'Férias na Praia',
+      date: '2024-07-20',
+      description: 'Dias incríveis de sol, mar e muita diversão! Castelos de areia e mergulhos inesquecíveis.',
+      category: 'ferias',
+      tags: ['férias', 'praia', 'família', 'verão'],
+      photos: [
+        'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400',
+        'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400',
+        'https://images.unsplash.com/photo-1471922694854-ff1b63b20054?w=400',
+        'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=400'
+      ],
+      createdAt: '2024-07-20T12:00:00Z'
+    },
+    {
+      id: '5',
+      type: 'mural',
+      title: 'Desenho do Dia das Mães',
+      date: '2024-05-12',
+      description: 'Um presente feito com muito amor e dedicação!',
+      category: 'familia',
+      tags: ['família', 'arte', 'presente'],
+      photos: [
+        'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=400'
+      ],
+      createdAt: '2024-05-12T09:00:00Z'
+    },
+    {
+      id: '6',
+      type: 'photo',
+      title: 'Apresentação de Dança na Escola',
+      date: '2024-06-05',
+      description: 'Meses de ensaio valeram a pena! A apresentação foi um sucesso total.',
+      category: 'escola',
+      tags: ['escola', 'dança', 'apresentação', 'conquistas'],
+      photos: [
+        'https://images.unsplash.com/photo-1508807526345-15e9b5f4eaff?w=400',
+        'https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?w=400'
+      ],
+      createdAt: '2024-06-05T18:00:00Z'
+    },
+    {
+      id: '7',
+      type: 'photo',
+      title: 'Passeio no Parque de Diversões',
+      date: '2024-08-14',
+      description: 'Dia cheio de aventuras e emoções! Montanha-russa, roda gigante e muitos sorrisos.',
+      category: 'ferias',
+      tags: ['férias', 'diversão', 'aventura'],
+      photos: [
+        'https://images.unsplash.com/photo-1513735718-ff2868c2ed24?w=400',
+        'https://images.unsplash.com/photo-1524293581917-878a6d017c71?w=400',
+        'https://images.unsplash.com/photo-1509023464722-18d996393ca8?w=400'
+      ],
+      createdAt: '2024-08-14T15:00:00Z'
+    },
+    {
+      id: '8',
+      type: 'text',
+      title: 'Carta para o Papai Noel',
+      date: '2024-11-20',
+      description: 'Os pedidos e sonhos para o Natal deste ano.',
+      category: 'familia',
+      tags: ['natal', 'família', 'sonhos'],
+      textContent: 'Querido Papai Noel, este ano eu fui uma criança muito boa! Eu queria ganhar uma bicicleta nova, livros de aventura e também queria que você trouxesse muita saúde para toda minha família. Prometo continuar me esforçando na escola!',
+      createdAt: '2024-11-20T20:00:00Z'
+    }
+  ];
+  
+  const [moments, setMoments] = useState<KidMoment[]>(mockMoments);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isTemplateModalOpen, setIsTemplateModalOpen] = useState(false);
 
