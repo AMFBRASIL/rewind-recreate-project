@@ -75,11 +75,11 @@ const KidLibraryCard = ({ moment, onDelete }: KidLibraryCardProps) => {
         {/* Preview de Mídia - Fotos */}
         {moment.photos && moment.photos.length > 0 && (
           <div className="mb-4 relative px-8">
-            <Carousel className="w-full">
+            <Carousel className="w-full max-w-md mx-auto">
               <CarouselContent>
                 {moment.photos.map((photo, index) => (
                   <CarouselItem key={index}>
-                    <div className="aspect-square rounded-lg overflow-hidden">
+                    <div className="aspect-square rounded-lg overflow-hidden h-48">
                       <img
                         src={photo}
                         alt={`${moment.title} - ${index + 1}`}
@@ -108,11 +108,11 @@ const KidLibraryCard = ({ moment, onDelete }: KidLibraryCardProps) => {
         {moment.videoUrl && (
           <div className="mb-4 relative px-8">
             {Array.isArray(moment.videoUrl) ? (
-              <Carousel className="w-full">
+              <Carousel className="w-full max-w-md mx-auto">
                 <CarouselContent>
                   {moment.videoUrl.map((video, index) => (
                     <CarouselItem key={index}>
-                      <div className="aspect-video rounded-lg bg-gray-100 overflow-hidden">
+                      <div className="aspect-video rounded-lg bg-gray-100 overflow-hidden h-48">
                         <video
                           src={video}
                           controls
@@ -130,7 +130,7 @@ const KidLibraryCard = ({ moment, onDelete }: KidLibraryCardProps) => {
                 )}
               </Carousel>
             ) : (
-              <div className="aspect-video rounded-lg bg-gray-100 overflow-hidden">
+              <div className="aspect-video rounded-lg bg-gray-100 overflow-hidden max-w-md mx-auto h-48">
                 <video
                   src={moment.videoUrl}
                   controls
