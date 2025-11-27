@@ -19,6 +19,7 @@ import ChildrenRetrospective from "./pages/ChildrenRetrospective";
 import ChristmasRetrospective from "./pages/ChristmasRetrospective";
 import KidMovie from "./pages/KidMovie";
 import KidLibrary from "./pages/KidLibrary";
+import CreateKidMovie from "./pages/CreateKidMovie";
 import Dashboard from "./pages/Dashboard";
 import DashboardClientes from "./pages/DashboardClientes";
 import PerfilCliente from "./pages/PerfilCliente";
@@ -47,7 +48,8 @@ const App = () => (
             <Route path="/father" element={<FatherRetrospective />} />
             <Route path="/children" element={<ChildrenRetrospective />} />
             <Route path="/christmas" element={<ChristmasRetrospective />} />
-            <Route path="/kid-library" element={<KidLibrary />} />
+          <Route path="/kid-library" element={<KidLibrary />} />
+          <Route path="/create-kidmovie" element={<CreateKidMovie />} />
             <Route path="/kidmovie" element={<KidMovie />} />
             <Route path="/create" element={<CreateRetrospective />} />
             <Route path="/payment" element={<PaymentPix />} />
