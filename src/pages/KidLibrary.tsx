@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Plus, Sparkles, Film } from "lucide-react";
+import { Plus, Sparkles, Film, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import KidLibraryCard from "@/components/KidLibraryCard";
 import AddMomentModal from "@/components/AddMomentModal";
@@ -206,6 +206,14 @@ const KidLibrary = () => {
               </p>
             </div>
             <div className="flex gap-3">
+              <Button
+                onClick={() => navigate('/dashboard-movies')}
+                variant="outline"
+                className="border-purple-300 text-purple-600 hover:bg-purple-50"
+              >
+                <BarChart3 className="w-4 h-4 mr-2" />
+                Dashboard
+              </Button>
               <Button
                 onClick={handleGenerateMovie}
                 className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600"
