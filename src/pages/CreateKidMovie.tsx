@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Check, Camera, Sparkles, School, Music, Plane, Calendar, Users, PartyPopper } from "lucide-react";
+import { ArrowLeft, Check, Camera, Sparkles, School, Music, Plane, Calendar, Users, PartyPopper, Film, Star, Heart, Wand2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { KidMoment } from "@/types/kidLibraryTypes";
 
@@ -28,8 +29,18 @@ const CreateKidMovie = () => {
   const [selectedEventType, setSelectedEventType] = useState<string | null>(null);
   const [selectedMoments, setSelectedMoments] = useState<string[]>([]);
   const [livePhotos, setLivePhotos] = useState(false);
+  const [isCreatingMovie, setIsCreatingMovie] = useState(false);
+  const [creationMessage, setCreationMessage] = useState(0);
   
   const MAX_MOMENTS = 5;
+
+  const creationMessages = [
+    "✨ Preparando a magia...",
+    "🎬 Criando momentos inesquecíveis...",
+    "🌟 Adicionando brilho especial...",
+    "🎨 Colorindo as memórias...",
+    "🎭 Quase lá... Prepare-se para se emocionar!"
+  ];
 
   const eventTypes: EventType[] = [
     {
@@ -117,21 +128,32 @@ const CreateKidMovie = () => {
     }
 
     const filteredMoments = allMoments.filter(m => selectedMoments.includes(m.id));
-    const eventType = eventTypes.find(et => et.id === selectedEventType);
     
     // Salvar configuração
     sessionStorage.setItem('kidMovieMoments', JSON.stringify(filteredMoments));
     sessionStorage.setItem('kidMovieLivePhotos', livePhotos.toString());
     sessionStorage.setItem('kidMovieEventType', selectedEventType || '');
     
-    toast({
-      title: "Criando seu filme!",
-      description: `${eventType?.name}: ${selectedMoments.length} momentos${livePhotos ? ' + fotos ao vivo' : ''}`,
-    });
+    // Mostrar modal de criação
+    setIsCreatingMovie(true);
+    setCreationMessage(0);
 
+    // Trocar mensagens a cada 800ms
+    const messageInterval = setInterval(() => {
+      setCreationMessage(prev => {
+        if (prev >= creationMessages.length - 1) {
+          clearInterval(messageInterval);
+          return prev;
+        }
+        return prev + 1;
+      });
+    }, 800);
+
+    // Navegar após 4 segundos
     setTimeout(() => {
+      clearInterval(messageInterval);
       navigate('/kidmovie');
-    }, 500);
+    }, 4000);
   };
 
   const formatDate = (dateString: string) => {
@@ -336,6 +358,48 @@ const CreateKidMovie = () => {
           </div>
         )}
       </div>
+
+      {/* Modal de Criação do Filme */}
+      <Dialog open={isCreatingMovie} onOpenChange={setIsCreatingMovie}>
+        <DialogContent className="max-w-2xl border-none bg-gradient-to-br from-purple-600 via-pink-600 to-orange-500 text-white p-0 overflow-hidden">
+          <div className="relative p-12 text-center">
+            {/* Elementos Flutuantes Animados */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <Star className="absolute top-10 left-10 w-8 h-8 animate-pulse" style={{ animationDelay: '0s' }} />
+              <Heart className="absolute top-20 right-20 w-10 h-10 animate-bounce" style={{ animationDelay: '0.3s' }} />
+              <Sparkles className="absolute bottom-20 left-20 w-12 h-12 animate-pulse" style={{ animationDelay: '0.6s' }} />
+              <Film className="absolute bottom-10 right-10 w-8 h-8 animate-bounce" style={{ animationDelay: '0.9s' }} />
+              <Wand2 className="absolute top-1/2 left-1/4 w-6 h-6 animate-spin" style={{ animationDelay: '0.4s' }} />
+              <Star className="absolute top-1/3 right-1/4 w-10 h-10 animate-pulse" style={{ animationDelay: '0.2s' }} />
+            </div>
+
+            {/* Conteúdo Principal */}
+            <div className="relative z-10">
+              <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-white/20 backdrop-blur-sm mb-6 animate-pulse">
+                <Film className="w-12 h-12 text-white animate-bounce" />
+              </div>
+
+              <h2 className="text-4xl font-bold mb-4 animate-fade-in">
+                Criando Seu Filme Mágico!
+              </h2>
+
+              <p className="text-2xl font-semibold mb-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+                {creationMessages[creationMessage]}
+              </p>
+
+              <div className="flex items-center justify-center gap-3 mb-6">
+                <div className="w-3 h-3 rounded-full bg-white animate-bounce" style={{ animationDelay: '0s' }}></div>
+                <div className="w-3 h-3 rounded-full bg-white animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                <div className="w-3 h-3 rounded-full bg-white animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+              </div>
+
+              <p className="text-lg text-white/90 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+                Você vai adorar o resultado! 🎉
+              </p>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
