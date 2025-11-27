@@ -1,6 +1,13 @@
 import { Calendar, Tag, Image as ImageIcon, Video, FileText, Palette, Trash2 } from "lucide-react";
 import { KidMoment } from "@/types/kidLibraryTypes";
 import { Button } from "@/components/ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 interface KidLibraryCardProps {
   moment: KidMoment;
@@ -65,31 +72,77 @@ const KidLibraryCard = ({ moment, onDelete }: KidLibraryCardProps) => {
           <p className="text-gray-600 mb-4 line-clamp-2">{moment.description}</p>
         )}
 
-        {/* Preview de Mídia */}
+        {/* Preview de Mídia - Fotos */}
         {moment.photos && moment.photos.length > 0 && (
-          <div className="mb-4 grid grid-cols-3 gap-2">
-            {moment.photos.slice(0, 3).map((photo, index) => (
-              <div key={index} className="aspect-square rounded-lg overflow-hidden">
-                <img
-                  src={photo}
-                  alt={`${moment.title} - ${index + 1}`}
-                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-            ))}
-            {moment.photos.length > 3 && (
-              <div className="aspect-square rounded-lg bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
-                <span className="text-lg font-bold text-purple-700">
-                  +{moment.photos.length - 3}
-                </span>
-              </div>
+          <div className="mb-4 relative px-8">
+            <Carousel className="w-full">
+              <CarouselContent>
+                {moment.photos.map((photo, index) => (
+                  <CarouselItem key={index}>
+                    <div className="aspect-square rounded-lg overflow-hidden">
+                      <img
+                        src={photo}
+                        alt={`${moment.title} - ${index + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              {moment.photos.length > 1 && (
+                <>
+                  <CarouselPrevious className="left-0" />
+                  <CarouselNext className="right-0" />
+                </>
+              )}
+            </Carousel>
+            {moment.photos.length > 1 && (
+              <p className="text-center text-xs text-gray-500 mt-2">
+                {moment.photos.length} fotos
+              </p>
             )}
           </div>
         )}
 
+        {/* Preview de Mídia - Vídeos */}
         {moment.videoUrl && (
-          <div className="mb-4 aspect-video rounded-lg bg-gray-100 flex items-center justify-center">
-            <Video className="w-12 h-12 text-gray-400" />
+          <div className="mb-4 relative px-8">
+            {Array.isArray(moment.videoUrl) ? (
+              <Carousel className="w-full">
+                <CarouselContent>
+                  {moment.videoUrl.map((video, index) => (
+                    <CarouselItem key={index}>
+                      <div className="aspect-video rounded-lg bg-gray-100 overflow-hidden">
+                        <video
+                          src={video}
+                          controls
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                {moment.videoUrl.length > 1 && (
+                  <>
+                    <CarouselPrevious className="left-0" />
+                    <CarouselNext className="right-0" />
+                  </>
+                )}
+              </Carousel>
+            ) : (
+              <div className="aspect-video rounded-lg bg-gray-100 overflow-hidden">
+                <video
+                  src={moment.videoUrl}
+                  controls
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )}
+            {Array.isArray(moment.videoUrl) && moment.videoUrl.length > 1 && (
+              <p className="text-center text-xs text-gray-500 mt-2">
+                {moment.videoUrl.length} vídeos
+              </p>
+            )}
           </div>
         )}
 
