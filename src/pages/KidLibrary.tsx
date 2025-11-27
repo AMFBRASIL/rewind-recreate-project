@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { Plus, Sparkles, Film } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import KidLibraryCard from "@/components/KidLibraryCard";
 import AddMomentModal from "@/components/AddMomentModal";
-import { KidMoment, MovieTemplate, MovieTemplateConfig } from "@/types/kidLibraryTypes";
+import { KidMoment } from "@/types/kidLibraryTypes";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 
@@ -128,38 +127,6 @@ const KidLibrary = () => {
   
   const [moments, setMoments] = useState<KidMoment[]>(mockMoments);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [isTemplateModalOpen, setIsTemplateModalOpen] = useState(false);
-
-  const templates: MovieTemplateConfig[] = [
-    {
-      id: 'birthday',
-      name: 'Festa de Aniversário',
-      description: 'Crie um filme especial com os momentos do aniversário',
-      icon: '🎂',
-      categories: ['aniversario']
-    },
-    {
-      id: 'school-year',
-      name: 'Ano Escolar',
-      description: 'Retrospectiva do ano na escola',
-      icon: '📚',
-      categories: ['escola', 'conquistas']
-    },
-    {
-      id: 'summer',
-      name: 'Férias de Verão',
-      description: 'Aventuras e diversão das férias',
-      icon: '🏖️',
-      categories: ['ferias', 'familia']
-    },
-    {
-      id: 'all-moments',
-      name: 'Todos os Momentos',
-      description: 'Um filme com todos os momentos especiais',
-      icon: '✨',
-      categories: []
-    }
-  ];
 
   const handleAddMoment = (moment: KidMoment) => {
     setMoments([moment, ...moments]);
@@ -178,9 +145,7 @@ const KidLibrary = () => {
     });
   };
 
-  const handleGenerateMovie = (template: MovieTemplate) => {
-    const selectedTemplate = templates.find(t => t.id === template);
-    
+  const handleGenerateMovie = () => {
     if (moments.length === 0) {
       toast({
         title: "Biblioteca vazia",
@@ -190,37 +155,11 @@ const KidLibrary = () => {
       return;
     }
 
-    // Filtrar momentos baseado no template
-    let filteredMoments = moments;
-    if (selectedTemplate && selectedTemplate.categories.length > 0) {
-      filteredMoments = moments.filter(m => 
-        selectedTemplate.categories.includes(m.category)
-      );
-    }
+    // Salvar momentos no sessionStorage
+    sessionStorage.setItem('kidLibraryMoments', JSON.stringify(moments));
 
-    if (filteredMoments.length === 0) {
-      toast({
-        title: "Nenhum momento encontrado",
-        description: `Não há momentos da categoria "${selectedTemplate?.name}"`,
-        variant: "destructive"
-      });
-      return;
-    }
-
-    // Salvar dados no sessionStorage para usar no KidMovie
-    sessionStorage.setItem('kidMovieMoments', JSON.stringify(filteredMoments));
-    sessionStorage.setItem('kidMovieTemplate', template);
-
-    toast({
-      title: "Gerando seu filme!",
-      description: `${filteredMoments.length} momentos selecionados`,
-    });
-
-    // Navegar para o KidMovie
-    setIsTemplateModalOpen(false);
-    setTimeout(() => {
-      navigate('/kidmovie');
-    }, 500);
+    // Navegar para tela de criação
+    navigate('/create-kidmovie');
   };
 
   return (
@@ -239,7 +178,7 @@ const KidLibrary = () => {
             </div>
             <div className="flex gap-3">
               <Button
-                onClick={() => setIsTemplateModalOpen(true)}
+                onClick={handleGenerateMovie}
                 className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600"
                 disabled={moments.length === 0}
               >
@@ -323,35 +262,6 @@ const KidLibrary = () => {
         onSave={handleAddMoment}
       />
 
-      {/* Modal de Templates */}
-      <Dialog open={isTemplateModalOpen} onOpenChange={setIsTemplateModalOpen}>
-        <DialogContent className="max-w-3xl">
-          <DialogHeader>
-            <DialogTitle className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Escolha um Template
-            </DialogTitle>
-            <DialogDescription>
-              Selecione o tipo de filme que deseja criar
-            </DialogDescription>
-          </DialogHeader>
-
-          <div className="grid grid-cols-2 gap-4 mt-6">
-            {templates.map((template) => (
-              <button
-                key={template.id}
-                onClick={() => handleGenerateMovie(template.id)}
-                className="p-6 rounded-xl border-2 border-gray-200 hover:border-purple-400 hover:shadow-lg transition-all text-left group"
-              >
-                <div className="text-5xl mb-4">{template.icon}</div>
-                <h3 className="text-xl font-bold text-gray-800 group-hover:text-purple-600 transition-colors mb-2">
-                  {template.name}
-                </h3>
-                <p className="text-sm text-gray-600">{template.description}</p>
-              </button>
-            ))}
-          </div>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 };
