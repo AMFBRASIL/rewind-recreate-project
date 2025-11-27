@@ -238,31 +238,29 @@ const CreateKidMovie = () => {
         {step === 'moments' && (
           <div className="animate-fade-in">
             {/* Opção de Fotos ao Vivo */}
-            {selectedEventType && eventTypes.find(et => et.id === selectedEventType)?.enableLivePhotos && (
-              <Card className="p-6 mb-8 border-2 border-purple-200 bg-gradient-to-r from-purple-50 to-pink-50">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
-                      <Camera className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <Label htmlFor="live-photos" className="text-lg font-bold text-gray-800 cursor-pointer">
-                        Fotos ao Vivo {livePhotos && '✓'}
-                      </Label>
-                      <p className="text-sm text-gray-600">
-                        Convidados poderão escanear um QR code e enviar fotos que aparecerão no filme em tempo real
-                      </p>
-                    </div>
+            <Card className="p-6 mb-8 border-2 border-purple-200 bg-gradient-to-r from-purple-50 to-pink-50">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                    <Camera className="w-6 h-6 text-white" />
                   </div>
-                  <Switch
-                    id="live-photos"
-                    checked={livePhotos}
-                    onCheckedChange={setLivePhotos}
-                    className="data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-purple-600 data-[state=checked]:to-pink-600"
-                  />
+                  <div>
+                    <Label htmlFor="live-photos" className="text-lg font-bold text-gray-800 cursor-pointer">
+                      Fotos ao Vivo {livePhotos && '✓'}
+                    </Label>
+                    <p className="text-sm text-gray-600">
+                      Convidados poderão escanear um QR code e enviar fotos que aparecerão no filme em tempo real
+                    </p>
+                  </div>
                 </div>
-              </Card>
-            )}
+                <Switch
+                  id="live-photos"
+                  checked={livePhotos}
+                  onCheckedChange={setLivePhotos}
+                  className="data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-purple-600 data-[state=checked]:to-pink-600"
+                />
+              </div>
+            </Card>
 
             {/* Grid de Momentos */}
             {allMoments.length === 0 ? (
