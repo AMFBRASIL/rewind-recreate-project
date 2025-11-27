@@ -22,6 +22,7 @@ import KidLibrary from "./pages/KidLibrary";
 import CreateKidMovie from "./pages/CreateKidMovie";
 import Dashboard from "./pages/Dashboard";
 import DashboardClientes from "./pages/DashboardClientes";
+import DashboardMovies from "./pages/DashboardMovies";
 import PerfilCliente from "./pages/PerfilCliente";
 import AdminLogin from "./pages/AdminLogin";
 import NotFound from "./pages/NotFound";
@@ -55,6 +56,7 @@ const App = () => (
             <Route path="/payment" element={<PaymentPix />} />
             <Route path="/payment-confirmation" element={<PaymentConfirmation />} />
             <Route path="/dashboard-clientes" element={<DashboardClientes />} />
+            <Route path="/dashboard-movies" element={<DashboardMovies />} />
             <Route path="/perfil-cliente" element={<PerfilCliente />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route 
