@@ -11,7 +11,7 @@ export interface KidMoment {
   
   // Mídia
   photos?: string[]; // URLs das fotos
-  videoUrl?: string;
+  videoUrl?: string | string[]; // URL ou array de URLs de vídeos
   textContent?: string;
   
   // Metadata
