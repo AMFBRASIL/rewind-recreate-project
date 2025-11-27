@@ -1,4 +1,4 @@
-import { Calendar, Tag, Image as ImageIcon, Video, FileText, Palette, Trash2 } from "lucide-react";
+import { Calendar, Tag, Image as ImageIcon, Video, FileText, Palette, Trash2, X } from "lucide-react";
 import { KidMoment } from "@/types/kidLibraryTypes";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,6 +8,12 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import {
+  Dialog,
+  DialogContent,
+  DialogClose,
+} from "@/components/ui/dialog";
+import { useState } from "react";
 
 interface KidLibraryCardProps {
   moment: KidMoment;
@@ -15,6 +21,9 @@ interface KidLibraryCardProps {
 }
 
 const KidLibraryCard = ({ moment, onDelete }: KidLibraryCardProps) => {
+  const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+
   const getTypeIcon = () => {
     switch (moment.type) {
       case 'photo':
@@ -78,18 +87,21 @@ const KidLibraryCard = ({ moment, onDelete }: KidLibraryCardProps) => {
             <Carousel className="w-full">
               <CarouselContent className="-ml-2">
                 {moment.photos.map((photo, index) => (
-                  <CarouselItem key={index} className="pl-2">
-                    <div className="relative rounded-xl overflow-hidden">
+                  <CarouselItem key={index} className="pl-2 md:basis-1/2 lg:basis-1/3">
+                    <div 
+                      className="relative rounded-xl overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
+                      onClick={() => setSelectedPhoto(photo)}
+                    >
                       <img
                         src={photo}
                         alt={`${moment.title} - ${index + 1}`}
-                        className="w-full h-64 object-cover"
+                        className="w-full h-48 object-cover"
                       />
                     </div>
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              {moment.photos.length > 1 && (
+              {moment.photos.length > 3 && (
                 <>
                   <CarouselPrevious className="-left-4 bg-white shadow-lg hover:bg-gray-50" />
                   <CarouselNext className="-right-4 bg-white shadow-lg hover:bg-gray-50" />
@@ -115,18 +127,23 @@ const KidLibraryCard = ({ moment, onDelete }: KidLibraryCardProps) => {
                 <Carousel className="w-full">
                   <CarouselContent className="-ml-2">
                     {moment.videoUrl.map((video, index) => (
-                      <CarouselItem key={index} className="pl-2">
-                        <div className="relative rounded-xl overflow-hidden bg-gray-900">
+                      <CarouselItem key={index} className="pl-2 md:basis-1/2 lg:basis-1/3">
+                        <div 
+                          className="relative rounded-xl overflow-hidden bg-gray-900 cursor-pointer hover:opacity-90 transition-opacity"
+                          onClick={() => setSelectedVideo(video)}
+                        >
                           <video
                             src={video}
-                            controls
-                            className="w-full h-64 object-contain"
+                            className="w-full h-48 object-contain"
                           />
+                          <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                            <Video className="w-12 h-12 text-white" />
+                          </div>
                         </div>
                       </CarouselItem>
                     ))}
                   </CarouselContent>
-                  {moment.videoUrl.length > 1 && (
+                  {moment.videoUrl.length > 3 && (
                     <>
                       <CarouselPrevious className="-left-4 bg-white shadow-lg hover:bg-gray-50" />
                       <CarouselNext className="-right-4 bg-white shadow-lg hover:bg-gray-50" />
@@ -141,12 +158,17 @@ const KidLibraryCard = ({ moment, onDelete }: KidLibraryCardProps) => {
                 </div>
               </>
             ) : (
-              <div className="relative rounded-xl overflow-hidden bg-gray-900">
+              <div 
+                className="relative rounded-xl overflow-hidden bg-gray-900 cursor-pointer hover:opacity-90 transition-opacity"
+                onClick={() => setSelectedVideo(moment.videoUrl as string)}
+              >
                 <video
                   src={moment.videoUrl}
-                  controls
-                  className="w-full h-64 object-contain"
+                  className="w-full h-48 object-contain"
                 />
+                <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                  <Video className="w-12 h-12 text-white" />
+                </div>
               </div>
             )}
           </div>
@@ -179,6 +201,39 @@ const KidLibraryCard = ({ moment, onDelete }: KidLibraryCardProps) => {
           )}
         </div>
       </div>
+
+      {/* Modal de Visualização de Foto */}
+      <Dialog open={!!selectedPhoto} onOpenChange={() => setSelectedPhoto(null)}>
+        <DialogContent className="max-w-5xl w-full p-0 bg-transparent border-none">
+          <DialogClose className="absolute right-4 top-4 z-50 rounded-full bg-white/90 p-2 hover:bg-white transition-colors">
+            <X className="h-6 w-6 text-gray-900" />
+          </DialogClose>
+          {selectedPhoto && (
+            <img
+              src={selectedPhoto}
+              alt="Visualização em tela cheia"
+              className="w-full h-auto max-h-[90vh] object-contain rounded-lg"
+            />
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Modal de Visualização de Vídeo */}
+      <Dialog open={!!selectedVideo} onOpenChange={() => setSelectedVideo(null)}>
+        <DialogContent className="max-w-5xl w-full p-0 bg-black/95 border-none">
+          <DialogClose className="absolute right-4 top-4 z-50 rounded-full bg-white/90 p-2 hover:bg-white transition-colors">
+            <X className="h-6 w-6 text-gray-900" />
+          </DialogClose>
+          {selectedVideo && (
+            <video
+              src={selectedVideo}
+              controls
+              autoPlay
+              className="w-full h-auto max-h-[90vh] object-contain"
+            />
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
