@@ -74,16 +74,16 @@ const KidLibraryCard = ({ moment, onDelete }: KidLibraryCardProps) => {
 
         {/* Preview de Mídia - Fotos */}
         {moment.photos && moment.photos.length > 0 && (
-          <div className="mb-4 relative px-8">
-            <Carousel className="w-full max-w-md mx-auto">
-              <CarouselContent>
+          <div className="mb-4">
+            <Carousel className="w-full">
+              <CarouselContent className="-ml-2">
                 {moment.photos.map((photo, index) => (
-                  <CarouselItem key={index}>
-                    <div className="aspect-square rounded-lg overflow-hidden h-48">
+                  <CarouselItem key={index} className="pl-2">
+                    <div className="relative rounded-xl overflow-hidden">
                       <img
                         src={photo}
                         alt={`${moment.title} - ${index + 1}`}
-                        className="w-full h-full object-cover"
+                        className="w-full h-64 object-cover"
                       />
                     </div>
                   </CarouselItem>
@@ -91,57 +91,63 @@ const KidLibraryCard = ({ moment, onDelete }: KidLibraryCardProps) => {
               </CarouselContent>
               {moment.photos.length > 1 && (
                 <>
-                  <CarouselPrevious className="left-0" />
-                  <CarouselNext className="right-0" />
+                  <CarouselPrevious className="-left-4 bg-white shadow-lg hover:bg-gray-50" />
+                  <CarouselNext className="-right-4 bg-white shadow-lg hover:bg-gray-50" />
                 </>
               )}
             </Carousel>
             {moment.photos.length > 1 && (
-              <p className="text-center text-xs text-gray-500 mt-2">
-                {moment.photos.length} fotos
-              </p>
+              <div className="flex items-center justify-center gap-2 mt-3">
+                <ImageIcon className="w-4 h-4 text-purple-600" />
+                <p className="text-sm font-medium text-gray-700">
+                  {moment.photos.length} fotos
+                </p>
+              </div>
             )}
           </div>
         )}
 
         {/* Preview de Mídia - Vídeos */}
         {moment.videoUrl && (
-          <div className="mb-4 relative px-8">
+          <div className="mb-4">
             {Array.isArray(moment.videoUrl) ? (
-              <Carousel className="w-full max-w-md mx-auto">
-                <CarouselContent>
-                  {moment.videoUrl.map((video, index) => (
-                    <CarouselItem key={index}>
-                      <div className="aspect-video rounded-lg bg-gray-100 overflow-hidden h-48">
-                        <video
-                          src={video}
-                          controls
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                {moment.videoUrl.length > 1 && (
-                  <>
-                    <CarouselPrevious className="left-0" />
-                    <CarouselNext className="right-0" />
-                  </>
-                )}
-              </Carousel>
+              <>
+                <Carousel className="w-full">
+                  <CarouselContent className="-ml-2">
+                    {moment.videoUrl.map((video, index) => (
+                      <CarouselItem key={index} className="pl-2">
+                        <div className="relative rounded-xl overflow-hidden bg-gray-900">
+                          <video
+                            src={video}
+                            controls
+                            className="w-full h-64 object-contain"
+                          />
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  {moment.videoUrl.length > 1 && (
+                    <>
+                      <CarouselPrevious className="-left-4 bg-white shadow-lg hover:bg-gray-50" />
+                      <CarouselNext className="-right-4 bg-white shadow-lg hover:bg-gray-50" />
+                    </>
+                  )}
+                </Carousel>
+                <div className="flex items-center justify-center gap-2 mt-3">
+                  <Video className="w-4 h-4 text-purple-600" />
+                  <p className="text-sm font-medium text-gray-700">
+                    {moment.videoUrl.length} vídeos
+                  </p>
+                </div>
+              </>
             ) : (
-              <div className="aspect-video rounded-lg bg-gray-100 overflow-hidden max-w-md mx-auto h-48">
+              <div className="relative rounded-xl overflow-hidden bg-gray-900">
                 <video
                   src={moment.videoUrl}
                   controls
-                  className="w-full h-full object-cover"
+                  className="w-full h-64 object-contain"
                 />
               </div>
-            )}
-            {Array.isArray(moment.videoUrl) && moment.videoUrl.length > 1 && (
-              <p className="text-center text-xs text-gray-500 mt-2">
-                {moment.videoUrl.length} vídeos
-              </p>
             )}
           </div>
         )}
