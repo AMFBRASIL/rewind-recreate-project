@@ -204,7 +204,7 @@ const Index = () => {
                     Ver Retrospectiva Completa
                   </button>
                 </DialogTrigger>
-                <DialogContent className="w-full h-full max-w-none max-h-none p-0 border-0">
+                <DialogContent className="w-[80vw] h-[80vh] max-w-[80vw] max-h-[80vh] p-0 border-0 rounded-2xl overflow-hidden bg-transparent">
                   <button 
                     onClick={() => setIsRetrospectiveOpen(false)}
                     className="absolute top-4 right-4 z-50 bg-white text-black hover:bg-gray-100 px-4 py-2 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 shadow-lg"
@@ -212,7 +212,9 @@ const Index = () => {
                     <X size={16} />
                     FECHAR
                   </button>
-                  <CoupleRetrospective />
+                  <div className="w-full h-full overflow-hidden rounded-2xl">
+                    <CoupleRetrospective />
+                  </div>
                 </DialogContent>
               </Dialog>
               
@@ -223,17 +225,12 @@ const Index = () => {
                     Assistir Vídeo
                   </button>
                 </DialogTrigger>
-                <DialogContent className="max-w-4xl w-full h-[80vh] p-0">
-                  <DialogHeader className="p-6 pb-0">
-                    <DialogTitle className="text-center text-2xl font-bold">
-                      Como Criar Sua Retrospectiva
-                    </DialogTitle>
-                  </DialogHeader>
-                  <div className="p-6 pt-4 h-full">
+                <DialogContent className="max-w-4xl w-[90vw] p-0 border-0 bg-black/95 rounded-2xl overflow-hidden">
+                  <div className="relative w-full aspect-video">
                     <iframe
                       src="https://www.youtube.com/embed/dQw4w9WgXcQ"
                       title="Vídeo Tutorial"
-                      className="w-full h-full rounded-lg"
+                      className="absolute inset-0 w-full h-full"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
                     />
