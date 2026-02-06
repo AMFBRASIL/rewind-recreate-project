@@ -31,6 +31,7 @@ import ChildrenLanding from "./pages/ChildrenLanding";
 import ChristmasLanding from "./pages/ChristmasLanding";
 import EmotionalRetrospective from "./pages/EmotionalRetrospective";
 import EmotionalLanding from "./pages/EmotionalLanding";
+import TemplateEditor from "./pages/TemplateEditor";
 
 const queryClient = new QueryClient();
 
@@ -54,6 +55,7 @@ const App = () => (
             <Route path="/christmas" element={<ChristmasRetrospective />} />
             <Route path="/emocional" element={<EmotionalLanding />} />
             <Route path="/emotional" element={<EmotionalRetrospective />} />
+            <Route path="/editor" element={<TemplateEditor />} />
           <Route path="/kid-library" element={<KidLibrary />} />
           <Route path="/create-kidmovie" element={<CreateKidMovie />} />
             <Route path="/kidmovie" element={<KidMovie />} />
