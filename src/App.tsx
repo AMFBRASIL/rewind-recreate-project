@@ -29,6 +29,8 @@ import ClientLogin from "./pages/ClientLogin";
 import NotFound from "./pages/NotFound";
 import ChildrenLanding from "./pages/ChildrenLanding";
 import ChristmasLanding from "./pages/ChristmasLanding";
+import EmotionalRetrospective from "./pages/EmotionalRetrospective";
+import EmotionalLanding from "./pages/EmotionalLanding";
 
 const queryClient = new QueryClient();
 
@@ -50,6 +52,8 @@ const App = () => (
             <Route path="/father" element={<FatherRetrospective />} />
             <Route path="/children" element={<ChildrenRetrospective />} />
             <Route path="/christmas" element={<ChristmasRetrospective />} />
+            <Route path="/emocional" element={<EmotionalLanding />} />
+            <Route path="/emotional" element={<EmotionalRetrospective />} />
           <Route path="/kid-library" element={<KidLibrary />} />
           <Route path="/create-kidmovie" element={<CreateKidMovie />} />
             <Route path="/kidmovie" element={<KidMovie />} />

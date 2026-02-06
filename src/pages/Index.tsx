@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Heart, Play, Star, Calendar, Camera, Music, Users, User, Baby, Flower, Video, FileText, Plus, Palette, Share2, Archive, MousePointer, Gift, X, GraduationCap, TreePine, Cross } from "lucide-react";
+import { Heart, Play, Star, Calendar, Camera, Music, Users, User, Baby, Flower, Video, FileText, Plus, Palette, Share2, Archive, MousePointer, Gift, X, GraduationCap, TreePine, Cross, Sparkles } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import LoadingScreen from "@/components/LoadingScreen";
 import RewindHeader from "@/components/RewindHeader";
@@ -72,6 +72,7 @@ const Index = () => {
   ];
 
   const retrospectiveTypes = [
+    { value: 'emocional', label: 'Emocional', icon: Sparkles, gradient: 'from-rose-500 to-pink-600', route: '/emocional', highlight: true },
     { value: 'namorados', label: 'Namorados', icon: Heart, gradient: 'from-pink-500 to-red-500' },
     { value: 'casamento', label: 'Casamento', icon: Users, gradient: 'from-purple-500 to-pink-500' },
     { value: 'amigos', label: 'Amigos', icon: User, gradient: 'from-green-500 to-teal-500' },
@@ -304,18 +305,32 @@ const Index = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
               {retrospectiveTypes.map((type) => {
                 const IconComponent = type.icon;
+                const isHighlight = 'highlight' in type && type.highlight;
                 return (
                   <div
                     key={type.value}
-                    className={`bg-gradient-to-br ${type.gradient} p-8 rounded-2xl text-white text-center transition-all duration-300 transform hover:scale-105 hover:shadow-2xl border border-white/10 backdrop-blur-sm`}
+                    className={`relative bg-gradient-to-br ${type.gradient} p-8 rounded-2xl text-white text-center transition-all duration-300 transform hover:scale-105 hover:shadow-2xl border border-white/10 backdrop-blur-sm ${isHighlight ? 'ring-4 ring-white/50 shadow-2xl shadow-pink-500/30' : ''}`}
                   >
+                    {isHighlight && (
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-pink-600 px-4 py-1 rounded-full text-sm font-bold shadow-lg">
+                        ✨ NOVO
+                      </div>
+                    )}
                     <IconComponent className="w-16 h-16 mx-auto mb-6" />
                     <h3 className="font-bold text-2xl mb-4">{type.label}</h3>
                     <button 
-                      onClick={() => type.value === 'pai' ? navigate('/pai') : navigate('/create')}
+                      onClick={() => {
+                        if ('route' in type && type.route) {
+                          navigate(type.route);
+                        } else if (type.value === 'pai') {
+                          navigate('/pai');
+                        } else {
+                          navigate('/create');
+                        }
+                      }}
                       className="w-full bg-white/20 hover:bg-white/30 text-white py-3 rounded-xl font-semibold transition-all duration-300 border border-white/30"
                     >
-                      {type.value === 'pai' ? 'Ver Retrospectiva' : 'Começar'}
+                      {type.value === 'pai' || ('route' in type && type.route) ? 'Ver Retrospectiva' : 'Começar'}
                     </button>
                   </div>
                 );
