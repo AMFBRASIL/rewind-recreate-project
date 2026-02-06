@@ -1,7 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Trash2, Copy, RotateCw, GripVertical } from "lucide-react";
+import { Trash2, X, Youtube } from "lucide-react";
 import { CanvasElement } from "@/pages/TemplateEditor";
+import CounterWidget from "./widgets/CounterWidget";
+import YouTubeWidget from "./widgets/YouTubeWidget";
+import ImageWidget from "./widgets/ImageWidget";
+import TextWidget from "./widgets/TextWidget";
 
 interface DraggableElementProps {
   element: CanvasElement;
@@ -20,12 +24,6 @@ const DraggableElement = ({
 }: DraggableElementProps) => {
   const elementRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
-  const [editableContent, setEditableContent] = useState(element.content);
-
-  useEffect(() => {
-    setEditableContent(element.content);
-  }, [element.content]);
 
   const handleDragEnd = (event: any, info: any) => {
     setIsDragging(false);
@@ -35,138 +33,46 @@ const DraggableElement = ({
     });
   };
 
-  const handleDoubleClick = () => {
-    if (element.type === 'text') {
-      setIsEditing(true);
-    }
-  };
-
-  const handleBlur = () => {
-    setIsEditing(false);
-    onUpdate({ content: editableContent });
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleBlur();
-    }
-    if (e.key === 'Escape') {
-      setEditableContent(element.content);
-      setIsEditing(false);
-    }
-  };
-
   const renderContent = () => {
     switch (element.type) {
       case 'text':
-        if (isEditing) {
-          return (
-            <textarea
-              value={editableContent}
-              onChange={(e) => setEditableContent(e.target.value)}
-              onBlur={handleBlur}
-              onKeyDown={handleKeyDown}
-              autoFocus
-              className="w-full h-full bg-transparent border-none outline-none resize-none text-center"
-              style={{
-                fontSize: element.style?.fontSize || 24,
-                fontFamily: element.style?.fontFamily || 'Inter',
-                color: element.style?.color || '#ffffff',
-              }}
-            />
-          );
-        }
         return (
-          <div 
-            className="w-full h-full flex items-center justify-center text-center cursor-text"
-            style={{
-              fontSize: element.style?.fontSize || 24,
-              fontFamily: element.style?.fontFamily || 'Inter',
-              color: element.style?.color || '#ffffff',
-            }}
-          >
-            {element.content}
-          </div>
+          <TextWidget 
+            element={element} 
+            onUpdate={onUpdate} 
+            isSelected={isSelected}
+          />
         );
 
       case 'image':
         return (
-          <img 
-            src={element.content} 
-            alt="" 
-            className="w-full h-full object-cover rounded-lg"
-            draggable={false}
+          <ImageWidget 
+            element={element} 
+            onUpdate={onUpdate}
           />
         );
 
       case 'youtube':
         return (
-          <div className="w-full h-full bg-black rounded-lg overflow-hidden">
-            <iframe
-              width="100%"
-              height="100%"
-              src={`https://www.youtube.com/embed/${element.content}`}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="pointer-events-none"
-            />
-          </div>
+          <YouTubeWidget 
+            element={element} 
+            onUpdate={onUpdate}
+          />
         );
+
+      case 'counter':
+        return <CounterWidget />;
 
       case 'emoji':
       case 'sticker':
         return (
           <div 
-            className="w-full h-full flex items-center justify-center"
-            style={{ fontSize: element.style?.fontSize || 48 }}
+            className="w-full h-full flex items-center justify-center select-none"
+            style={{ fontSize: element.style?.fontSize || 80 }}
           >
             {element.content}
           </div>
         );
-
-      case 'shape':
-        const shapeStyles: React.CSSProperties = {
-          width: '100%',
-          height: '100%',
-          backgroundColor: element.style?.backgroundColor || '#8b5cf6',
-        };
-
-        if (element.content === 'círculo' || element.content === 'circle') {
-          shapeStyles.borderRadius = '50%';
-        } else if (element.content === 'triângulo' || element.content === 'triangle') {
-          return (
-            <div 
-              className="w-0 h-0"
-              style={{
-                borderLeft: `${element.width / 2}px solid transparent`,
-                borderRight: `${element.width / 2}px solid transparent`,
-                borderBottom: `${element.height}px solid ${element.style?.backgroundColor || '#8b5cf6'}`,
-              }}
-            />
-          );
-        } else if (element.content === 'estrela' || element.content === 'star') {
-          return (
-            <div 
-              className="flex items-center justify-center text-6xl"
-              style={{ color: element.style?.backgroundColor || '#8b5cf6' }}
-            >
-              ★
-            </div>
-          );
-        } else if (element.content === 'coração' || element.content === 'heart') {
-          return (
-            <div 
-              className="flex items-center justify-center text-6xl"
-              style={{ color: element.style?.backgroundColor || '#8b5cf6' }}
-            >
-              ❤️
-            </div>
-          );
-        }
-
-        return <div style={shapeStyles} className="rounded-lg" />;
 
       default:
         return null;
@@ -192,52 +98,26 @@ const DraggableElement = ({
         e.stopPropagation();
         onSelect();
       }}
-      onDoubleClick={handleDoubleClick}
-      whileHover={{ scale: isSelected ? 1 : 1.02 }}
-      whileDrag={{ scale: 1.05, cursor: 'grabbing' }}
+      whileDrag={{ scale: 1.02, cursor: 'grabbing' }}
     >
-      {/* Selection border */}
-      {isSelected && (
-        <div className="absolute -inset-1 border-2 border-purple-500 rounded-lg pointer-events-none">
-          {/* Resize handles */}
-          <div className="absolute -top-1.5 -left-1.5 w-3 h-3 bg-white rounded-full border-2 border-purple-500 cursor-nw-resize" />
-          <div className="absolute -top-1.5 -right-1.5 w-3 h-3 bg-white rounded-full border-2 border-purple-500 cursor-ne-resize" />
-          <div className="absolute -bottom-1.5 -left-1.5 w-3 h-3 bg-white rounded-full border-2 border-purple-500 cursor-sw-resize" />
-          <div className="absolute -bottom-1.5 -right-1.5 w-3 h-3 bg-white rounded-full border-2 border-purple-500 cursor-se-resize" />
-          
-          {/* Rotation handle */}
-          <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-6 h-6 bg-white rounded-full border-2 border-purple-500 flex items-center justify-center cursor-pointer">
-            <RotateCw className="w-3 h-3 text-purple-500" />
-          </div>
-        </div>
+      {/* Delete button */}
+      {isSelected && !isDragging && (
+        <motion.button
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="absolute -top-3 -right-3 w-7 h-7 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center shadow-lg z-10"
+          onClick={(e) => {
+            e.stopPropagation();
+            onDelete();
+          }}
+        >
+          <X className="w-4 h-4 text-white" />
+        </motion.button>
       )}
 
-      {/* Toolbar */}
-      {isSelected && !isDragging && (
-        <motion.div 
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="absolute -top-12 left-1/2 -translate-x-1/2 flex items-center gap-1 bg-zinc-800 rounded-lg p-1 shadow-xl"
-        >
-          <button 
-            className="p-1.5 hover:bg-zinc-700 rounded transition-colors"
-            onClick={(e) => {
-              e.stopPropagation();
-              // Duplicate logic would go here
-            }}
-          >
-            <Copy className="w-4 h-4 text-zinc-300" />
-          </button>
-          <button 
-            className="p-1.5 hover:bg-red-500/20 rounded transition-colors"
-            onClick={(e) => {
-              e.stopPropagation();
-              onDelete();
-            }}
-          >
-            <Trash2 className="w-4 h-4 text-red-400" />
-          </button>
-        </motion.div>
+      {/* Selection indicator */}
+      {isSelected && (
+        <div className="absolute -inset-1 border-2 border-pink-500 rounded-xl pointer-events-none" />
       )}
 
       {/* Content */}

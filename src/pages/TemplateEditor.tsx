@@ -1,23 +1,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { 
-  Type, Image, Youtube, Smile, Square, Circle, 
-  Triangle, Star, Heart, Trash2, Copy, Layers,
-  ZoomIn, ZoomOut, Undo, Redo, Download, Eye,
-  Move, RotateCw, Palette, Plus, GripVertical,
-  Play, Music, Sparkles
-} from "lucide-react";
+import { Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import EditorCanvas from "@/components/editor/EditorCanvas";
-import EditorSidebar from "@/components/editor/EditorSidebar";
-import EditorToolbar from "@/components/editor/EditorToolbar";
-import SlidePanel from "@/components/editor/SlidePanel";
+import EditorRightSidebar from "@/components/editor/EditorRightSidebar";
 
 export interface CanvasElement {
   id: string;
-  type: 'text' | 'image' | 'youtube' | 'emoji' | 'shape' | 'sticker';
+  type: 'text' | 'image' | 'youtube' | 'emoji' | 'counter' | 'sticker';
   x: number;
   y: number;
   width: number;
@@ -31,6 +21,7 @@ export interface CanvasElement {
     backgroundColor?: string;
     borderRadius?: number;
     opacity?: number;
+    borderStyle?: string;
   };
 }
 
@@ -42,19 +33,40 @@ export interface Slide {
 
 const TemplateEditor = () => {
   const [slides, setSlides] = useState<Slide[]>([
-    { id: '1', elements: [], background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }
+    { 
+      id: '1', 
+      elements: [], 
+      background: '#0f172a'
+    }
   ]);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [selectedElement, setSelectedElement] = useState<string | null>(null);
-  const [zoom, setZoom] = useState(100);
 
   const currentSlide = slides[currentSlideIndex];
+
+  // Element counts for sidebar badges
+  const elementCounts = {
+    text: currentSlide.elements.filter(e => e.type === 'text').length,
+    image: currentSlide.elements.filter(e => e.type === 'image').length,
+    youtube: currentSlide.elements.filter(e => e.type === 'youtube').length,
+    counter: currentSlide.elements.filter(e => e.type === 'counter').length,
+    emoji: currentSlide.elements.filter(e => e.type === 'emoji' || e.type === 'sticker').length,
+  };
+
+  const maxCounts = {
+    text: 30,
+    image: 7,
+    youtube: 2,
+    audio: 1,
+    counter: 1,
+    emoji: 50,
+  };
 
   const addElement = (element: Omit<CanvasElement, 'id' | 'x' | 'y'>) => {
     const newElement: CanvasElement = {
       ...element,
       id: `el-${Date.now()}`,
-      x: 100 + Math.random() * 200,
+      x: 100 + Math.random() * 300,
       y: 100 + Math.random() * 200,
     };
 
@@ -88,80 +100,40 @@ const TemplateEditor = () => {
     setSelectedElement(null);
   };
 
-  const addSlide = () => {
-    const newSlide: Slide = {
-      id: `slide-${Date.now()}`,
-      elements: [],
-      background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'
-    };
-    setSlides(prev => [...prev, newSlide]);
-    setCurrentSlideIndex(slides.length);
-  };
-
-  const duplicateSlide = (index: number) => {
-    const slideToCopy = slides[index];
-    const newSlide: Slide = {
-      ...slideToCopy,
-      id: `slide-${Date.now()}`,
-      elements: slideToCopy.elements.map(el => ({ ...el, id: `el-${Date.now()}-${Math.random()}` }))
-    };
-    setSlides(prev => [...prev.slice(0, index + 1), newSlide, ...prev.slice(index + 1)]);
-  };
-
-  const deleteSlide = (index: number) => {
-    if (slides.length === 1) return;
-    setSlides(prev => prev.filter((_, idx) => idx !== index));
-    if (currentSlideIndex >= slides.length - 1) {
-      setCurrentSlideIndex(Math.max(0, slides.length - 2));
-    }
-  };
-
-  const updateSlideBackground = (background: string) => {
-    setSlides(prev => prev.map((slide, idx) => 
-      idx === currentSlideIndex 
-        ? { ...slide, background }
-        : slide
-    ));
-  };
-
   return (
-    <div className="h-screen flex flex-col bg-zinc-950 text-white overflow-hidden">
-      {/* Top Toolbar */}
-      <EditorToolbar 
-        zoom={zoom}
-        setZoom={setZoom}
-        onPreview={() => console.log('Preview')}
-        onExport={() => console.log('Export')}
-      />
-
-      <div className="flex-1 flex overflow-hidden">
-        {/* Left Sidebar - Modules */}
-        <EditorSidebar 
-          onAddElement={addElement}
-          onChangeBackground={updateSlideBackground}
-        />
-
-        {/* Center - Canvas */}
-        <div className="flex-1 flex flex-col">
-          <EditorCanvas 
-            slide={currentSlide}
-            selectedElement={selectedElement}
-            setSelectedElement={setSelectedElement}
-            updateElement={updateElement}
-            deleteElement={deleteElement}
-            zoom={zoom}
-          />
+    <div className="h-screen flex flex-col bg-[#0a0e1a] text-white overflow-hidden">
+      {/* Header */}
+      <header className="h-14 flex items-center justify-center relative z-10">
+        <div className="flex items-center gap-2">
+          <Heart className="w-5 h-5 text-pink-500 fill-pink-500" />
+          <span className="font-semibold text-lg">LoveYuu</span>
+          <span className="text-zinc-500">▾</span>
         </div>
+      </header>
 
-        {/* Right - Slides Panel */}
-        <SlidePanel 
-          slides={slides}
-          currentSlideIndex={currentSlideIndex}
-          setCurrentSlideIndex={setCurrentSlideIndex}
-          addSlide={addSlide}
-          duplicateSlide={duplicateSlide}
-          deleteSlide={deleteSlide}
+      <div className="flex-1 flex overflow-hidden relative">
+        {/* Canvas */}
+        <EditorCanvas 
+          slide={currentSlide}
+          selectedElement={selectedElement}
+          setSelectedElement={setSelectedElement}
+          updateElement={updateElement}
+          deleteElement={deleteElement}
         />
+
+        {/* Right Sidebar */}
+        <EditorRightSidebar 
+          onAddElement={addElement}
+          elementCounts={elementCounts}
+          maxCounts={maxCounts}
+        />
+      </div>
+
+      {/* Finalizar Button */}
+      <div className="absolute bottom-6 right-6 z-20">
+        <Button className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-6 text-lg rounded-xl shadow-lg shadow-pink-500/30">
+          Finalizar e criar
+        </Button>
       </div>
     </div>
   );
