@@ -1,6 +1,26 @@
 import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight, Pause, Play, Volume2, VolumeX } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+
+// Import new slide components
+import PhotoGallerySlide from "@/components/emotional/PhotoGallerySlide";
+import ScatteredPhotosSlide from "@/components/emotional/ScatteredPhotosSlide";
+import ParallaxPhotoSlide from "@/components/emotional/ParallaxPhotoSlide";
+import CounterSlide from "@/components/emotional/CounterSlide";
+import SplitScreenSlide from "@/components/emotional/SplitScreenSlide";
+import CarouselSlide from "@/components/emotional/CarouselSlide";
+import TextRevealSlide from "@/components/emotional/TextRevealSlide";
 import EmotionalSlide, { EmotionalSlideData } from "@/components/EmotionalSlide";
+
+type SlideType = 
+  | { type: "emotional"; data: EmotionalSlideData }
+  | { type: "gallery"; photos: string[]; title?: string }
+  | { type: "scattered"; photos: string[]; centerText?: string }
+  | { type: "parallax"; backgroundPhoto: string; foregroundPhoto: string; title: string; subtitle?: string }
+  | { type: "counter"; stats: { label: string; value: number; suffix?: string; icon: "heart" | "calendar" | "star" | "clock" }[]; title: string }
+  | { type: "split"; leftPhoto: string; rightPhoto: string; leftLabel?: string; rightLabel?: string; centerText: string }
+  | { type: "carousel"; photos: { url: string; caption?: string }[]; title?: string }
+  | { type: "textReveal"; lines: string[]; backgroundGradient?: string };
 
 const EmotionalRetrospective = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -8,113 +28,130 @@ const EmotionalRetrospective = () => {
   const [isMuted, setIsMuted] = useState(true);
   const [progress, setProgress] = useState(0);
   
-  const slideDuration = 10000; // 10 segundos por slide
+  const slideDuration = 12000; // 12 segundos por slide
 
-  const slides: EmotionalSlideData[] = [
+  const slides: SlideType[] = [
+    // 1. Intro dramático com texto revelando
     {
-      id: 1,
-      type: "intro",
-      title: "Uma História de Amor",
-      subtitle: "Cada momento ao seu lado é uma página escrita no livro mais bonito da minha vida...",
-      backgroundImage: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=1920",
-      mood: "romantic"
+      type: "textReveal",
+      lines: [
+        "Uma História de Amor",
+        "Escrita com momentos",
+        "Guardada no coração",
+        "Para sempre nossa..."
+      ]
     },
+    
+    // 2. Galeria de fotos animada
     {
-      id: 2,
-      type: "quote",
-      quote: "O amor não se vê com os olhos, mas com a alma. E minha alma encontrou a sua no primeiro olhar.",
-      quoteAuthor: "Para você, meu amor",
-      mood: "romantic"
+      type: "gallery",
+      photos: [
+        "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=800",
+        "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=800",
+        "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=800",
+        "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800",
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800",
+        "https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=800",
+      ],
+      title: "Nossos Momentos"
     },
+    
+    // 3. Split screen - antes e agora
     {
-      id: 3,
-      type: "photo",
-      backgroundImage: "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=1920",
-      title: "O Dia Que Tudo Mudou",
-      date: "O primeiro encontro",
-      text: "Naquele dia, sem saber, eu encontrei meu futuro. Cada sorriso seu iluminou um caminho que eu nem sabia que existia.",
-      mood: "nostalgic"
+      type: "split",
+      leftPhoto: "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=800",
+      rightPhoto: "https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=800",
+      leftLabel: "O Início",
+      rightLabel: "Hoje",
+      centerText: "O amor só ficou mais forte..."
     },
+    
+    // 4. Contador animado
     {
-      id: 4,
-      type: "milestone",
-      backgroundImage: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=1920",
-      title: "Nossos Primeiros Passos",
-      date: "O início de tudo",
-      text: "Mãos dadas, corações acelerados, e a certeza de que algo mágico estava começando entre nós dois.",
-      mood: "joyful"
+      type: "counter",
+      title: "Nossa Jornada em Números",
+      stats: [
+        { label: "Dias Juntos", value: 1825, icon: "calendar" },
+        { label: "Beijos", value: 9999, suffix: "+", icon: "heart" },
+        { label: "Risos", value: 99999, suffix: "+", icon: "star" },
+        { label: "Aventuras", value: 365, icon: "clock" },
+      ]
     },
+    
+    // 5. Fotos espalhadas com citação
     {
-      id: 5,
-      type: "quote",
-      quote: "Você me ensinou que amar não é olhar um para o outro, mas olhar juntos na mesma direção.",
-      quoteAuthor: "Com todo meu coração",
-      mood: "bittersweet"
+      type: "scattered",
+      photos: [
+        "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600",
+        "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600",
+        "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600",
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600",
+        "https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=600",
+        "https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600",
+        "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=600",
+      ],
+      centerText: "Cada foto conta uma história"
     },
+    
+    // 6. Parallax interativo
     {
-      id: 6,
-      type: "photo",
-      backgroundImage: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=1920",
-      title: "Risos e Lágrimas",
-      date: "Momentos que guardamos",
-      text: "Cada risada compartilhada, cada lágrima enxugada... você transformou meus dias comuns em memórias extraordinárias.",
-      mood: "nostalgic"
+      type: "parallax",
+      backgroundPhoto: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=1920",
+      foregroundPhoto: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800",
+      title: "Meu Lugar Favorito",
+      subtitle: "É ao seu lado, não importa onde"
     },
+    
+    // 7. Carrossel com legendas
     {
-      id: 7,
-      type: "milestone",
-      backgroundImage: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=1920",
-      title: "Superamos Juntos",
-      date: "Nos momentos difíceis",
-      text: "Quando o mundo pareceu desmoronar, sua mão na minha me lembrou: juntos somos mais fortes que qualquer tempestade.",
-      mood: "bittersweet"
+      type: "carousel",
+      title: "Momentos Inesquecíveis",
+      photos: [
+        { url: "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=1200", caption: "O dia que tudo mudou" },
+        { url: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=1200", caption: "Nosso primeiro passo juntos" },
+        { url: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=1200", caption: "Risos que nunca vou esquecer" },
+        { url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=1200", caption: "Você iluminou minha vida" },
+        { url: "https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=1200", caption: "Cada segundo vale a pena" },
+      ]
     },
+    
+    // 8. Texto emocional
     {
-      id: 8,
-      type: "quote",
-      quote: "Você é meu lar. Não importa onde eu esteja, quando estou com você, estou em casa.",
-      quoteAuthor: "A verdade mais simples",
-      mood: "romantic"
+      type: "textReveal",
+      lines: [
+        "Obrigado",
+        "Por cada sorriso",
+        "Por cada abraço",
+        "Por ser você..."
+      ],
+      backgroundGradient: "bg-gradient-to-br from-pink-950 via-rose-900 to-purple-950"
     },
+    
+    // 9. Galeria final
     {
-      id: 9,
-      type: "photo",
-      backgroundImage: "https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=1920",
-      title: "Pequenos Grandes Momentos",
-      date: "O extraordinário no comum",
-      text: "Café da manhã juntos, conversas até tarde, abraços sem motivo... são esses detalhes que fazem nossa história única.",
-      mood: "joyful"
+      type: "gallery",
+      photos: [
+        "https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800",
+        "https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=800",
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800",
+        "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800",
+        "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=800",
+        "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=800",
+      ],
+      title: "E a história continua..."
     },
+    
+    // 10. Slide emocional clássico - finale
     {
-      id: 10,
-      type: "milestone",
-      backgroundImage: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=1920",
-      title: "Crescemos Juntos",
-      date: "Uma jornada compartilhada",
-      text: "Você me fez uma pessoa melhor. Cada dia ao seu lado é uma oportunidade de evoluir, de amar mais, de ser mais.",
-      mood: "nostalgic"
+      type: "emotional",
+      data: {
+        id: 10,
+        type: "finale",
+        title: "Te Amo Infinitamente",
+        text: "Hoje, amanhã, sempre. Meu coração é seu, para sempre e além.",
+        mood: "romantic"
+      }
     },
-    {
-      id: 11,
-      type: "quote",
-      quote: "Se eu tivesse uma flor para cada vez que você me fez sorrir, teria um jardim infinito.",
-      quoteAuthor: "Gratidão eterna",
-      mood: "joyful"
-    },
-    {
-      id: 12,
-      type: "dedication",
-      title: "Obrigado por Existir",
-      text: "Por cada segundo, cada minuto, cada hora ao seu lado. Você é o presente mais precioso que a vida me deu.",
-      mood: "romantic"
-    },
-    {
-      id: 13,
-      type: "finale",
-      title: "Te Amo Infinitamente",
-      text: "Hoje, amanhã, sempre. Meu coração é seu, para sempre e além.",
-      mood: "romantic"
-    }
   ];
 
   const nextSlide = useCallback(() => {
@@ -142,7 +179,7 @@ const EmotionalRetrospective = () => {
     }, 100);
 
     return () => clearInterval(progressInterval);
-  }, [isPaused, nextSlide]);
+  }, [isPaused, nextSlide, slideDuration]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -161,19 +198,48 @@ const EmotionalRetrospective = () => {
     return () => window.removeEventListener("keydown", handleKeyPress);
   }, [nextSlide, prevSlide]);
 
+  const renderSlide = (slide: SlideType, index: number) => {
+    const isActive = index === currentSlide;
+    
+    switch (slide.type) {
+      case "gallery":
+        return <PhotoGallerySlide photos={slide.photos} title={slide.title} isActive={isActive} />;
+      case "scattered":
+        return <ScatteredPhotosSlide photos={slide.photos} centerText={slide.centerText} isActive={isActive} />;
+      case "parallax":
+        return <ParallaxPhotoSlide {...slide} isActive={isActive} />;
+      case "counter":
+        return <CounterSlide stats={slide.stats} title={slide.title} isActive={isActive} />;
+      case "split":
+        return <SplitScreenSlide {...slide} isActive={isActive} />;
+      case "carousel":
+        return <CarouselSlide photos={slide.photos} title={slide.title} isActive={isActive} />;
+      case "textReveal":
+        return <TextRevealSlide lines={slide.lines} backgroundGradient={slide.backgroundGradient} isActive={isActive} />;
+      case "emotional":
+        return <EmotionalSlide slide={slide.data} isActive={isActive} />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="relative h-screen w-full overflow-hidden bg-black">
-      {/* Slides */}
-      {slides.map((slide, index) => (
-        <div
-          key={slide.id}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
-            index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
-          }`}
-        >
-          <EmotionalSlide slide={slide} isActive={index === currentSlide} />
-        </div>
-      ))}
+      {/* Slides with AnimatePresence for smooth transitions */}
+      <AnimatePresence mode="wait">
+        {slides.map((slide, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: index === currentSlide ? 1 : 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8 }}
+            className={`absolute inset-0 ${index === currentSlide ? "z-10" : "z-0 pointer-events-none"}`}
+          >
+            {renderSlide(slide, index)}
+          </motion.div>
+        ))}
+      </AnimatePresence>
 
       {/* Progress Bar */}
       <div className="absolute top-0 left-0 right-0 z-50 flex gap-1 p-4">
@@ -186,88 +252,78 @@ const EmotionalRetrospective = () => {
               setProgress(0);
             }}
           >
-            <div
-              className="h-full bg-white rounded-full transition-all duration-100"
-              style={{
+            <motion.div
+              className="h-full bg-gradient-to-r from-pink-400 to-rose-500 rounded-full"
+              animate={{
                 width: index < currentSlide 
                   ? "100%" 
                   : index === currentSlide 
                     ? `${progress}%` 
                     : "0%"
               }}
+              transition={{ duration: 0.1 }}
             />
           </div>
         ))}
       </div>
 
       {/* Navigation Arrows */}
-      <button
+      <motion.button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-50 p-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full transition-all duration-300 group"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-50 p-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full transition-all duration-300"
         aria-label="Slide anterior"
       >
-        <ChevronLeft className="w-8 h-8 text-white group-hover:scale-110 transition-transform" />
-      </button>
+        <ChevronLeft className="w-8 h-8 text-white" />
+      </motion.button>
 
-      <button
+      <motion.button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-50 p-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full transition-all duration-300 group"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-50 p-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full transition-all duration-300"
         aria-label="Próximo slide"
       >
-        <ChevronRight className="w-8 h-8 text-white group-hover:scale-110 transition-transform" />
-      </button>
+        <ChevronRight className="w-8 h-8 text-white" />
+      </motion.button>
 
       {/* Bottom Controls */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-6">
         {/* Pause/Play */}
-        <button
+        <motion.button
           onClick={() => setIsPaused(!isPaused)}
-          className="p-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full transition-all duration-300 group"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          className="p-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full transition-all duration-300"
           aria-label={isPaused ? "Reproduzir" : "Pausar"}
         >
           {isPaused ? (
-            <Play className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
+            <Play className="w-6 h-6 text-white" />
           ) : (
-            <Pause className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
+            <Pause className="w-6 h-6 text-white" />
           )}
-        </button>
+        </motion.button>
 
         {/* Slide Counter */}
-        <div className="text-white/70 text-sm font-medium tracking-wider">
+        <div className="text-white/70 text-sm font-medium tracking-wider bg-black/30 px-4 py-2 rounded-full backdrop-blur-sm">
           {currentSlide + 1} / {slides.length}
         </div>
 
         {/* Mute/Unmute */}
-        <button
+        <motion.button
           onClick={() => setIsMuted(!isMuted)}
-          className="p-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full transition-all duration-300 group"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          className="p-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full transition-all duration-300"
           aria-label={isMuted ? "Ativar som" : "Desativar som"}
         >
           {isMuted ? (
-            <VolumeX className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
+            <VolumeX className="w-6 h-6 text-white" />
           ) : (
-            <Volume2 className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
+            <Volume2 className="w-6 h-6 text-white" />
           )}
-        </button>
-      </div>
-
-      {/* Slide Dots */}
-      <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => {
-              setCurrentSlide(index);
-              setProgress(0);
-            }}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              index === currentSlide 
-                ? "w-8 bg-white" 
-                : "bg-white/30 hover:bg-white/50"
-            }`}
-            aria-label={`Ir para slide ${index + 1}`}
-          />
-        ))}
+        </motion.button>
       </div>
 
       {/* Touch/Swipe Areas */}
